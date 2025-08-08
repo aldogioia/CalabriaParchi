@@ -1,0 +1,41 @@
+figure {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--fill);
+  border: 1px solid var(--stroke-weak);
+}
+
+figure img {
+  object-position: center;
+  object-fit: cover;
+  width: 100%;
+  aspect-ratio: 1 / .8;
+}
+
+
+figure figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.location svg {
+  fill: var(--brand-weak);
+}
+
+.description {
+  height: 150px;
+  overflow-y: auto;
+  padding-right: 8px;
+}

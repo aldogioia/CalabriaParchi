@@ -1,0 +1,124 @@
+header {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: calc(100% - 32px);
+  max-width: 800px;
+}
+
+.header-actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--stroke-weak);
+  background: var(--background);
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--stroke-weak);
+}
+
+.header-actions h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  cursor: pointer;
+  grid-column: 2 / span 2;
+  border-left: 1px solid var(--stroke-weak);
+}
+
+.header-item {
+  height: 100%;
+  width: 100%;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px;
+  border: none;
+  border-left: 1px solid var(--stroke-weak);
+  background: none;
+  cursor: pointer;
+}
+
+.header-item:first-of-type {
+  border-left: none;
+}
+
+.header-item svg{
+  fill: var(--text-strong);
+}
+
+button.header-item > span {
+  text-transform: uppercase;
+}
+
+.header-item:hover {
+  background: var(--fill);
+}
+
+div.header-item:hover {
+  background: none;
+}
+
+.menu {
+  position: relative;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  background: var(--background);
+  border: 1px solid var(--stroke-weak);
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--stroke-weak);
+  max-width: 100%;
+  overflow-y: auto;
+}
+
+.menu.to-reveal{
+  animation-duration: .3s;
+}
+
+.menu > svg {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  fill: var(--text-strong);
+  cursor: pointer;
+}
+
+.menu a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-weak);
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: var(--stroke-weak);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.menu a:hover {
+  color: var(--text-strong);
+  text-decoration-color: var(--brand-stroke-strong);
+}
+
+.menu a svg {
+  stroke: var(--text-weak);
+  transition: .3s ease-in-out;
+}
+
+.menu a:hover svg {
+  stroke: var(--brand-strong);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

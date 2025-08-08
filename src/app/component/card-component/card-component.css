@@ -1,0 +1,44 @@
+.card {
+  position: relative;
+  height: auto;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card figcaption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  background: linear-gradient(to top ,var(--text-strong), transparent);
+  z-index: 1;
+}
+
+.card figcaption h2 {
+  text-transform: capitalize;
+  color: var(--text-on-black-strong);
+}
+
+.card figcaption p {
+  color: var(--text-on-black-weak);
+}
+
+button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+}

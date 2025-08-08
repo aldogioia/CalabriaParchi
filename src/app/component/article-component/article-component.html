@@ -1,0 +1,12 @@
+<article aria-label="Storia del Parco Nazionale della Sila">
+  <h2>{{title}}</h2>
+  @for (paragraph of paragraphs; track paragraph) {
+    <p>{{paragraph}}</p>
+  }
+  @if (image !== null) {
+    <figure>
+      <img src="images/sila.jpg" alt="Immagine del Parco Nazionale della Sila">
+      <figcaption>Parco Nazionale della Sila</figcaption>
+    </figure>
+  }
+</article>

@@ -1,0 +1,24 @@
+article{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+article p {
+  max-width: 80ch;
+}
+
+figure{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+figure img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-position: center;
+  object-fit: cover;
+}

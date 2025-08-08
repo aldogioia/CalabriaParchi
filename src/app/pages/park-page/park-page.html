@@ -1,0 +1,117 @@
+<figure>
+  <img src="images/sila.jpg" alt="Immagine parco nazionale della sila">
+  <svg id="visual" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 351L129 360L257 326L386 356L514 368L643 362L771 323L900 336L900 601L771 601L643 601L514 601L386 601L257 601L129 601L0 601Z" fill="#f2f2f233"></path>
+    <path d="M0 380L129 425L257 377L386 372L514 382L643 426L771 376L900 423L900 601L771 601L643 601L514 601L386 601L257 601L129 601L0 601Z" fill="#f2f2f266"></path>
+    <path d="M0 462L129 455L257 442L386 471L514 477L643 438L771 477L900 435L900 601L771 601L643 601L514 601L386 601L257 601L129 601L0 601Z" fill="#f2f2f299"></path>
+    <path d="M0 509L129 480L257 505L386 520L514 517L643 481L771 515L900 470L900 601L771 601L643 601L514 601L386 601L257 601L129 601L0 601Z" fill="#f2f2f2cc"></path>
+    <path d="M0 566L129 545L257 545L386 521L514 567L643 572L771 555L900 542L900 601L771 601L643 601L514 601L386 601L257 601L129 601L0 601Z" fill="#f2f2f2ff"></path>
+  </svg>
+  <figcaption><h1>Parco Nazionale della Sila</h1></figcaption>
+</figure>
+<section class="details-location" aria-label="Informazioni sul Parco Nazionale della Sila">
+  <nav>
+    <ul>
+      <li (click)="sectionToShow = 0" [class.active]="sectionToShow == 0">Storia del Parco</li>
+      <li (click)="sectionToShow = 1" [class.active]="sectionToShow == 1">Località</li>
+      <li (click)="sectionToShow = 2" [class.active]="sectionToShow == 2">Attività</li>
+      <li (click)="sectionToShow = 3" [class.active]="sectionToShow == 3">Galleria</li>
+    </ul>
+  </nav>
+
+  @switch (sectionToShow) {
+    @case (0) {
+      <ng-container *ngTemplateOutlet="story"></ng-container>
+    }
+    @case (1) {
+      <ng-container *ngTemplateOutlet="locations"></ng-container>
+    }
+    @case (2) {
+      <ng-container *ngTemplateOutlet="activities"></ng-container>
+    }
+    @case (3) {
+      <ng-container *ngTemplateOutlet="gallery"></ng-container>
+    }
+    @default {
+      <ng-container *ngTemplateOutlet="story"></ng-container>
+    }
+  }
+</section>
+
+<app-footer-component></app-footer-component>
+
+<ng-template #story>
+  <section class="sub-section to-reveal">
+    <app-article-component
+      title="Storia del Parco Nazionale della Sila"
+      [paragraphs]="[
+      'Il Parco Nazionale della Sila è stato istituito nel 1997 e si estende su una superficie di circa 73.000 ettari. La sua storia è legata alla conservazione della biodiversità e alla tutela degli ecosistemi montani tipici della Sila, un\'area caratterizzata da foreste di pini, faggi e abeti.',
+      'Il parco è stato creato per preservare le risorse naturali e culturali della regione, promuovendo al contempo lo sviluppo sostenibile e il turismo responsabile.',
+      'Oggi, il Parco Nazionale della Sila è un importante centro di ricerca e conservazione, con numerosi progetti dedicati alla salvaguardia della fauna selvatica e degli habitat naturali.']">
+    </app-article-component>
+    <app-article-component
+      title="I giganti della Sila"
+      image="images/sila.jpg"
+      [paragraphs]="['I giganti della Sila sono un gruppo di alberi secolari, tra cui pini loricati e faggi, che si trovano nel parco. Questi alberi sono considerati monumenti naturali e rappresentano un simbolo della biodiversità della Sila.']">
+    </app-article-component>
+    <app-article-component
+      title="Il lago Cecita"
+      image="images/sila.jpg"
+      [paragraphs]="['Il lago Cecita è il più grande lago artificiale della Calabria e si trova all\'interno del Parco Nazionale della Sila. È un luogo ideale per attività ricreative come la pesca, il kayak e le passeggiate lungo le sue sponde.']">
+    </app-article-component>
+    <app-article-component
+      title="Il sentiero del Brigante"
+      image="images/sila.jpg"
+      [paragraphs]="['Il sentiero del Brigante è un percorso escursionistico che attraversa il parco, offrendo ai visitatori la possibilità di esplorare la natura incontaminata e scoprire la storia locale legata ai briganti della Sila.']">
+    </app-article-component>
+  </section>
+</ng-template>
+
+<ng-template #locations>
+  <section class="sub-section to-reveal">
+    <app-article-component
+      title="Località del Parco Nazionale della Sila"
+    [paragraphs]="['Il Parco Nazionale della Sila si trova in Calabria, nel sud Italia, e comprende le province di Cosenza, Catanzaro e Crotone. Il parco è caratterizzato da un paesaggio montano unico, con vette che raggiungono i 2.000 metri di altitudine e una ricca biodiversità.']">
+    </app-article-component>
+    <app-park-item-component
+      title="Camigliatello Silano"
+      location="Camigliatello Silano"
+      phone="+39 0984 123456"
+      website="aldogioia.com"
+      description="Il Parco Nazionale della Sila è un paradiso per gli appassionati di birdwatching, con molte specie di uccelli che abitano la zona. I visitatori possono osservare aquile, falchi e altri rapaci in volo."
+      [tags]="tags"
+    ></app-park-item-component>
+  </section>
+</ng-template>
+
+<ng-template #activities>
+  <section class="sub-section to-reveal">
+    <app-article-component
+      title="Attività nel Parco Nazionale della Sila"
+      [paragraphs]="['Il Parco Nazionale della Sila offre una vasta gamma di attività all\'aperto, tra cui escursioni, birdwatching, ciclismo e sci. I visitatori possono esplorare i numerosi sentieri che attraversano il parco, ammirando la bellezza dei paesaggi montani e la ricca fauna selvatica.',]">
+    </app-article-component>
+    <app-park-item-component
+      title="Escursioni"
+      location="Camigliatello Silano"
+      description="Il parco offre numerosi sentieri per escursioni di diversa difficoltà, adatti a tutti i livelli di esperienza. I percorsi variano da brevi passeggiate a lunghe escursioni che attraversano le foreste e le vette della Sila."
+      [tags]="tags"
+    ></app-park-item-component>
+    <app-park-item-component
+      title="Birdwatching"
+      location="Camigliatello Silano"
+      phone="+39 0984 123456"
+      description="Il Parco Nazionale della Sila è un paradiso per gli appassionati di birdwatching, con molte specie di uccelli che abitano la zona. I visitatori possono osservare aquile, falchi e altri rapaci in volo."
+      [tags]="tags"
+    ></app-park-item-component>
+  </section>
+</ng-template>
+
+<ng-template #gallery>
+  <section class="sub-section to-reveal" aria-label="Galleria fotografica del Parco Nazionale della Sila">
+    <app-article-component
+      title="Galleria fotografica del Parco Nazionale della Sila"
+      [paragraphs]="['La galleria fotografica del Parco Nazionale della Sila offre uno sguardo ravvicinato alla bellezza naturale di questa area protetta. Le immagini catturano la varietà di paesaggi, dalla vegetazione lussureggiante alle vette montuose, e mostrano la fauna selvatica che abita il parco.']">
+    </app-article-component>
+    <app-gallery-component></app-gallery-component>
+  </section>
+</ng-template>

@@ -1,0 +1,158 @@
+.share-experience {
+  display: flex;
+  align-items: start;
+  gap: 24px;
+  width: 100%;
+  max-width: 1280px;
+  padding: 0 16px;
+}
+
+.preview {
+  position: sticky;
+  top: calc(128px + 16px);
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--fill);
+  border: 1px solid var(--stroke-weak);
+}
+
+figure img,
+figure .placeholder-image {
+  width: 100%;
+  aspect-ratio: 1 / .8;
+}
+figure img {
+  object-position: center;
+  object-fit: cover;
+}
+
+figure .placeholder-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--stroke-weak);
+}
+
+figure figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.location svg {
+  fill: var(--brand-weak);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.input-group label {
+  font-size: clamp(.875rem, 2vw, 1rem);
+  font-weight: 600;
+  color: var(--text-weak);
+  margin-left: 4px;
+}
+
+.input-group select {
+  position: relative;
+}
+
+.input-group select svg {
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  fill: var(--text-strong);
+}
+
+.primary-button {
+  max-width: none;
+}
+
+.file-wrapper {
+  display: flex;
+  align-items: center;
+  background: var(--fill);
+  border: 1px solid var(--stroke-strong);
+  border-radius: 8px;
+  padding: 8px 8px;
+  gap: 12px;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  transition: .3s ease-in-out;
+}
+
+.file-wrapper:focus-within {
+  outline: 2px solid var(--brand-stroke-strong);
+  outline-offset: 2px;
+}
+
+.file-wrapper input[type="file"] {
+  font-size: inherit;
+  color: var(--text-weak);
+  cursor: pointer;
+}
+
+.file-wrapper input[type="file"]::-webkit-file-upload-button {
+  background-color: var(--stroke-weak);
+  color: var(--text-strong);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.file-wrapper input[type="file"]::-webkit-file-upload-button:hover {
+  background-color: var(--brand-weak);
+}
+
+.file-wrapper input[type="file"]::file-selector-button {
+  /* Firefox and others that use spec-compliant selector */
+  background-color: var(--stroke-weak);
+  color: var(--text-strong);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.file-wrapper input[type="file"]::file-selector-button:hover {
+  background-color: var(--brand-weak);
+}
+
+
+@media (max-width: 768px) {
+  .share-experience {
+    flex-direction: column;
+  }
+
+  .preview {
+    max-width: 100%;
+  }
+}

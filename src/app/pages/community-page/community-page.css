@@ -1,0 +1,22 @@
+.community {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+  gap: 32px;
+  width: 100%;
+  max-width: 1280px;
+}
+
+.community-experiences {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 568px) {
+  .community-experiences {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
