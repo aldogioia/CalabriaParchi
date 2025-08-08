@@ -153,6 +153,8 @@ form {
   }
 
   .preview {
+    position: relative;
+    top: 0;
     max-width: 100%;
   }
 }
