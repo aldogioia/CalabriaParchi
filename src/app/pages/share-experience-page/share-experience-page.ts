@@ -24,7 +24,7 @@ export class ShareExperiencePage {
       surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       email: ['', [Validators.required, Validators.email]],
       park: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(300)]]
     });
   }
 
