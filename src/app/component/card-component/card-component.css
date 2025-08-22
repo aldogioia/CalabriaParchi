@@ -27,7 +27,7 @@
   z-index: 1;
 }
 
-.card figcaption h2 {
+.card figcaption h3 {
   text-transform: capitalize;
   color: var(--text-on-black-strong);
 }

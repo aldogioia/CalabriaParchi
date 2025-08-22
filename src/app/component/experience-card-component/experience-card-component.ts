@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {ExperiencePostDto} from '../../../model/dto/ExperiencePostDto';
 
 @Component({
   selector: 'app-experience-card-component',
@@ -7,9 +8,6 @@ import {Component, Input} from '@angular/core';
   styleUrl: './experience-card-component.css'
 })
 export class ExperienceCardComponent {
-  @Input() name: string = '';
-  @Input() surname: string = '';
-  @Input() description: string = '';
-  @Input() location: string = '';
-  @Input() image: string = '';
+  @Input({required : true})
+  experiencePostDto!: ExperiencePostDto
 }

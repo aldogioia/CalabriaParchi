@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {ArticleDto} from '../../../model/dto/ArticleDto';
 
 @Component({
   selector: 'app-article-component',
@@ -7,7 +8,6 @@ import {Component, Input} from '@angular/core';
   styleUrl: './article-component.css'
 })
 export class ArticleComponent {
-  @Input() title: string = '';
-  @Input() paragraphs: string[] = [];
-  @Input() image: string | null = null;
+  @Input({required: true})
+  articleDto!: ArticleDto;
 }

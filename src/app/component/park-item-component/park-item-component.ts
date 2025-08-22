@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {TagDto} from '../../../model/dto/TagDto';
+import {InterestDto} from '../../../model/dto/InterestDto';
+import {GlobalHandler} from '../../../utils/GlobalHandler';
 
 @Component({
   selector: 'app-park-item-component',
@@ -8,15 +9,16 @@ import {TagDto} from '../../../model/dto/TagDto';
   styleUrl: './park-item-component.css'
 })
 export class ParkItemComponent {
-  @Input() title: string = '';
-  @Input() description: string = '';
-  @Input() image: string = 'images/sila.jpg';
-  @Input() tags: TagDto[] = [];
-  @Input() location: string = '';
-  @Input() website: string | null = null;
-  @Input() phone: string | null = null;
+  @Input({required : true})
+  interestDto!: InterestDto
 
   @Input() isItinerary: boolean = false;
 
   showMore: boolean = false;
+
+  actionInWishlist(id: string) {
+    this.isItinerary
+      ? GlobalHandler.getInstance().addToWishlist(id)
+      : GlobalHandler.getInstance().removeFromWishlist(id);
+  }
 }

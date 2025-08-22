@@ -1,6 +1,7 @@
-import {Component, signal, TemplateRef} from '@angular/core';
+import {Component, signal} from '@angular/core';
 import {GlobalHandler} from '../utils/GlobalHandler';
 import {Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -10,30 +11,24 @@ import {Router} from '@angular/router';
 })
 export class App {
   protected readonly title = signal('CalabriaParchi');
-
-  language = GlobalHandler.getInstance().getItem("language") || 'it';
-
+  language: string = "";
   isMenuOpen = false;
-  isExtendedMenuOpen = false;
-  template:TemplateRef<any> | null = null;
 
-  constructor(private router: Router) {}
+  constructor(private translate: TranslateService, private router: Router) {
+    this.language = GlobalHandler.getInstance().getItem("language") || 'it';
+    this.translate.addLangs(['it', 'en']);
+    this.translate.use(this.language);
+  }
 
   changeLanguage(): void {
     const lang = this.language === 'it' ? 'en' : 'it';
     GlobalHandler.getInstance().setItem("language", lang);
     this.language = lang;
-  }
-
-  openMenu(template: TemplateRef<any>): void {
-    this.isMenuOpen = false;
-    this.isMenuOpen = true;
-    this.template = template;
+    this.translate.use(lang);
   }
 
   redirectTo(url: string): void {
     this.router.navigate([url]).then();
     this.isMenuOpen = false;
-    this.isExtendedMenuOpen = false;
   }
 }

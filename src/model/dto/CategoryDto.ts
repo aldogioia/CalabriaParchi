@@ -1,11 +1,9 @@
-export class TagDto {
+export class CategoryDto {
   id: string;
   name: string;
-  color: string;
 
   constructor(data: any) {
     this.id = data.id || '';
     this.name = data.name || '';
-    this.color = data.color || '';
   }
 }

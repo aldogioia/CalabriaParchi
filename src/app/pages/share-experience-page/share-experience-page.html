@@ -1,43 +1,73 @@
 <section class="share-experience">
-  <form [formGroup]="experienceForm" (ngSubmit)="onSubmit()">
-    <app-article-component
-      title="La tua storia è un'ispirazione"
-      [paragraphs]="['Condividendo il tuo racconto, non solo aiuti la tua memoria a custodire i momenti più belli, ma diventi una fonte di ispirazione per l\'intera community. Le tue parole possono essere la scintilla che accende in altri viaggiatori il desiderio di partire. Usa il modulo qui sotto per dare forma alla tua storia e preparati a vederla pubblicata nel nostro archivio di avventure.']">
-    </app-article-component>
-    <div class="input-group file-upload">
-      <div class="input-group">
-        <label for="img">Foto</label>
-        <div class="file-wrapper">
-          <input id="img" name="img" type="file" (change)="onFileSelected($event)" required>
-        </div>
+  <form [formGroup]="experienceForm" (ngSubmit)="share()">
+    <div class="input-group" [class.error]="!selectedFile && experienceForm.touched">
+      <label for="img">Foto</label>
+      <div class="file-wrapper">
+        <input id="img" name="img" type="file" (change)="onFileSelected($event)" required>
       </div>
+      @if (!selectedFile && experienceForm.touched) {
+        <span class="error-message">Immagine obbligatoria</span>
+      }
     </div>
-    <div class="input-group">
+
+    <div class="input-group" [class.error]="isInvalid('email')">
       <label for="email">Email</label>
       <input name="email" type="email" placeholder="Email" formControlName="email" required>
+      @if (isInvalid('email')) {
+        <span class="error-message">{{ getErrorMessage('email') }}</span>
+      }
     </div>
-    <div class="input-group">
+
+    <div class="input-group" [class.error]="isInvalid('park')">
       <label for="park">Parco</label>
       <select name="park" formControlName="park" required>
         <option value="" disabled selected>Seleziona un Parco</option>
         @for (park of parks; track park) {
-          <option [value]="park">{{ park }}</option>
+          <option [value]="park.id">{{ park.name }}</option>
         }
       </select>
+      @if (isInvalid('park')) {
+        <span class="error-message">{{ getErrorMessage('park') }}</span>
+      }
     </div>
-    <div class="input-group">
+
+    <div class="input-group" [class.error]="isInvalid('description')">
       <label for="experience">La tua Esperienza</label>
-      <textarea name="experience" minlength="3" maxlength="300" placeholder="Condividi la tua esperienza qui..." formControlName="description" required></textarea>
+      <textarea
+        name="experience"
+        minlength="3"
+        maxlength="300"
+        placeholder="Condividi la tua esperienza qui..."
+        formControlName="description"
+        required
+      ></textarea>
+      @if (isInvalid('description')) {
+        <span class="error-message">{{ getErrorMessage('description') }}</span>
+      }
     </div>
-    <div class="input-group">
+
+    <div class="input-group" [class.error]="isInvalid('name')">
       <label for="name">Nome</label>
       <input name="name" type="text" minlength="3" maxlength="20" placeholder="Nome" formControlName="name" required>
+      @if (isInvalid('name')) {
+        <span class="error-message">{{ getErrorMessage('name') }}</span>
+      }
     </div>
-    <div class="input-group">
+
+    <div class="input-group" [class.error]="isInvalid('surname')">
       <label for="surname">Cognome</label>
       <input name="surname" type="text" minlength="3" maxlength="20" placeholder="Cognome" formControlName="surname" required>
+      @if (isInvalid('surname')) {
+        <span class="error-message">{{ getErrorMessage('surname') }}</span>
+      }
     </div>
-    <button type="submit" class="primary-button">Pubblica</button>
+
+    <button
+      class="primary-button"
+      type="submit"
+      [disabled]="experienceForm.invalid || !selectedFile">
+      {{ "PUBLISH" | translate }}
+    </button>
   </form>
 
   <figure class="preview">
@@ -45,17 +75,11 @@
       <img [src]="selectedFileUrl" alt="Anteprima Immagine">
     } @else {
       <span class="placeholder-image">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M3.77 20.87C5.38 22.25 7.59 22.25 12 22.25C16.4 22.25 18.62 22.25 20.23 20.87C20.48 20.66 20.69 20.46 20.87 20.24C22.25 18.62 22.25 16.41 22.25 12C22.25 7.59 22.25 5.38001 20.87 3.76001C20.69 3.55001 20.48 3.34 20.23 3.13C18.62 1.75 16.4 1.75 12 1.75C7.6 1.75 5.38 1.75 3.77 3.13C3.52 3.34 3.31 3.54001 3.13 3.76001C1.75 5.38001 1.75 7.58999 1.75 12V12V12C1.75 16.41 1.75 18.62 3.13 20.24C3.31 20.45 3.52 20.66 3.77 20.87ZM4.74 4.27002C5.93 3.25002 7.96 3.25 12 3.25C16.04 3.25 18.07 3.25002 19.26 4.27002C19.43 4.41002 19.59 4.55998 19.73 4.72998C20.75 5.92998 20.75 7.95999 20.75 11.99C20.75 13.0057 20.75 13.8943 20.7337 14.6746L19.0599 13.0009C18.0999 12.0309 16.3999 12.0309 15.4399 13.0009L13.9999 14.4409L10.5599 11.0009C9.59994 10.0309 7.89994 10.0309 6.93994 11.0009L3.26612 14.6747C3.25 13.8968 3.25 13.0114 3.25 12V12V12C3.25 7.96999 3.25 5.93999 4.27 4.73999C4.41 4.56999 4.57 4.41002 4.74 4.27002ZM3.3731 16.6505C3.42939 16.6185 3.48224 16.5787 3.52994 16.531L7.99994 12.061C8.39994 11.661 9.09994 11.661 9.49994 12.061L14.9699 17.531C15.1199 17.681 15.3099 17.7509 15.4999 17.7509C15.6899 17.7509 15.8799 17.681 16.0299 17.531C16.3199 17.241 16.3199 16.7609 16.0299 16.4709L15.0599 15.5009L16.4999 14.061C16.8999 13.661 17.5999 13.661 17.9999 14.061L20.4699 16.531C20.5174 16.5784 20.5699 16.6181 20.6259 16.65C20.4995 17.828 20.2446 18.6446 19.73 19.25C19.59 19.42 19.43 19.58 19.26 19.72C18.07 20.74 16.04 20.74 12 20.74C7.96 20.74 5.93 20.74 4.74 19.72C4.57 19.58 4.41 19.43 4.27 19.26C3.75406 18.653 3.49909 17.8337 3.3731 16.6505ZM15.5 8.75C16.1904 8.75 16.75 8.19036 16.75 7.5C16.75 6.80964 16.1904 6.25 15.5 6.25C14.8096 6.25 14.25 6.80964 14.25 7.5C14.25 8.19036 14.8096 8.75 15.5 8.75Z" fill="#141B34" />
-        </svg>
         Inserisci un'immagine
       </span>
     }
     <figcaption>
       <div class="location">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-          <path d="M10.223,18.035 C9.981,17.801 9.736,17.567 9.488,17.33 L9.459,17.303 C6.487,14.474 2.788,10.953 4.842,6.016 C6.027,3.165 8.904,1.25 12,1.25 C15.096,1.25 17.974,3.165 19.159,6.016 C21.22,10.972 17.49,14.509 14.493,17.351 C14.25,17.581 14.01,17.809 13.776,18.034 C13.296,18.496 12.666,18.75 12,18.75 L11.999,18.75 C11.333,18.75 10.703,18.496 10.223,18.035 Z M6.227,6.592 C4.569,10.577 7.581,13.444 10.493,16.216 L10.493,16.216 C10.755,16.465 11.013,16.711 11.265,16.955 C11.462,17.144 11.724,17.25 12,17.25 C12.276,17.25 12.538,17.145 12.737,16.953 C12.974,16.725 13.216,16.495 13.462,16.262 C16.401,13.475 19.439,10.593 17.775,6.591 C16.819,4.293 14.498,2.749 12,2.749 L12,2.75 C9.502,2.75 7.182,4.294 6.227,6.592 Z M12,22.75 C8.75,22.75 3.25,22.119 3.25,19.754 C3.25,18.641 4.456,17.804 6.835,17.268 C7.239,17.177 7.64,17.431 7.732,17.835 C7.823,18.239 7.569,18.64 7.165,18.732 C5.445,19.12 4.858,19.587 4.759,19.755 C4.999,20.204 7.386,21.25 12.001,21.25 C16.616,21.25 19.002,20.204 19.243,19.755 C19.144,19.587 18.557,19.119 16.837,18.732 C16.433,18.641 16.179,18.24 16.27,17.835 C16.361,17.431 16.762,17.177 17.167,17.268 C19.546,17.804 20.752,18.64 20.752,19.754 C20.752,20.748 19.779,21.526 17.862,22.064 C16.287,22.506 14.206,22.75 12.002,22.75 Z M12,12.25 C10.208,12.25 8.75,10.792 8.75,9 C8.75,7.208 10.208,5.75 12,5.75 C13.792,5.75 15.25,7.208 15.25,9 C15.25,10.792 13.792,12.25 12,12.25 Z M12,7.25 C11.035,7.25 10.25,8.035 10.25,9 C10.25,9.965 11.035,10.75 12,10.75 C12.965,10.75 13.75,9.965 13.75,9 C13.75,8.035 12.965,7.25 12,7.25 Z" />
-        </svg>
         @if (experienceForm.value.park && experienceForm.value.park !== '') {
           <p>{{ experienceForm.value.park }}</p>
         } @else {

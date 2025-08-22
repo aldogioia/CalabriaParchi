@@ -19,13 +19,13 @@
   </section>
   <section class="newsletter">
     <h5>Newsletter</h5>
-    <form>
-      <input type="email" placeholder="Enter your email" required>
-      <button class="primary-button" type="submit">Subscribe</button>
+    <form [formGroup]="newsletterForm" (ngSubmit)="subscribeToNewsletter()">
+      <input formControlName="email" type="email" placeholder="Enter your email" required>
+      <button class="primary-button" type="submit" [disabled]="newsletterForm.invalid">Subscribe</button>
     </form>
   </section>
   <section class="copyright-tag">
-    <span>&copy; 2025 Parchi Calabria. All rights reserved.</span>
+    <span>&copy; 2025 Parchi Calabria.</span>
     <a href="https://www.aldogioia.com" target="_blank">Develobed by Aldo Gioia</a>
   </section>
 </footer>

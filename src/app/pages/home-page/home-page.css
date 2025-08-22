@@ -35,9 +35,8 @@ section {
   gap: 16px;
 }
 
-.details h2 {
+.details h1 {
   color: var(--background);
   text-shadow: 0 0 10px var(--text-strong);
   text-align: center;
-  font-size: 2rem;
 }

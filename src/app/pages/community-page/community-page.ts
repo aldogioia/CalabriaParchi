@@ -1,4 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ExperiencePostDto} from '../../../model/dto/ExperiencePostDto';
+import {ShareExperienceService} from '../../../service/share-experience-service';
+import {ParkService} from '../../../service/park-service';
+import {ParkDto} from '../../../model/dto/ParkDto';
 
 @Component({
   selector: 'app-community-page',
@@ -7,13 +11,39 @@ import {Component} from '@angular/core';
   styleUrl: './community-page.css',
   host: {'class': 'page margin' }
 })
-export class CommunityPage {
-  sectionToShow: number = 0;
+export class CommunityPage implements OnInit {
+  selectedPark: number = 0;
 
-  experiences: any[] = [0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+  experiences: ExperiencePostDto[] = [];
+  parks: ParkDto[] = [];
 
-  parks: string[] = [
-    'Tutte','Sila', 'Aspromonte', 'Pollino', 'Baia di Soverato', 'Costa degli Dei',
-    'Costa dei Gelsomini', 'Riviera dei Cedri', 'Scogli di Isca', 'Secca di Amendolara'
-  ];
+  constructor(
+    private experienceService: ShareExperienceService,
+    private parkService: ParkService
+  ) {}
+
+  ngOnInit(): void {
+    this.parkService.getParks().subscribe({
+      next: (response) => {
+        this.parks = response;
+        if (this.parks.length > 0) {
+          this.changeSelected(0);
+        }
+      }
+    });
+  }
+
+  changeSelected(i: number) {
+    this.selectedPark = i
+    this.getExperiencePostByPark(this.parks[i].id);
+  }
+
+  private getExperiencePostByPark(parkId: string) {
+    this.experienceService.getExperiencePostByPark(parkId).subscribe({
+      next: (experiences) => {
+        this.experiences = experiences;
+      }
+    });
+  }
+
 }

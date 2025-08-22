@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {TagDto} from '../../../model/dto/TagDto';
+import {InterestDto} from '../../../model/dto/InterestDto';
+import {GlobalHandler} from '../../../utils/GlobalHandler';
 
 @Component({
   selector: 'app-card-component',
@@ -8,7 +9,12 @@ import {TagDto} from '../../../model/dto/TagDto';
   styleUrl: './card-component.css'
 })
 export class CardComponent {
-  @Input() title: string = '';
-  @Input() description: string = '';
-  @Input() tags: TagDto[] = [];
+  @Input({ required: true })
+  interestDto!: InterestDto
+
+  actionInWishlist(id: string) {
+    GlobalHandler.getInstance().getWishlist().includes(id) //TODO da migliorare
+      ? GlobalHandler.getInstance().addToWishlist(id)
+      : GlobalHandler.getInstance().removeFromWishlist(id);
+  }
 }

@@ -1,117 +1,89 @@
 <figure>
-  <img src="images/sila.jpg" alt="Immagine parco nazionale della sila">
-  <svg id="visual" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0 351L129 360L257 326L386 356L514 368L643 362L771 323L900 336L900 601L771 601L643 601L514 601L386 601L257 601L129 601L0 601Z" fill="#f2f2f233"></path>
-    <path d="M0 380L129 425L257 377L386 372L514 382L643 426L771 376L900 423L900 601L771 601L643 601L514 601L386 601L257 601L129 601L0 601Z" fill="#f2f2f266"></path>
-    <path d="M0 462L129 455L257 442L386 471L514 477L643 438L771 477L900 435L900 601L771 601L643 601L514 601L386 601L257 601L129 601L0 601Z" fill="#f2f2f299"></path>
-    <path d="M0 509L129 480L257 505L386 520L514 517L643 481L771 515L900 470L900 601L771 601L643 601L514 601L386 601L257 601L129 601L0 601Z" fill="#f2f2f2cc"></path>
-    <path d="M0 566L129 545L257 545L386 521L514 567L643 572L771 555L900 542L900 601L771 601L643 601L514 601L386 601L257 601L129 601L0 601Z" fill="#f2f2f2ff"></path>
-  </svg>
-  <figcaption><h1>Parco Nazionale della Sila</h1></figcaption>
+  <img [src]="park!.imageUrl" [alt]="park!.name">
+  @if (park!.isMarine) {
+    <svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 386L22.8 385.2C45.7 384.3 91.3 382.7 137 380.8C182.7 379 228.3 377 274 369.7C319.7 362.3 365.3 349.7 411.2 343.5C457 337.3 503 337.7 548.8 346.5C594.7 355.3 640.3 372.7 686 379.8C731.7 387 777.3 384 823 384.3C868.7 384.7 914.3 388.3 937.2 390.2L960 392L960 541L937.2 541C914.3 541 868.7 541 823 541C777.3 541 731.7 541 686 541C640.3 541 594.7 541 548.8 541C503 541 457 541 411.2 541C365.3 541 319.7 541 274 541C228.3 541 182.7 541 137 541C91.3 541 45.7 541 22.8 541L0 541Z" fill="#f2f2f233"/>
+      <path d="M0 424L22.8 413.8C45.7 403.7 91.3 383.3 137 373C182.7 362.7 228.3 362.3 274 370.3C319.7 378.3 365.3 394.7 411.2 400.3C457 406 503 401 548.8 394.3C594.7 387.7 640.3 379.3 686 383C731.7 386.7 777.3 402.3 823 403.5C868.7 404.7 914.3 391.3 937.2 384.7L960 378L960 541L937.2 541C914.3 541 868.7 541 823 541C777.3 541 731.7 541 686 541C640.3 541 594.7 541 548.8 541C503 541 457 541 411.2 541C365.3 541 319.7 541 274 541C228.3 541 182.7 541 137 541C91.3 541 45.7 541 22.8 541L0 541Z" fill="#f2f2f266"/>
+      <path d="M0 460L22.8 454.5C45.7 449 91.3 438 137 436.3C182.7 434.7 228.3 442.3 274 442.3C319.7 442.3 365.3 434.7 411.2 432.5C457 430.3 503 433.7 548.8 436.7C594.7 439.7 640.3 442.3 686 445.5C731.7 448.7 777.3 452.3 823 444C868.7 435.7 914.3 415.3 937.2 405.2L960 395L960 541L937.2 541C914.3 541 868.7 541 823 541C777.3 541 731.7 541 686 541C640.3 541 594.7 541 548.8 541C503 541 457 541 411.2 541C365.3 541 319.7 541 274 541C228.3 541 182.7 541 137 541C91.3 541 45.7 541 22.8 541L0 541Z" fill="#f2f2f299"/>
+      <path d="M0 463L22.8 462.8C45.7 462.7 91.3 462.3 137 465C182.7 467.7 228.3 473.3 274 476.5C319.7 479.7 365.3 480.3 411.2 479.7C457 479 503 477 548.8 474.3C594.7 471.7 640.3 468.3 686 469.7C731.7 471 777.3 477 823 474.5C868.7 472 914.3 461 937.2 455.5L960 450L960 541L937.2 541C914.3 541 868.7 541 823 541C777.3 541 731.7 541 686 541C640.3 541 594.7 541 548.8 541C503 541 457 541 411.2 541C365.3 541 319.7 541 274 541C228.3 541 182.7 541 137 541C91.3 541 45.7 541 22.8 541L0 541Z" fill="#f2f2f2cc"/>
+      <path d="M0 508L22.8 509.2C45.7 510.3 91.3 512.7 137 507.2C182.7 501.7 228.3 488.3 274 488.3C319.7 488.3 365.3 501.7 411.2 507.2C457 512.7 503 510.3 548.8 507.8C594.7 505.3 640.3 502.7 686 498C731.7 493.3 777.3 486.7 823 483.8C868.7 481 914.3 482 937.2 482.5L960 483L960 541L937.2 541C914.3 541 868.7 541 823 541C777.3 541 731.7 541 686 541C640.3 541 594.7 541 548.8 541C503 541 457 541 411.2 541C365.3 541 319.7 541 274 541C228.3 541 182.7 541 137 541C91.3 541 45.7 541 22.8 541L0 541Z" fill="#f2f2f2ff"/>
+    </svg>
+  } @else {
+    <svg viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 351L129 360L257 326L386 356L514 368L643 362L771 323L900 336L900 601L771 601L643 601L514 601L386 601L257 601L129 601L0 601Z" fill="#f2f2f233"></path>
+      <path d="M0 380L129 425L257 377L386 372L514 382L643 426L771 376L900 423L900 601L771 601L643 601L514 601L386 601L257 601L129 601L0 601Z" fill="#f2f2f266"></path>
+      <path d="M0 462L129 455L257 442L386 471L514 477L643 438L771 477L900 435L900 601L771 601L643 601L514 601L386 601L257 601L129 601L0 601Z" fill="#f2f2f299"></path>
+      <path d="M0 509L129 480L257 505L386 520L514 517L643 481L771 515L900 470L900 601L771 601L643 601L514 601L386 601L257 601L129 601L0 601Z" fill="#f2f2f2cc"></path>
+      <path d="M0 566L129 545L257 545L386 521L514 567L643 572L771 555L900 542L900 601L771 601L643 601L514 601L386 601L257 601L129 601L0 601Z" fill="#f2f2f2ff"></path>
+    </svg>
+  }
+  <figcaption><h1>{{ park!.name }}</h1></figcaption>
 </figure>
-<section class="details-location" aria-label="Informazioni sul Parco Nazionale della Sila">
+<section class="details-location" aria-label="Dettagli sul Parco">
   <nav>
     <ul>
-      <li (click)="sectionToShow = 0" [class.active]="sectionToShow == 0">Storia del Parco</li>
-      <li (click)="sectionToShow = 1" [class.active]="sectionToShow == 1">Località</li>
-      <li (click)="sectionToShow = 2" [class.active]="sectionToShow == 2">Attività</li>
-      <li (click)="sectionToShow = 3" [class.active]="sectionToShow == 3">Galleria</li>
+      @for (section of sections; track section) {
+        <li (click)="changeSection(section)" [class.active]="sectionToShow == section">{{ Section[section] }}</li>
+      }
     </ul>
   </nav>
 
   @switch (sectionToShow) {
-    @case (0) {
-      <ng-container *ngTemplateOutlet="story"></ng-container>
+    @case (Section.Articles) {
+      <ng-container *ngTemplateOutlet="storyTemplate"></ng-container>
     }
-    @case (1) {
-      <ng-container *ngTemplateOutlet="locations"></ng-container>
+    @case (Section.Localities) {
+      <ng-container *ngTemplateOutlet="locationsTemplate"></ng-container>
     }
-    @case (2) {
-      <ng-container *ngTemplateOutlet="activities"></ng-container>
+    @case (Section.Activities) {
+      <ng-container *ngTemplateOutlet="activitiesTemplate"></ng-container>
     }
-    @case (3) {
-      <ng-container *ngTemplateOutlet="gallery"></ng-container>
-    }
-    @default {
-      <ng-container *ngTemplateOutlet="story"></ng-container>
+    @case (Section.Gallery) {
+      <ng-container *ngTemplateOutlet="galleryTemplate"></ng-container>
     }
   }
 </section>
 
 <app-footer-component></app-footer-component>
 
-<ng-template #story>
+<ng-template #storyTemplate>
   <section class="sub-section to-reveal">
-    <app-article-component
-      title="Storia del Parco Nazionale della Sila"
-      [paragraphs]="[
-      'Il Parco Nazionale della Sila è stato istituito nel 1997 e si estende su una superficie di circa 73.000 ettari. La sua storia è legata alla conservazione della biodiversità e alla tutela degli ecosistemi montani tipici della Sila, un\'area caratterizzata da foreste di pini, faggi e abeti.',
-      'Il parco è stato creato per preservare le risorse naturali e culturali della regione, promuovendo al contempo lo sviluppo sostenibile e il turismo responsabile.',
-      'Oggi, il Parco Nazionale della Sila è un importante centro di ricerca e conservazione, con numerosi progetti dedicati alla salvaguardia della fauna selvatica e degli habitat naturali.']">
-    </app-article-component>
-    <app-article-component
-      title="I giganti della Sila"
-      image="images/sila.jpg"
-      [paragraphs]="['I giganti della Sila sono un gruppo di alberi secolari, tra cui pini loricati e faggi, che si trovano nel parco. Questi alberi sono considerati monumenti naturali e rappresentano un simbolo della biodiversità della Sila.']">
-    </app-article-component>
-    <app-article-component
-      title="Il lago Cecita"
-      image="images/sila.jpg"
-      [paragraphs]="['Il lago Cecita è il più grande lago artificiale della Calabria e si trova all\'interno del Parco Nazionale della Sila. È un luogo ideale per attività ricreative come la pesca, il kayak e le passeggiate lungo le sue sponde.']">
-    </app-article-component>
-    <app-article-component
-      title="Il sentiero del Brigante"
-      image="images/sila.jpg"
-      [paragraphs]="['Il sentiero del Brigante è un percorso escursionistico che attraversa il parco, offrendo ai visitatori la possibilità di esplorare la natura incontaminata e scoprire la storia locale legata ai briganti della Sila.']">
-    </app-article-component>
+    @for (article of articles; track article.id) {
+      <app-article-component [articleDto]="article"></app-article-component>
+    }
   </section>
 </ng-template>
 
-<ng-template #locations>
+<ng-template #locationsTemplate>
   <section class="sub-section to-reveal">
-    <app-article-component
+    <!--<app-article-component
       title="Località del Parco Nazionale della Sila"
     [paragraphs]="['Il Parco Nazionale della Sila si trova in Calabria, nel sud Italia, e comprende le province di Cosenza, Catanzaro e Crotone. Il parco è caratterizzato da un paesaggio montano unico, con vette che raggiungono i 2.000 metri di altitudine e una ricca biodiversità.']">
-    </app-article-component>
-    <app-park-item-component
-      title="Camigliatello Silano"
-      location="Camigliatello Silano"
-      phone="+39 0984 123456"
-      website="aldogioia.com"
-      description="Il Parco Nazionale della Sila è un paradiso per gli appassionati di birdwatching, con molte specie di uccelli che abitano la zona. I visitatori possono osservare aquile, falchi e altri rapaci in volo."
-      [tags]="tags"
-    ></app-park-item-component>
+    </app-article-component>-->
+    @for (locality of localities; track locality.id) {
+      <app-park-item-component [interestDto]="locality"></app-park-item-component>
+    }
   </section>
 </ng-template>
 
-<ng-template #activities>
+<ng-template #activitiesTemplate>
   <section class="sub-section to-reveal">
-    <app-article-component
+    <!--<app-article-component
       title="Attività nel Parco Nazionale della Sila"
       [paragraphs]="['Il Parco Nazionale della Sila offre una vasta gamma di attività all\'aperto, tra cui escursioni, birdwatching, ciclismo e sci. I visitatori possono esplorare i numerosi sentieri che attraversano il parco, ammirando la bellezza dei paesaggi montani e la ricca fauna selvatica.',]">
-    </app-article-component>
-    <app-park-item-component
-      title="Escursioni"
-      location="Camigliatello Silano"
-      description="Il parco offre numerosi sentieri per escursioni di diversa difficoltà, adatti a tutti i livelli di esperienza. I percorsi variano da brevi passeggiate a lunghe escursioni che attraversano le foreste e le vette della Sila."
-      [tags]="tags"
-    ></app-park-item-component>
-    <app-park-item-component
-      title="Birdwatching"
-      location="Camigliatello Silano"
-      phone="+39 0984 123456"
-      description="Il Parco Nazionale della Sila è un paradiso per gli appassionati di birdwatching, con molte specie di uccelli che abitano la zona. I visitatori possono osservare aquile, falchi e altri rapaci in volo."
-      [tags]="tags"
-    ></app-park-item-component>
+    </app-article-component>-->
+    @for (activity of activities; track activity.id) {
+      <app-park-item-component [interestDto]="activity"></app-park-item-component>
+    }
   </section>
 </ng-template>
 
-<ng-template #gallery>
+<ng-template #galleryTemplate>
   <section class="sub-section to-reveal" aria-label="Galleria fotografica del Parco Nazionale della Sila">
-    <app-article-component
+    <!--<app-article-component
       title="Galleria fotografica del Parco Nazionale della Sila"
       [paragraphs]="['La galleria fotografica del Parco Nazionale della Sila offre uno sguardo ravvicinato alla bellezza naturale di questa area protetta. Le immagini catturano la varietà di paesaggi, dalla vegetazione lussureggiante alle vette montuose, e mostrano la fauna selvatica che abita il parco.']">
-    </app-article-component>
-    <app-gallery-component></app-gallery-component>
+    </app-article-component>-->
+    <app-gallery-component [galleryItems]="galleryItems"></app-gallery-component>
   </section>
 </ng-template>

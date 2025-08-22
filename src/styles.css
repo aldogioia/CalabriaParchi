@@ -191,6 +191,13 @@ nav ul li.active {
   fill: var(--background);
 }
 
+.primary-button svg {
+  fill: var(--background);
+  transition: .3s ease-in-out;
+  height: 24px;
+  width: 24px;
+}
+
 .primary-button:hover {
   background-color: var(--brand-strong);
 }

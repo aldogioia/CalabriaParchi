@@ -90,6 +90,19 @@ form {
   fill: var(--text-strong);
 }
 
+.input-group.error > input,
+.input-group.error > textarea,
+.input-group.error > select,
+.input-group.error > .file-wrapper{
+  border: 2px solid #e74c3c;
+  background-color: #fff6f6;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+}
+
 .primary-button {
   max-width: none;
 }

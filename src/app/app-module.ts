@@ -1,10 +1,12 @@
 import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {TRANSLATE_HTTP_LOADER_CONFIG, TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { HomePage } from './pages/home-page/home-page';
-import {NgOptimizedImage} from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { ParkPage } from './pages/park-page/park-page';
 import { FooterComponent } from './component/footer-component/footer-component';
 import { CardComponent } from './component/card-component/card-component';
@@ -12,11 +14,16 @@ import { ArticleComponent } from './component/article-component/article-componen
 import { GalleryComponent } from './component/gallery-component/gallery-component';
 import { ItineraryPage } from './pages/itinerary-page/itinerary-page';
 import { ParkItemComponent } from './component/park-item-component/park-item-component';
-import {ShareExperiencePage} from './pages/share-experience-page/share-experience-page';
+import { ShareExperiencePage } from './pages/share-experience-page/share-experience-page';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ExperienceCardComponent } from './component/experience-card-component/experience-card-component';
 import { CommunityPage } from './pages/community-page/community-page';
 import { MyItineraryPage } from './pages/my-itinerary-page/my-itinerary-page';
+import {HttpClient, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+
+export function HttpLoaderFactory():TranslateHttpLoader {
+  return new TranslateHttpLoader();
+}
 
 @NgModule({
   declarations: [
@@ -39,10 +46,25 @@ import { MyItineraryPage } from './pages/my-itinerary-page/my-itinerary-page';
     AppRoutingModule,
     NgOptimizedImage,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
-    provideBrowserGlobalErrorListeners()
+    {
+      provide: TRANSLATE_HTTP_LOADER_CONFIG,
+      useValue: {
+        prefix: '/i18n/',
+        suffix: '.json'
+      }
+    },
+    provideBrowserGlobalErrorListeners(),
+    provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [App]
 })

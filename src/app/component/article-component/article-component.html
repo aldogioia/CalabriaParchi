@@ -1,12 +1,12 @@
 <article aria-label="Storia del Parco Nazionale della Sila">
-  <h2>{{title}}</h2>
-  @for (paragraph of paragraphs; track paragraph) {
+  <h2>{{articleDto.title}}</h2>
+  @for (paragraph of articleDto.paragraphs; track paragraph) {
     <p>{{paragraph}}</p>
   }
-  @if (image !== null) {
+  @if (articleDto.imageUrl !== '' && articleDto.imageUrl !== null) {
     <figure>
-      <img src="images/sila.jpg" alt="Immagine del Parco Nazionale della Sila">
-      <figcaption>Parco Nazionale della Sila</figcaption>
+      <img [src]="articleDto.imageUrl" [alt]="articleDto.title">
+      <!-- todo: aggiungere un campo al dto <figcaption>Parco Nazionale della Sila</figcaption> -->
     </figure>
   }
 </article>

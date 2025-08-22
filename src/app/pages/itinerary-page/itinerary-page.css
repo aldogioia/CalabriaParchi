@@ -111,6 +111,10 @@
   padding-bottom: 0;
 }
 
+.tags{
+  flex-wrap: wrap;
+}
+
 .tag{
   background: var(--fill);
   border-color: var(--stroke-strong);
@@ -120,6 +124,7 @@
 
 .tag.selected {
   background: var(--brand-fill);
+  border-color: var(--brand-stroke-strong);
 }
 
 @media (max-width: 768px) {

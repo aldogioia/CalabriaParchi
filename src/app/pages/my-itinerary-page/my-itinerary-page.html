@@ -1,16 +1,11 @@
 <section class="my-itinerary-page">
-  <app-article-component
+  <!--<app-article-component
     title="Il tuo itinerario"
     [paragraphs]="['In questa sezione troverai il riepilogo delle location che andranno a comporre il tuo viaggio. Considerala la base di partenza per la tua avventura: un promemoria visivo dei luoghi meravigliosi che ti prepari a visitare e delle esperienze indimenticabili che ti aspettano.']">
-  </app-article-component>
-  @for (itinerary of itineraries; track itinerary) {
+  </app-article-component>-->
+  @for (interest of myInterests; track interest.id) {
     <app-park-item-component
-      title="Camigliatello Silano"
-      location="Camigliatello Silano"
-      phone="+39 0984 123456"
-      website="aldogioia.com"
-      description="Il Parco Nazionale della Sila è un paradiso per gli appassionati di birdwatching, con molte specie di uccelli che abitano la zona. I visitatori possono osservare aquile, falchi e altri rapaci in volo."
-      [tags]="tags"
+      [interestDto]="interest"
       [isItinerary]="true"
     ></app-park-item-component>
   }
