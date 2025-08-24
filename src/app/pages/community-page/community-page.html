@@ -1,10 +1,5 @@
 <section class="community">
-  <!--<app-article-component
-    title="Un mosaico di avventure calabresi"
-    [paragraphs]="[
-    'Benvenuto nel cuore pulsante della nostra community: l\'archivio collettivo delle esperienze in Calabria. Questa sezione raccoglie le storie, le immagini e i consigli di viaggiatori come te, che hanno esplorato i sentieri dei parchi nazionali e si sono immersi nelle acque cristalline della costa. Ogni racconto è una finestra aperta su un\'esperienza reale e autentica.',
-    'Qui puoi trovare l\'ispirazione per il tuo prossimo viaggio. Naviga liberamente tra le storie per lasciarti sorprendere, oppure usa i filtri per affinare la ricerca in base ai tuoi interessi e alle mete che sogni di visitare. Che tu stia cercando un consiglio pratico o semplicemente voglia sognare attraverso gli occhi di altri esploratori, sei nel posto giusto.']">
-  </app-article-component>-->
+  <app-article-component [articleDto]="articleDto"></app-article-component>
   <nav>
     <ul>
       @for (park of parks; track park.id; let i = $index) {

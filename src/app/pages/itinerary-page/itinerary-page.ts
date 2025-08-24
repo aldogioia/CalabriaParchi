@@ -7,6 +7,10 @@ import {InterestService} from '../../../service/interest-service';
 import {InterestDto} from '../../../model/dto/InterestDto';
 import {ParkService} from '../../../service/park-service';
 import {ParkDto} from '../../../model/dto/ParkDto';
+import {ArticleDto} from '../../../model/dto/ArticleDto';
+import {TranslateService} from '@ngx-translate/core';
+import {ItineraryService} from '../../../service/itinerary-service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-itinerary-page',
@@ -27,14 +31,35 @@ export class ItineraryPage implements OnInit{
   categories: CategoryDto[] = [];
   interests: InterestDto[] = [];
 
+  articleDto: ArticleDto
+
+  private sub!: Subscription;
+  wishlistCount: number = 0;
+
   constructor(
     private tagService: TagService,
     private parkService: ParkService,
     private categoryService: CategoryService,
-    private interestService: InterestService
-  ) {}
+    private interestService: InterestService,
+    private itineraryService: ItineraryService,
+    private translateService: TranslateService
+  ) {
+    this.articleDto = {
+      id: '',
+      parkId: '',
+      imageUrl: '',
+      title: this.translateService.instant('ITINERARY_ARTICLE_TITLE'),
+      paragraphs: [
+        this.translateService.instant('ITINERARY_ARTICLE_PARAGRAPH_1')
+      ]
+    };
+  }
 
   ngOnInit() {
+    this.sub = this.itineraryService.wishlist$.subscribe(ids => {
+      this.wishlistCount = ids.length;
+    });
+
     this.tagService.getTags().subscribe(tags => {
       this.tags = tags;
     });

@@ -1,8 +1,5 @@
 <section class="my-itinerary-page">
-  <!--<app-article-component
-    title="Il tuo itinerario"
-    [paragraphs]="['In questa sezione troverai il riepilogo delle location che andranno a comporre il tuo viaggio. Considerala la base di partenza per la tua avventura: un promemoria visivo dei luoghi meravigliosi che ti prepari a visitare e delle esperienze indimenticabili che ti aspettano.']">
-  </app-article-component>-->
+  <app-article-component [articleDto]="articleDto"></app-article-component>
   <section class="buttons">
     <button (click)="generateItinerary()" class="primary-button">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

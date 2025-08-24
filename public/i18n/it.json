@@ -10,5 +10,19 @@
   "COMMUNITY": "Community",
   "ITINERARIES": "Itinerari",
   "GENERATE_ITINERARY": "Scarica itinerario",
-  "CLEAR_ITINERARY": "Cancella itinerario"
+  "CLEAR_ITINERARY": "Cancella itinerario",
+
+  "COMMUNITY_ARTICLE_TITLE": "Un mosaico di avventure calabresi",
+  "COMMUNITY_ARTICLE_PARAGRAPH_1": "Benvenuto nel cuore pulsante della nostra community: l'archivio collettivo delle esperienze in Calabria. Questa sezione raccoglie le storie, le immagini e i consigli di viaggiatori come te, che hanno esplorato i sentieri dei parchi nazionali e si sono immersi nelle acque cristalline della costa. Ogni racconto è una finestra aperta su un'esperienza reale e autentica.",
+  "COMMUNITY_ARTICLE_PARAGRAPH_2": "Qui puoi trovare l'ispirazione per il tuo prossimo viaggio. Naviga liberamente tra le storie per lasciarti sorprendere, oppure usa i filtri per affinare la ricerca in base ai tuoi interessi e alle mete che sogni di visitare. Che tu stia cercando un consiglio pratico o semplicemente voglia sognare attraverso gli occhi di altri esploratori, sei nel posto giusto.",
+
+  "ITINERARY_ARTICLE_TITLE": "Crea il tuo Itinerario personale",
+  "ITINERARY_ARTICLE_PARAGRAPH_1": "Crea il tuo itinerario personale e condividilo con gli altri utenti. Puoi aggiungere luoghi e attività per poi scaricare il tuo itinerario di viaggio in formato PDF.",
+
+  "MY_ITINERARY_ARTICLE_TITLE": "Il tuo itinerario",
+  "MY_ITINERARY_ARTICLE_PARAGRAPH_1": "In questa sezione troverai il riepilogo delle location che andranno a comporre il tuo viaggio. Considerala la base di partenza per la tua avventura: un promemoria visivo dei luoghi meravigliosi che ti prepari a visitare e delle esperienze indimenticabili che ti aspettano.",
+
+  "SHARE_EXPERIENCE": "Condividi la tua esperienza",
+
+  "SELECTED_INTERESTS": "Interessi selezionati: "
 }

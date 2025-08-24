@@ -1,12 +1,9 @@
 <section class="itinerary">
-  <!--<app-article-component
-    title="Crea il tuo Itinerario personale"
-    [paragraphs]="['Crea il tuo itinerario personale e condividilo con gli altri utenti. Puoi aggiungere luoghi e attività per poi scaricare il tuo itinerario di viaggio in formato PDF.']"
-  ></app-article-component>-->
+  <app-article-component [articleDto]="articleDto"></app-article-component>
 
   <section class="my-itinerary-summary">
     <h3>Il tuo itinerario</h3>
-    <a routerLink="/my-itinerary">4 tappe selezionate</a>
+    <a routerLink="/my-itinerary">{{ "SELECTED_INTERESTS" | translate }} {{wishlistCount}}</a>
   </section>
 
   <form class="filter-form">

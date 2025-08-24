@@ -1,5 +1,6 @@
 <section class="share-experience">
   <form [formGroup]="experienceForm" (ngSubmit)="share()">
+    <h2>{{ "SHARE_EXPERIENCE" | translate }}</h2>
     <div class="input-group" [class.error]="!selectedFile && experienceForm.touched">
       <label for="img">Foto</label>
       <div class="file-wrapper">

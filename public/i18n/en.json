@@ -10,5 +10,19 @@
   "COMMUNITY": "Community",
   "ITINERARIES": "Itineraries",
   "GENERATE_ITINERARY": "Download Itinerary",
-  "CLEAR_ITINERARY": "Clear Itinerary"
+  "CLEAR_ITINERARY": "Clear Itinerary",
+
+  "COMMUNITY_ARTICLE_TITLE": "A mosaic of Calabrian adventures",
+  "COMMUNITY_ARTICLE_PARAGRAPH_1": "Welcome to the vibrant heart of our community: the collective archive of experiences in Calabria. This section gathers stories, images, and advice from travelers like you, who have explored the trails of national parks and dived into the crystal-clear waters of the coast. Each story is an open window onto a real and authentic experience.",
+  "COMMUNITY_ARTICLE_PARAGRAPH_2": "Here you can find inspiration for your next trip. Freely browse through the stories to be surprised, or use filters to refine your search based on your interests and the destinations you dream of visiting. Whether you are looking for practical advice or simply want to dream through the eyes of other explorers, you are in the right place.",
+
+  "ITINERARY_ARTICLE_TITLE": "Create your personal itinerary",
+  "ITINERARY_ARTICLE_PARAGRAPH_1": "Create your personal itinerary and share it with other users. You can add places and activities, then download your travel itinerary as a PDF.",
+
+  "MY_ITINERARY_ARTICLE_TITLE": "Your itinerary",
+  "MY_ITINERARY_ARTICLE_PARAGRAPH_1": "In this section you will find a summary of the locations that will make up your trip. Consider it the starting point for your adventure: a visual reminder of the wonderful places you are about to visit and the unforgettable experiences that await you.",
+
+  "SHARE_EXPERIENCE": "Share your experience",
+
+  "SELECTED_INTERESTS": "Selected interests: "
 }

@@ -3,6 +3,8 @@ import {ExperiencePostDto} from '../../../model/dto/ExperiencePostDto';
 import {ShareExperienceService} from '../../../service/share-experience-service';
 import {ParkService} from '../../../service/park-service';
 import {ParkDto} from '../../../model/dto/ParkDto';
+import {ArticleDto} from '../../../model/dto/ArticleDto';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-community-page',
@@ -17,10 +19,24 @@ export class CommunityPage implements OnInit {
   experiences: ExperiencePostDto[] = [];
   parks: ParkDto[] = [];
 
+  articleDto: ArticleDto;
+
   constructor(
     private experienceService: ShareExperienceService,
-    private parkService: ParkService
-  ) {}
+    private parkService: ParkService,
+    private translateService: TranslateService
+  ) {
+    this.articleDto = {
+      id: '',
+      parkId: '',
+      imageUrl: '',
+      title: this.translateService.instant('COMMUNITY_ARTICLE_TITLE'),
+      paragraphs: [
+        this.translateService.instant('COMMUNITY_ARTICLE_PARAGRAPH_1'),
+        this.translateService.instant('COMMUNITY_ARTICLE_PARAGRAPH_2')
+      ]
+    };
+  }
 
   ngOnInit(): void {
     this.parkService.getParks().subscribe({
@@ -45,5 +61,4 @@ export class CommunityPage implements OnInit {
       }
     });
   }
-
 }
