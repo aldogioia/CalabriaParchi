@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {InterestDto} from '../../../model/dto/InterestDto';
-import {GlobalHandler} from '../../../utils/GlobalHandler';
+import {ItineraryService} from '../../../service/itinerary-service';
 
 @Component({
   selector: 'app-park-item-component',
@@ -12,13 +12,6 @@ export class ParkItemComponent {
   @Input({required : true})
   interestDto!: InterestDto
 
-  @Input() isItinerary: boolean = false;
-
-  showMore: boolean = false;
-
-  actionInWishlist(id: string) {
-    this.isItinerary
-      ? GlobalHandler.getInstance().addToWishlist(id)
-      : GlobalHandler.getInstance().removeFromWishlist(id);
+  constructor(protected itineraryService: ItineraryService) {
   }
 }

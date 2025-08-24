@@ -5,4 +5,16 @@
   padding: 16px;
   width: 100%;
   max-width: 1280px;
+  min-height: 100svh;
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.primary-button {
+  max-width: none;
+  width: fit-content;
 }

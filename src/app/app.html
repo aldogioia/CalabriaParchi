@@ -31,21 +31,16 @@
 
 <ng-template #destinations>
   <div class="container">
-    <h4>Destinazioni</h4>
-    <a (click)="redirectTo('/park')">
-      Sila</a>
-    <a (click)="redirectTo('/park')">
-      Aspromonte</a>
-    <a (click)="redirectTo('/park')">
-      Pollino</a>
-    <a (click)="redirectTo('/park')">
-      Parchi Marini</a>
+    <h4>{{ "DESTINATIONS" | translate }}</h4>
+    @for (park of parks; track park.id){
+      <a (click)="redirectTo('/park', park)">{{ park.name }}</a>
+    }
   </div>
 </ng-template>
 
 <ng-template #share>
   <div class="container">
-    <h4>Community</h4>
+    <h4>{{ "COMMUNITY" | translate }}</h4>
     <a (click)="redirectTo('/share-experience')">
       Condividi la tua esperienza</a>
     <a (click)="redirectTo('/community')">
@@ -55,7 +50,7 @@
 
 <ng-template #itinerary>
   <div class="container">
-    <h4>Itinerari</h4>
+    <h4>{{ "ITINERARIES" | translate }}</h4>
     <a (click)="redirectTo('/my-itinerary')">Il tuo itinerario</a>
     <a (click)="redirectTo('/itineraries')">Esplora nuove tappe</a>
   </div>

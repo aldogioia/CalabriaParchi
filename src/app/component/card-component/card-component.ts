@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {InterestDto} from '../../../model/dto/InterestDto';
 import {GlobalHandler} from '../../../utils/GlobalHandler';
+import {ItineraryService} from '../../../service/itinerary-service';
 
 @Component({
   selector: 'app-card-component',
@@ -11,10 +12,7 @@ import {GlobalHandler} from '../../../utils/GlobalHandler';
 export class CardComponent {
   @Input({ required: true })
   interestDto!: InterestDto
+  protected readonly GlobalHandler = GlobalHandler;
 
-  actionInWishlist(id: string) {
-    GlobalHandler.getInstance().getWishlist().includes(id) //TODO da migliorare
-      ? GlobalHandler.getInstance().addToWishlist(id)
-      : GlobalHandler.getInstance().removeFromWishlist(id);
-  }
+  constructor(protected itineraryService: ItineraryService) {}
 }

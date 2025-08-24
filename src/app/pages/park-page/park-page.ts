@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { ArticleService } from '../../../service/article-service';
 import { InterestService } from '../../../service/interest-service';
 import { GalleryItemService } from '../../../service/gallery-item-service';
@@ -10,6 +10,7 @@ import { InterestDto } from '../../../model/dto/InterestDto';
 import { GalleryItemDto } from '../../../model/dto/GalleryItemDto';
 import { Observable } from 'rxjs';
 import { Section } from '../../../model/enum/Section';
+import {ParkService} from '../../../service/park-service';
 
 @Component({
   selector: 'app-park-page',
@@ -40,15 +41,12 @@ export class ParkPage implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
+    private parkService: ParkService,
     private articleService: ArticleService,
     private interestService: InterestService,
     private galleryItemService: GalleryItemService
   ) {
-    const navigation = this.router.getCurrentNavigation();
-    if (navigation?.extras.state) {
-      this.park = navigation.extras.state['park'] as ParkDto;
-    }
-
     this.sectionConfig = {
       0: {
         fetch: (id) => this.articleService.getArticlesByParkId(id),
@@ -74,10 +72,17 @@ export class ParkPage implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.park) {
-      this.loadSection(this.sectionToShow);
-      console.log(this.articles?.forEach(article => console.log(article.imageUrl)));
-    }
+    this.route.paramMap.subscribe(params => {
+      const parkId = params.get('id');
+      const navigation = this.router.getCurrentNavigation();
+
+      if (navigation?.extras.state?.['park']) {
+        this.setPark(navigation.extras.state['park']);
+      } else {
+        this.parkService.getPark(parkId!)
+          .subscribe(park => this.setPark(park));
+      }
+    });
   }
 
   changeSection(section: number): void {
@@ -102,6 +107,21 @@ export class ParkPage implements OnInit {
       complete: () => (this.loading = false)
     });
   }
+
+  private resetData(): void {
+    this.articles = undefined;
+    this.localities = undefined;
+    this.activities = undefined;
+    this.galleryItems = undefined;
+    this.loading = false;
+  }
+
+  private setPark(park: ParkDto): void {
+    this.park = park;
+    this.resetData();
+    this.loadSection(this.sectionToShow);
+  }
+
 
   protected readonly Section = Section;
 }

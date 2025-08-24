@@ -12,7 +12,6 @@ article {
   flex-direction: column;
   gap: 8px;
   padding-top: 16px;
-  border-top: 1px solid var(--stroke-weak);
 }
 
 figure {
@@ -55,13 +54,6 @@ figcaption {
 
 .article-info svg {
   fill: var(--brand-weak);
-}
-
-.article-info span {
-  color: var(--text-strong);
-  text-decoration: underline;
-  transition: .3s ease-in-out;
-  cursor: pointer;
 }
 
 .article-info a:hover {

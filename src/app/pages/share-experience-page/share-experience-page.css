@@ -94,12 +94,12 @@ form {
 .input-group.error > textarea,
 .input-group.error > select,
 .input-group.error > .file-wrapper{
-  border: 2px solid #e74c3c;
-  background-color: #fff6f6;
+  border: 2px solid var(--error-stroke-strong);
+  background-color: var(--error-fill);
 }
 
 .error-message {
-  color: #e74c3c;
+  color: var(--error-strong);
   font-size: clamp(0.75rem, 1.5vw, 0.875rem);
 }
 

@@ -19,14 +19,12 @@ export class HomePage implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.parkService.getParks().subscribe({
-      next: (response) => {
-        this.parks = response
-      }
+    this.parkService.getParks().subscribe(parks => {
+        this.parks = parks
     })
   }
 
   navigateToPark(park: ParkDto) {
-    this.router.navigate(['/park'], {state: {park}}).then();
+    this.router.navigate(['/park', park.id], {state: {park}}).then();
   }
 }

@@ -10,7 +10,7 @@ import {MyItineraryPage} from './pages/my-itinerary-page/my-itinerary-page';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomePage },
-  { path: 'park', component: ParkPage },
+  { path: 'park/:id', component: ParkPage },
   { path: 'itineraries', component: ItineraryPage },
   { path: 'my-itinerary', component: MyItineraryPage },
   { path: 'share-experience', component: ShareExperiencePage },

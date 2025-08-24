@@ -5,5 +5,10 @@
   "PARKS": "Parks",
   "SEARCH": "Search for parks, localities, or activities",
   "FILTER": "Filters",
-  "PUBLISH": "Publish"
+  "PUBLISH": "Publish",
+  "DESTINATIONS": "Destinations",
+  "COMMUNITY": "Community",
+  "ITINERARIES": "Itineraries",
+  "GENERATE_ITINERARY": "Download Itinerary",
+  "CLEAR_ITINERARY": "Clear Itinerary"
 }
