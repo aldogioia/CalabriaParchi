@@ -56,10 +56,6 @@
 
 <ng-template #locationsTemplate>
   <section class="sub-section to-reveal">
-    <!--<app-article-component
-      title="Località del Parco Nazionale della Sila"
-    [paragraphs]="['Il Parco Nazionale della Sila si trova in Calabria, nel sud Italia, e comprende le province di Cosenza, Catanzaro e Crotone. Il parco è caratterizzato da un paesaggio montano unico, con vette che raggiungono i 2.000 metri di altitudine e una ricca biodiversità.']">
-    </app-article-component>-->
     @for (locality of localities; track locality.id) {
       <app-park-item-component [interestDto]="locality"></app-park-item-component>
     }
@@ -68,10 +64,6 @@
 
 <ng-template #activitiesTemplate>
   <section class="sub-section to-reveal">
-    <!--<app-article-component
-      title="Attività nel Parco Nazionale della Sila"
-      [paragraphs]="['Il Parco Nazionale della Sila offre una vasta gamma di attività all\'aperto, tra cui escursioni, birdwatching, ciclismo e sci. I visitatori possono esplorare i numerosi sentieri che attraversano il parco, ammirando la bellezza dei paesaggi montani e la ricca fauna selvatica.',]">
-    </app-article-component>-->
     @for (activity of activities; track activity.id) {
       <app-park-item-component [interestDto]="activity"></app-park-item-component>
     }
@@ -80,10 +72,8 @@
 
 <ng-template #galleryTemplate>
   <section class="sub-section to-reveal">
-    <!--<app-article-component
-      title="Galleria fotografica del Parco Nazionale della Sila"
-      [paragraphs]="['La galleria fotografica del Parco Nazionale della Sila offre uno sguardo ravvicinato alla bellezza naturale di questa area protetta. Le immagini catturano la varietà di paesaggi, dalla vegetazione lussureggiante alle vette montuose, e mostrano la fauna selvatica che abita il parco.']">
-    </app-article-component>-->
-    <app-gallery-component [galleryItems]="galleryItems"></app-gallery-component>
+    @if (galleryItems !== undefined) {
+      <app-gallery-component [galleryItems]="galleryItems"></app-gallery-component>
+    }
   </section>
 </ng-template>

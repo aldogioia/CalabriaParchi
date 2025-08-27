@@ -24,7 +24,7 @@ export class ParkPage implements OnInit {
   sectionToShow = 0;
   sections = Object.values(Section).filter(v => typeof v === 'number');
 
-  articles?: ArticleDto[];
+  articles?: ArticleDto[] = [];
   localities?: InterestDto[];
   activities?: InterestDto[];
   galleryItems?: GalleryItemDto[];

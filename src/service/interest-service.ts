@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import {GlobalHandler} from '../utils/GlobalHandler';
-import {HttpClient} from '@angular/common/http';
-import {InterestDto} from '../model/dto/InterestDto';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import { InterestDto } from '../model/dto/InterestDto';
+import { GlobalHandler } from '../utils/GlobalHandler';
 import {InterestType} from '../model/enum/InterestType';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +15,25 @@ export class InterestService {
 
   constructor(private http: HttpClient) {}
 
-  getInterests() {
-    return this.http.get<InterestDto[]>(`${this.baseUrl}/all`);
+  getInterests(keyword: string, parks: string[], tags: string[], categories: string[]): Observable<InterestDto[]> {
+    const body = {
+      keyword,
+      parks,
+      tags,
+      categories
+    };
+    return this.http.post<InterestDto[]>(`${this.baseUrl}/search`, body);
   }
 
-  getSelectedInterests(ids: string[]) {
-    return this.http.get<InterestDto[]>(`${this.baseUrl}/selected`, {params: {ids: ids}});
+  getSelectedInterests(ids: string[]): Observable<InterestDto[]> {
+    return this.http.get<InterestDto[]>(`${this.baseUrl}/selected`, { params: { ids } });
   }
 
-  getInterestsLocationByParkId(parkId: string) {
-    return this.http.get<InterestDto[]>(`${this.baseUrl}/${parkId}`, {params: {type: InterestType.LOCATION}});
+  getInterestsLocationByParkId(parkId: string): Observable<InterestDto[]> {
+    return this.http.get<InterestDto[]>(`${this.baseUrl}/${parkId}`, { params: { type: InterestType.LOCATION } });
   }
 
-  getInterestsActivityByParkId(parkId: string) {
-    return this.http.get<InterestDto[]>(`${this.baseUrl}/${parkId}`, {params: {type: InterestType.ACTIVITY}});
+  getInterestsActivityByParkId(parkId: string): Observable<InterestDto[]> {
+    return this.http.get<InterestDto[]>(`${this.baseUrl}/${parkId}`, { params: { type: InterestType.ACTIVITY } });
   }
 }

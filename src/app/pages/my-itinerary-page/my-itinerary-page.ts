@@ -3,8 +3,8 @@ import { InterestDto } from '../../../model/dto/InterestDto';
 import { InterestService } from '../../../service/interest-service';
 import { ItineraryService } from '../../../service/itinerary-service';
 import { Subscription } from 'rxjs';
-import {TranslateService} from '@ngx-translate/core';
-import {ArticleDto} from '../../../model/dto/ArticleDto';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {GlobalHandler} from '../../../utils/GlobalHandler';
 
 @Component({
   selector: 'app-my-itinerary-page',
@@ -17,22 +17,18 @@ export class MyItineraryPage implements OnInit, OnDestroy {
   myInterests: InterestDto[] = [];
   private sub!: Subscription;
 
-  articleDto: ArticleDto;
+
+  showPopup: boolean = false;
+  itineraryForm: FormGroup = new FormGroup({});
 
   constructor(
     private interestService: InterestService,
     private itineraryService: ItineraryService,
-    private translateService: TranslateService
+    private formBuilder: FormBuilder
   ) {
-    this.articleDto = {
-      id: '',
-      parkId: '',
-      imageUrl: '',
-      title: this.translateService.instant('MY_ITINERARY_ARTICLE_TITLE'),
-      paragraphs: [
-        this.translateService.instant('MY_ITINERARY_ARTICLE_PARAGRAPH_1')
-      ]
-    };
+    this.itineraryForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(100)]]
+    });
   }
 
   ngOnInit(): void {
@@ -55,7 +51,12 @@ export class MyItineraryPage implements OnInit, OnDestroy {
   }
 
   generateItinerary(): void {
-    const email = "aldogioia2002@gmail.com"; // TODO: ottenere la mail dell’utente
+    if (this.itineraryForm.invalid) {
+      this.itineraryForm.markAllAsTouched();
+      return;
+    }
+
+    const email = this.itineraryForm.value.email;
     this.itineraryService.generateItinerary(
       this.myInterests.map(i => i.id),
       email
@@ -63,6 +64,7 @@ export class MyItineraryPage implements OnInit, OnDestroy {
       next: (response) => {
         // TODO: mostrare pupup di successo
         console.log('Itinerary generated successfully:', response);
+        this.showPopup = false;
       },
       error: (error) => {
         // TODO: mostrare pupup di errore
@@ -73,6 +75,16 @@ export class MyItineraryPage implements OnInit, OnDestroy {
 
   clearItinerary() {
     this.itineraryService.clearWishlist();
+  }
+
+  isInvalid(controlName: string): boolean {
+    const control = this.itineraryForm.get(controlName);
+    return !!(control && control.invalid && (control.dirty || control.touched));
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.itineraryForm.get(controlName);
+    return GlobalHandler.getInstance().getErrorMessage(control)
   }
 
   ngOnDestroy(): void {

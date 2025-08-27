@@ -11,5 +11,5 @@ export class GalleryComponent {
   galleryItemSelected: number | null = null;
 
   @Input({required : true})
-  galleryItems?: GalleryItemDto[]
+  galleryItems!: GalleryItemDto[]
 }

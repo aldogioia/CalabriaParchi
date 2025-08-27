@@ -1,5 +1,9 @@
 <section class="community">
-  <app-article-component [articleDto]="articleDto"></app-article-component>
+  <article>
+    <h2>{{ 'COMMUNITY_ARTICLE_TITLE' | translate }}</h2>
+    <p>{{ 'COMMUNITY_ARTICLE_PARAGRAPH_1' | translate }}</p>
+    <p>{{ 'COMMUNITY_ARTICLE_PARAGRAPH_2' | translate }}</p>
+  </article>
   <nav>
     <ul>
       @for (park of parks; track park.id; let i = $index) {

@@ -36,7 +36,7 @@
   align-items: center;
   gap: 8px;
   z-index: 11;
-  background: var(--background-60);
+  background: var(--text-weak);
   backdrop-filter: blur(16px);
 }
 
@@ -47,14 +47,6 @@
 
 .overlay .gallery-item img {
   object-fit: contain;
-  border: 0;
-  border-radius: 0;
-}
-
-.gallery-item .secondary-button {
-  position: absolute;
-  top: 8px;
-  right: 8px;
 }
 
 @media (max-width: 768px) {

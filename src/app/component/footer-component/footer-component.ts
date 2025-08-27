@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NewsletterService} from '../../../service/newsletter-service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {GlobalHandler} from '../../../utils/GlobalHandler';
 
 @Component({
   selector: 'app-footer-component',
@@ -23,7 +24,7 @@ export class FooterComponent {
 
   subscribeToNewsletter() {
     if (this.newsletterForm.invalid) {
-      console.error('Invalid form submission');
+      this.newsletterForm.markAllAsTouched();
       return;
     }
 
@@ -31,11 +32,21 @@ export class FooterComponent {
     const email = this.newsletterForm.value.email;
     this.newsletterService.subscribe(email).subscribe({
       next: (response) => {
-        console.log('Subscription successful:', response);
+        alert('Subscription successful:' + response);
       },
       error: (error) => {
-        console.error('Subscription failed:', error);
+        alert('Subscription failed:'+ error);
       }
     });
+  }
+
+  isInvalid(controlName: string): boolean {
+    const control = this.newsletterForm.get(controlName);
+    return !!(control && control.invalid && (control.dirty || control.touched));
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.newsletterForm.get(controlName);
+    return GlobalHandler.getInstance().getErrorMessage(control)
   }
 }

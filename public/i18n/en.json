@@ -21,8 +21,16 @@
 
   "MY_ITINERARY_ARTICLE_TITLE": "Your itinerary",
   "MY_ITINERARY_ARTICLE_PARAGRAPH_1": "In this section you will find a summary of the locations that will make up your trip. Consider it the starting point for your adventure: a visual reminder of the wonderful places you are about to visit and the unforgettable experiences that await you.",
+  "SELECTED_INTERESTS": "Selected interests: ",
 
   "SHARE_EXPERIENCE": "Share your experience",
+  "SHARE_EXPERIENCE_PARAGRAPH_1": "Have you had an unforgettable experience in Calabria? Share your adventure with our community! Tell us the details of your trip, the emotions you felt, and the places that impressed you the most. Your story could inspire other travelers to discover the wonders of Calabria.",
 
-  "SELECTED_INTERESTS": "Selected interests: "
+  "NEWSLETTER_TITLE": "Subscribe to the newsletter",
+  "NEWSLETTER_PARAGRAPH_1": "Stay updated on the latest news, events, and travel tips in Calabria. Subscribe to our newsletter to receive inspiration and exclusive offers directly in your inbox.",
+
+  "DOWNLOAD_ITINERARY_TITLE": "Download your itinerary",
+  "DOWNLOAD_ITINERARY_PARAGRAPH_1": "Enter your email to receive the link to download your itinerary as a PDF.",
+  "DOWNLOAD_ITINERARY_PARAGRAPH_2": "You will receive an email with the download link. Your address will not be used for other purposes."
+
 }

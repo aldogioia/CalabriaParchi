@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ShareExperienceService} from '../../../service/share-experience-service';
 import {ParkDto} from '../../../model/dto/ParkDto';
 import {ParkService} from '../../../service/park-service';
+import {GlobalHandler} from '../../../utils/GlobalHandler';
 
 @Component({
   selector: 'app-share-experience-page',
@@ -62,7 +63,6 @@ export class ShareExperiencePage implements OnInit{
   share(): void {
     if (this.experienceForm.invalid || !this.selectedFile) {
       this.experienceForm.markAllAsTouched();
-      console.warn('Form non valido o file mancante');
       return;
     }
 
@@ -71,7 +71,7 @@ export class ShareExperiencePage implements OnInit{
     formData.append('name', this.experienceForm.value.name);
     formData.append('surname', this.experienceForm.value.surname);
     formData.append('email', this.experienceForm.value.email);
-    formData.append('parkId', this.experienceForm.value.park);
+    formData.append('parkId', this.experienceForm.value.park.id);
     formData.append('description', this.experienceForm.value.description);
     formData.append('image', this.selectedFile);
 
@@ -95,18 +95,12 @@ export class ShareExperiencePage implements OnInit{
 
   getErrorMessage(controlName: string): string {
     const control = this.experienceForm.get(controlName);
-    if (control?.errors?.['required']) {
-      return 'Campo obbligatorio';
-    }
-    if (control?.errors?.['email']) {
-      return 'Formato email non valido';
-    }
-    if (control?.errors?.['minlength']) {
-      return `Minimo ${control.errors['minlength'].requiredLength} caratteri`;
-    }
-    if (control?.errors?.['maxlength']) {
-      return `Massimo ${control.errors['maxlength'].requiredLength} caratteri`;
-    }
-    return 'Valore non valido';
+    return GlobalHandler.getInstance().getErrorMessage(control);
+  }
+
+  findParkNameById(id: string): string {
+    const park = this.parks.find(p => p.id === id);
+    console.log(park ? park.name : 'Parco non trovato')
+    return park ? park.name : 'Parco non trovato';
   }
 }

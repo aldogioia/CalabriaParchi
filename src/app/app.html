@@ -16,10 +16,10 @@
   @if (isMenuOpen) {
     <section class="menu to-reveal">
       <ng-container *ngTemplateOutlet="destinations"></ng-container>
-      <ng-container *ngTemplateOutlet="share"></ng-container>
       <ng-container *ngTemplateOutlet="itinerary"></ng-container>
+      <ng-container *ngTemplateOutlet="share"></ng-container>
       <svg (click)="isMenuOpen = false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-        <path fill="#141B34" d="M12.75,22.75 C6.813,22.75 2,17.937 2,12 C2,6.063 6.813,1.25 12.75,1.25 C18.687,1.25 23.5,6.063 23.5,12 C23.5,17.937 18.687,22.75 12.75,22.75 Z M3.5,12 C3.5,17.109 7.641,21.25 12.75,21.25 C17.859,21.25 22,17.109 22,12 C22,6.891 17.859,2.75 12.75,2.75 C7.641,2.75 3.5,6.891 3.5,12 Z M10.28,8.47 L12.75,10.94 L15.22,8.47 C15.512,8.177 15.987,8.177 16.28,8.47 C16.573,8.763 16.573,9.237 16.28,9.53 L13.811,12 L16.28,14.47 C16.573,14.763 16.573,15.238 16.28,15.53 C15.987,15.823 15.512,15.823 15.219,15.53 L12.75,13.061 L10.281,15.53 C9.988,15.823 9.513,15.823 9.22,15.53 C8.927,15.238 8.927,14.763 9.22,14.47 L11.689,12 L9.22,9.53 C8.927,9.237 8.927,8.763 9.22,8.47 C9.513,8.177 9.987,8.177 10.28,8.47 Z" />
+        <path d="M12.75,22.75 C6.813,22.75 2,17.937 2,12 C2,6.063 6.813,1.25 12.75,1.25 C18.687,1.25 23.5,6.063 23.5,12 C23.5,17.937 18.687,22.75 12.75,22.75 Z M3.5,12 C3.5,17.109 7.641,21.25 12.75,21.25 C17.859,21.25 22,17.109 22,12 C22,6.891 17.859,2.75 12.75,2.75 C7.641,2.75 3.5,6.891 3.5,12 Z M10.28,8.47 L12.75,10.94 L15.22,8.47 C15.512,8.177 15.987,8.177 16.28,8.47 C16.573,8.763 16.573,9.237 16.28,9.53 L13.811,12 L16.28,14.47 C16.573,14.763 16.573,15.238 16.28,15.53 C15.987,15.823 15.512,15.823 15.219,15.53 L12.75,13.061 L10.281,15.53 C9.988,15.823 9.513,15.823 9.22,15.53 C8.927,15.238 8.927,14.763 9.22,14.47 L11.689,12 L9.22,9.53 C8.927,9.237 8.927,8.763 9.22,8.47 C9.513,8.177 9.987,8.177 10.28,8.47 Z" />
       </svg>
     </section>
   }
@@ -40,7 +40,7 @@
 
 <ng-template #share>
   <div class="container">
-    <h4>{{ "COMMUNITY" | translate }}</h4>
+    <h4>{{"COMMUNITY" | translate }}</h4>
     <a (click)="redirectTo('/share-experience')">
       Condividi la tua esperienza</a>
     <a (click)="redirectTo('/community')">
@@ -51,7 +51,7 @@
 <ng-template #itinerary>
   <div class="container">
     <h4>{{ "ITINERARIES" | translate }}</h4>
-    <a (click)="redirectTo('/my-itinerary')">Il tuo itinerario</a>
-    <a (click)="redirectTo('/itineraries')">Esplora nuove tappe</a>
+    <a (click)="redirectTo('/my-itinerary')">{{"MY_ITINERARY_ARTICLE_TITLE" | translate }}</a>
+    <a (click)="redirectTo('/itineraries')">{{"ITINERARY_ARTICLE_TITLE" | translate }}</a>
   </div>
 </ng-template>

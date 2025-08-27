@@ -139,6 +139,16 @@ figcaption {
 
 /* stili componenti base */
 
+article{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+article p {
+  max-width: 80ch;
+}
+
 nav {
   display: flex;
   padding: 8px;
@@ -316,7 +326,100 @@ nav ul li.active {
   text-transform: capitalize;
 }
 
-input::placeholder {
+/* STILI FORM */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.input-group label {
+  font-size: clamp(.875rem, 2vw, 1rem);
+  font-weight: 600;
+  color: var(--text-weak);
+  margin-left: 4px;
+}
+
+.input-group select {
+  position: relative;
+}
+
+.input-group select svg {
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  fill: var(--text-strong);
+}
+
+.input-group.error > input,
+.input-group.error > textarea,
+.input-group.error > select,
+.input-group.error > .file-wrapper{
+  border: 2px solid var(--error-stroke-strong);
+  background-color: var(--error-fill);
+}
+
+.error-message {
+  color: var(--error-strong);
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+}
+
+.file-wrapper {
+  display: flex;
+  align-items: center;
+  background: var(--fill);
+  border: 1px solid var(--stroke-strong);
+  border-radius: 8px;
+  padding: 8px 8px;
+  gap: 12px;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  transition: .3s ease-in-out;
+}
+
+.file-wrapper:focus-within {
+  outline: 2px solid var(--brand-stroke-strong);
+  outline-offset: 2px;
+}
+
+.file-wrapper input[type="file"] {
+  font-size: inherit;
+  color: var(--text-weak);
+  cursor: pointer;
+}
+
+.file-wrapper input[type="file"]::-webkit-file-upload-button {
+  background-color: var(--stroke-weak);
+  color: var(--text-strong);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.file-wrapper input[type="file"]::-webkit-file-upload-button:hover {
+  background-color: var(--brand-weak);
+}
+
+.file-wrapper input[type="file"]::file-selector-button {
+  /* Firefox and others that use spec-compliant selector */
+  background-color: var(--stroke-weak);
+  color: var(--text-strong);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.file-wrapper input[type="file"]::file-selector-button:hover {
+  background-color: var(--brand-weak);
+}
+
+input::placeholder, textarea::placeholder {
   color: var(--text-weak);
   font-weight: 400;
 }
@@ -338,6 +441,7 @@ select {
   border-radius: 8px;
   font-size: clamp(0.8rem, 2vw, 1rem);
   transition: .3s ease-in-out;
+  color: var(--text-strong);
 }
 
 input[type="search"]:hover,
@@ -365,4 +469,9 @@ textarea{
 
 select {
   cursor: pointer;
+}
+
+select.color {
+  color: var(--text-weak);
+  font-weight: 400;
 }

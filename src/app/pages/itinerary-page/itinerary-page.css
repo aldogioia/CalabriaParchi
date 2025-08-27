@@ -54,6 +54,13 @@
 
 .filter-form {
   display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.control-form-section {
+  display: flex;
   gap: 8px;
   width: 100%;
 }
@@ -82,6 +89,14 @@
 
 .filter-button.selected > div {
   background-color: var(--brand-strong);
+}
+
+svg{
+  transition: .3s ease-in-out;
+}
+
+svg.rotated {
+  transform: scaleY(-1);
 }
 
 .filter-section {

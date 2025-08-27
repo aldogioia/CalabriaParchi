@@ -21,8 +21,15 @@
 
   "MY_ITINERARY_ARTICLE_TITLE": "Il tuo itinerario",
   "MY_ITINERARY_ARTICLE_PARAGRAPH_1": "In questa sezione troverai il riepilogo delle location che andranno a comporre il tuo viaggio. Considerala la base di partenza per la tua avventura: un promemoria visivo dei luoghi meravigliosi che ti prepari a visitare e delle esperienze indimenticabili che ti aspettano.",
+  "SELECTED_INTERESTS": "Interessi selezionati: ",
 
   "SHARE_EXPERIENCE": "Condividi la tua esperienza",
+  "SHARE_EXPERIENCE_PARAGRAPH_1": "Hai vissuto un'esperienza indimenticabile in Calabria? Condividi la tua avventura con la nostra community! Raccontaci i dettagli del tuo viaggio, le emozioni provate e i luoghi che ti hanno colpito di più. La tua storia potrebbe ispirare altri viaggiatori a scoprire le meraviglie della Calabria.",
 
-  "SELECTED_INTERESTS": "Interessi selezionati: "
+  "NEWSLETTER_TITLE": "Iscriviti alla newsletter",
+  "NEWSLETTER_PARAGRAPH_1": "Resta aggiornato sulle ultime novità, eventi e consigli di viaggio in Calabria. Iscriviti alla nostra newsletter per ricevere ispirazione e offerte esclusive direttamente nella tua casella di posta.",
+
+  "DOWNLOAD_ITINERARY_TITLE": "Scarica il tuo itinerario",
+  "DOWNLOAD_ITINERARY_PARAGRAPH_1": "Inserisci la tua email per ricevere il link da cui scaricare il tuo itinerario in PDF.",
+  "DOWNLOAD_ITINERARY_PARAGRAPH_2": "Riceverai una mail con il collegamento per scaricare il file. L’indirizzo non verrà utilizzato per altri scopi."
 }
