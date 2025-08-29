@@ -26,7 +26,7 @@ export class GlobalHandler {
     return this.baseUrl;
   }
 
-  public getErrorMessage(control: AbstractControl<any,any,any> | null): string {
+  public getErrorMessage(control: AbstractControl<any,any> | null): string {
     if (control?.errors?.['required']) {
       return 'Campo obbligatorio';
     }
@@ -40,5 +40,11 @@ export class GlobalHandler {
       return `Massimo ${control.errors['maxlength'].requiredLength} caratteri`;
     }
     return 'Valore non valido';
+  }
+
+  async urlToFile(url: string, filename: string): Promise<File> {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return new File([blob], filename, { type: blob.type });
   }
 }

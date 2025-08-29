@@ -18,4 +18,13 @@ export class ParkService {
   getParks() {
     return this.http.get<ParkDto[]>(`${this.baseUrl}/all`);
   }
+
+  createPark(image: File, name: string, isMarine: boolean) {
+    return this.http.post<ParkDto>(this.baseUrl, {image: image, name: name, isMarine: isMarine});
+  }
+
+  updatePark(parkId: string, image: File, name: string, isMarine: boolean) {
+    return this.http.put<ParkDto>(this.baseUrl, {id: parkId, image: image, name: name, isMarine: isMarine});
+
+  }
 }

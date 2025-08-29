@@ -8,7 +8,7 @@ import {ParkDto} from '../../../model/dto/ParkDto';
   selector: 'app-community-page',
   standalone: false,
   templateUrl: './community-page.html',
-  styleUrl: './community-page.css',
+  styleUrls: ['./community-page.css', "../../../../public/styles/nav.css"],
   host: {'class': 'page margin' }
 })
 export class CommunityPage implements OnInit {

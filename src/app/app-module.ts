@@ -5,21 +5,24 @@ import {TRANSLATE_HTTP_LOADER_CONFIG, TranslateHttpLoader} from '@ngx-translate/
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
-import { HomePage } from './pages/home-page/home-page';
+import { HomePage } from './userPages/home-page/home-page';
 import { NgOptimizedImage } from '@angular/common';
-import { ParkPage } from './pages/park-page/park-page';
+import { ParkPage } from './userPages/park-page/park-page';
 import { FooterComponent } from './component/footer-component/footer-component';
 import { CardComponent } from './component/card-component/card-component';
 import { ArticleComponent } from './component/article-component/article-component';
 import { GalleryComponent } from './component/gallery-component/gallery-component';
-import { ItineraryPage } from './pages/itinerary-page/itinerary-page';
+import { ItineraryPage } from './userPages/itinerary-page/itinerary-page';
 import { ParkItemComponent } from './component/park-item-component/park-item-component';
-import { ShareExperiencePage } from './pages/share-experience-page/share-experience-page';
+import { ShareExperiencePage } from './userPages/share-experience-page/share-experience-page';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ExperienceCardComponent } from './component/experience-card-component/experience-card-component';
-import { CommunityPage } from './pages/community-page/community-page';
-import { MyItineraryPage } from './pages/my-itinerary-page/my-itinerary-page';
+import { CommunityPage } from './userPages/community-page/community-page';
+import { MyItineraryPage } from './userPages/my-itinerary-page/my-itinerary-page';
 import {HttpClient, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import { UserLayout } from './userPages/user-layout/user-layout';
+import { AdminLayout } from './adminPages/admin-layout/admin-layout';
+import { ParksPage } from './adminPages/parks-page/parks-page';
 
 export function HttpLoaderFactory():TranslateHttpLoader {
   return new TranslateHttpLoader();
@@ -40,6 +43,9 @@ export function HttpLoaderFactory():TranslateHttpLoader {
     ExperienceCardComponent,
     CommunityPage,
     MyItineraryPage,
+    UserLayout,
+    AdminLayout,
+    ParksPage,
   ],
   imports: [
     BrowserModule,

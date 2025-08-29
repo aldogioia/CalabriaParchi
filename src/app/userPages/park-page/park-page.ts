@@ -16,7 +16,7 @@ import {ParkService} from '../../../service/park-service';
   selector: 'app-park-page',
   standalone: false,
   templateUrl: './park-page.html',
-  styleUrls: ['./park-page.css'],
+  styleUrls: ['./park-page.css', "../../../../public/styles/nav.css"],
   host: {class: 'page'}
 })
 export class ParkPage implements OnInit {
