@@ -130,7 +130,7 @@ header {
     align-items: center;
     text-align: center;
     gap: 24pt;
-    padding: 124pt 16pt;
+    padding: 64pt 16pt;
     width: 100%;
     background: var(--brand-fill);
 }
@@ -260,6 +260,10 @@ footer {
 
 
 @media (max-width: 868px) {
+    .tag {
+        padding: 4pt 8pt;
+    }
+
     .cards {
         flex-direction: column;
         align-items: center;
