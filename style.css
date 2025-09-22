@@ -53,21 +53,21 @@ h1 {
 }
 
 h2 {
-    font-size: clamp(1.25rem, 4vw, 2.25rem);
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
     font-weight: 800;
     line-height: 1.35;
     letter-spacing: 2.4px;
 }
 
 h3 {
-    font-size: clamp(1.125rem, 3vw, 1.75rem);
+    font-size: clamp(1.5rem, 3vw, 1.75rem);
     font-weight: 700;
     line-height: 1.4;
     letter-spacing: 0.96px;
 }
 
 h4 {
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
     line-height: 1.6;
     font-weight: 600;
     letter-spacing: 0.72px;
@@ -82,7 +82,7 @@ p{
 }
 
 p.small, .tag  {
-    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    font-size: clamp(.75rem, 2.2vw, 1.25rem);
     font-weight: 400;
     color: var(--text-strong);
 }
@@ -157,6 +157,16 @@ section{
 
 section.gradient {
     background: linear-gradient(to bottom, var(--brand-fill), transparent);
+    gap: 64pt;
+}
+
+.sub-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32pt;
+    width: 100%;
+    max-width: 1200pt;
 }
 
 .column {
@@ -166,7 +176,7 @@ section.gradient {
     gap: 16pt;
     text-align: center;
     width: 100%;
-    max-width: 1200pt;
+    max-width: 1080pt;
 }
 
 .row {
@@ -247,6 +257,36 @@ figcaption h4 {
     padding-left: 40pt;
 }
 
+.preview {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 32pt;
+    margin: 16pt 0;
+}
+
+.preview.invert {
+    flex-direction: row-reverse;
+}
+
+.preview img,
+.preview .column {
+    flex: 1 1 50%;
+    max-width: 50%;
+    align-items: flex-start;
+    text-align: left;
+    justify-content: center;
+}
+
+
+.preview img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    border-radius: 16pt;
+    box-shadow: 0 4pt 16pt rgba(0, 0, 0, 0.1);
+}
+
 footer {
     display: flex;
     flex-direction: column;
@@ -261,7 +301,7 @@ footer {
 
 @media (max-width: 868px) {
     .tag {
-        padding: 2pt 4pt;
+        padding: 4pt;
     }
 
     .cards {
@@ -271,5 +311,14 @@ footer {
 
     figure{
         min-width: auto;
+    }
+
+    .preview {
+        flex-direction: column;
+    }
+
+    .preview img,
+    .preview .column {
+        max-width: 100%;
     }
 }
