@@ -313,7 +313,7 @@ footer {
         min-width: auto;
     }
 
-    .preview {
+    .preview, .preview.invert{
         flex-direction: column;
     }
 
