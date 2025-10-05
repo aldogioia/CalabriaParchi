@@ -1,0 +1,63 @@
+form {
+  position: sticky;
+  top: 128px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  padding-bottom: 16px;
+}
+
+.sub-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px;
+  border: 1px solid var(--stroke-weak);
+  border-radius: 16px;
+}
+
+.background {
+  background: var(--fill);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid var(--stroke-weak);
+  aspect-ratio: 16/9;
+}
+
+.primary-button {
+  max-width: none;
+}
+
+.secondary-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.tertiary-button {
+  width: 100%;
+  justify-content: center;
+}
