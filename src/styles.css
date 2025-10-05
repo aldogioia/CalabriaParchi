@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
 
 *{
   margin: 0;
@@ -43,11 +43,13 @@ body {
 
 .footer{
   display: flex;
+  margin-top: 128px;
   width: 100%;
+  padding: 16px;
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: "Playfair Display", serif;
+  font-family: "MuseoModerno", sans-serif;
 }
 
 h1 {
@@ -125,6 +127,7 @@ figcaption {
   flex-direction: row;
   gap: 24px;
   max-width: 1280px;
+  padding: 0 16px 16px;
 }
 
 .component {
@@ -296,9 +299,12 @@ article p {
   padding-top: 8px;
   flex-wrap: nowrap;
   align-items: center;
+  overflow: auto;
+  width: 100%;
 }
 
 .tag{
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -309,6 +315,10 @@ article p {
   border: 1px solid var(--stroke-weak);
   backdrop-filter: blur(8px);
   text-transform: capitalize;
+}
+
+.tag.dark {
+  color: var(--text-strong);
 }
 
 /* STILI FORM */
@@ -346,13 +356,18 @@ article p {
 .input-group.error > input,
 .input-group.error > textarea,
 .input-group.error > select,
-.input-group.error > .file-wrapper{
+.input-group.error > .file-wrapper,
+textarea.error {
   border: 2px solid var(--error-stroke-strong);
   background-color: var(--error-fill);
 }
 
 .error-message {
   color: var(--error-strong);
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+}
+
+.little-text {
   font-size: clamp(0.75rem, 1.5vw, 0.875rem);
 }
 
@@ -416,6 +431,8 @@ input::placeholder, textarea::placeholder {
 input[type="search"],
 input[type="text"],
 input[type="email"],
+input[type="url"],
+input[type="tel"],
 input[type="password"],
 textarea,
 select {
@@ -436,6 +453,8 @@ select {
 input[type="search"]:hover,
 input[type="text"]:hover,
 input[type="email"]:hover,
+input[type="url"]:hover,
+input[type="tel"]:hover,
 input[type="password"]:hover,
 textarea:hover, select:hover {
   border-color: var(--brand-stroke-strong);
@@ -444,6 +463,8 @@ textarea:hover, select:hover {
 input[type="search"]:focus,
 input[type="text"]:focus,
 input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="tel"]:focus,
 input[type="password"]:focus,
 textarea:focus, select:focus {
   outline: 2px solid var(--brand-stroke-strong);
@@ -483,4 +504,32 @@ select.color {
 .radio-button.selected {
   border-color: var(--brand-stroke-strong);
   background: var(--brand-fill);
+}
+
+.modifying {
+  filter: blur(4px) grayscale(1);
+  cursor: no-drop;
+}
+
+.warning-tag {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border: 1px solid #ca702c1a;
+  background: #ca702c1a;
+  color: #ca702c;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.warning-tag.compact {
+  width: fit-content;
+  border-radius: 4px;
+  padding: 4px;
+  border: 1px solid #ca702c1a;
+  background: #ca702c1a;
+  color: #ca702c;
+  font-size: 0.875rem;
+  font-weight: 500;
 }

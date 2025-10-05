@@ -1,0 +1,27 @@
+<section class="community">
+  <article>
+    <h2>{{ 'COMMUNITY_ARTICLE_TITLE' | translate }}</h2>
+    <p>{{ 'COMMUNITY_ARTICLE_PARAGRAPH_1' | translate }}</p>
+    <p>{{ 'COMMUNITY_ARTICLE_PARAGRAPH_2' | translate }}</p>
+  </article>
+  <nav>
+    <ul>
+      @for (park of parks; track park.id; let i = $index) {
+        <li (click)="changeSelected(i)" [class.active]="selectedPark == i">
+          {{ GlobalHandler.getInstance().isItalian() ? park.name : park.englishName }}
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <section class="community-experiences">
+    @for (experience of experiences; track experience) {
+      <app-experience-card-component [experiencePostDto]="experience"></app-experience-card-component>
+    }
+    @if (experiences.length === 0) {
+      <p class="no-results">{{ 'NO_RESULTS' | translate }}</p>
+    }
+  </section>
+</section>
+
+<app-footer-component></app-footer-component>

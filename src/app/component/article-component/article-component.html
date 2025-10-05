@@ -1,11 +1,11 @@
-<article>
-  <h2>{{articleDto.title}}</h2>
-  @for (paragraph of articleDto.paragraphs; track paragraph) {
+<article [class.modifying]="isModifyMode">
+  <h2>{{GlobalHandler.getInstance().isItalian() ? articleDto.title : articleDto.englishTitle }}</h2>
+  @for (paragraph of (GlobalHandler.getInstance().isItalian() ? articleDto.paragraphs : articleDto.englishParagraphs); track paragraph) {
     <p>{{paragraph}}</p>
   }
   @if (articleDto.imageUrl !== '' && articleDto.imageUrl !== null) {
     <figure>
-      <img [src]="articleDto.imageUrl" [alt]="articleDto.title">
+      <img [src]="articleDto.imageUrl" [alt]="GlobalHandler.getInstance().isItalian() ? articleDto.title: articleDto.englishTitle">
       <!-- todo: aggiungere un campo al dto <figcaption>Parco Nazionale della Sila</figcaption> -->
     </figure>
   }

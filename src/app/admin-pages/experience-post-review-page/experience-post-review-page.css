@@ -1,0 +1,73 @@
+.community {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+  gap: 32px;
+  width: 100%;
+  max-width: 1280px;
+  min-height: 100svh;
+}
+
+.community-experiences {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 16px;
+}
+
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.wrapper .controls {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  backdrop-filter: blur(0);
+  transition: .3s ease-in-out;
+}
+
+.wrapper:hover .controls {
+  opacity: 1;
+  backdrop-filter: blur(16px);
+}
+
+.approve-button {
+  background: var(--brand-strong);
+}
+
+.reject-button {
+  background: var(--error-strong);
+}
+
+.secondary-button {
+  transition: .3s ease-in-out;
+}
+
+.secondary-button:hover{
+  scale: 1.2;
+}
+
+.secondary-button > svg {
+  fill: var(--text-on-black-strong);
+}
+
+.secondary-button:hover > svg {
+  fill: var(--text-on-black-strong);
+}
+
+@media (max-width: 568px) {
+  .community-experiences {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}

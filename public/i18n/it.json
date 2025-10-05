@@ -12,6 +12,13 @@
   "GENERATE_ITINERARY": "Scarica itinerario",
   "CLEAR_ITINERARY": "Cancella itinerario",
 
+  "DETAILS": "Dettagli del Parco",
+  "LOCATIONS": "Località",
+  "ACTIVITIES": "Attività",
+  "FOOD_AND_WINE": "Enogastronomia",
+  "GALLERY": "Foto del Parco",
+
+  "COMMUNITY_EXPERIENCES": "Esperienze della community",
   "COMMUNITY_ARTICLE_TITLE": "Un mosaico di avventure calabresi",
   "COMMUNITY_ARTICLE_PARAGRAPH_1": "Benvenuto nel cuore pulsante della nostra community: l'archivio collettivo delle esperienze in Calabria. Questa sezione raccoglie le storie, le immagini e i consigli di viaggiatori come te, che hanno esplorato i sentieri dei parchi nazionali e si sono immersi nelle acque cristalline della costa. Ogni racconto è una finestra aperta su un'esperienza reale e autentica.",
   "COMMUNITY_ARTICLE_PARAGRAPH_2": "Qui puoi trovare l'ispirazione per il tuo prossimo viaggio. Naviga liberamente tra le storie per lasciarti sorprendere, oppure usa i filtri per affinare la ricerca in base ai tuoi interessi e alle mete che sogni di visitare. Che tu stia cercando un consiglio pratico o semplicemente voglia sognare attraverso gli occhi di altri esploratori, sei nel posto giusto.",
@@ -31,5 +38,11 @@
 
   "DOWNLOAD_ITINERARY_TITLE": "Scarica il tuo itinerario",
   "DOWNLOAD_ITINERARY_PARAGRAPH_1": "Inserisci la tua email per ricevere il link da cui scaricare il tuo itinerario in PDF.",
-  "DOWNLOAD_ITINERARY_PARAGRAPH_2": "Riceverai una mail con il collegamento per scaricare il file. L’indirizzo non verrà utilizzato per altri scopi."
+  "DOWNLOAD_ITINERARY_PARAGRAPH_2": "Riceverai una mail con il collegamento per scaricare il file. L’indirizzo non verrà utilizzato per altri scopi.",
+  "DOWNLOAD": "Scarica",
+
+  "NO_RESULTS": "Nessun risultato trovato.",
+  "ADD_INTEREST": "Non hai ancora aggiunto interessi al tuo itinerario. Vai alla sezione Crea il tuo itinerario e seleziona i tuoi interessi!",
+  "SUBSCRIBE": "Iscriviti"
+
 }

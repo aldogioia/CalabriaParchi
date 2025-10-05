@@ -12,6 +12,13 @@
   "GENERATE_ITINERARY": "Download Itinerary",
   "CLEAR_ITINERARY": "Clear Itinerary",
 
+  "DETAILS": "Details of the Park",
+  "LOCATIONS": "Locations",
+  "ACTIVITIES": "Activities",
+  "FOOD_AND_WINE": "food and wine",
+  "GALLERY": "Park Photos",
+
+  "COMMUNITY_EXPERIENCES": "Community Experiences",
   "COMMUNITY_ARTICLE_TITLE": "A mosaic of Calabrian adventures",
   "COMMUNITY_ARTICLE_PARAGRAPH_1": "Welcome to the vibrant heart of our community: the collective archive of experiences in Calabria. This section gathers stories, images, and advice from travelers like you, who have explored the trails of national parks and dived into the crystal-clear waters of the coast. Each story is an open window onto a real and authentic experience.",
   "COMMUNITY_ARTICLE_PARAGRAPH_2": "Here you can find inspiration for your next trip. Freely browse through the stories to be surprised, or use filters to refine your search based on your interests and the destinations you dream of visiting. Whether you are looking for practical advice or simply want to dream through the eyes of other explorers, you are in the right place.",
@@ -31,6 +38,11 @@
 
   "DOWNLOAD_ITINERARY_TITLE": "Download your itinerary",
   "DOWNLOAD_ITINERARY_PARAGRAPH_1": "Enter your email to receive the link to download your itinerary as a PDF.",
-  "DOWNLOAD_ITINERARY_PARAGRAPH_2": "You will receive an email with the download link. Your address will not be used for other purposes."
+  "DOWNLOAD_ITINERARY_PARAGRAPH_2": "You will receive an email with the download link. Your address will not be used for other purposes.",
+  "DOWNLOAD": "Download",
+
+  "NO_RESULTS": "No results found.",
+  "ADD_INTEREST": "You haven't added any interests to your itinerary yet. Go to the Create Your Itinerary section and select your interests!",
+  "SUBSCRIBE": "Subscribe"
 
 }

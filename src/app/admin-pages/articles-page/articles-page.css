@@ -1,0 +1,9 @@
+.wrapper {
+  display: flex;
+  position: relative;
+}
+
+.secondary-button {
+  top: 0;
+  right: 0;
+}

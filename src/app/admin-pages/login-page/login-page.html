@@ -1,0 +1,32 @@
+<section>
+  <!--<figure>
+    <img src="/images/sign.jpg"  alt="Immagine di sfondo della pagina di login" />
+    <img src="/images/sea.jpg" alt="Immagine di sfondo della pagina di login" />
+    <img src="/images/sea.jpg" alt="Immagine di sfondo della pagina di login" />
+  </figure>-->
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h3>Calabriaparchi<b style="color: var(--brand-strong)">.</b>it</h3>
+    <div class="sub-form">
+      <h2>Benvenuto</h2>
+
+      <div class="input-group" [class.error]="isInvalid('email')">
+        <label for="email">Email</label>
+        <input name="email" type="email" placeholder="Inserisci l'email" formControlName="email" required>
+        @if (isInvalid('email')) {
+          <span class="error-message">{{ getErrorMessage('email') }}</span>
+        }
+      </div>
+
+      <div class="input-group" [class.error]="isInvalid('password')">
+        <label for="password">Password</label>
+        <input name="password" type="password" placeholder="Inserisci la password" formControlName="password" required>
+        @if (isInvalid('password')) {
+          <span class="error-message">{{ getErrorMessage('password') }}</span>
+        }
+      </div>
+      <!--<p class="little-text">Password dimenticata? <u style="color: var(--text-strong); cursor: pointer">recuperala</u></p>-->
+    </div>
+
+    <button class="primary-button" type="submit" [disabled]="loginForm.invalid">Accedi</button>
+  </form>
+</section>

@@ -1,0 +1,73 @@
+<form [formGroup]="tagForm" (ngSubmit)="submit()">
+  <h3>Aggiungi un nuovo Tag</h3>
+
+  <div class="input-group" [class.error]="isInvalid('name')">
+    <label for="name">Nome</label>
+    <input name="name" type="text" minlength="3" maxlength="50" placeholder="Inserisci il nome del Tag" formControlName="name" required>
+    @if (isInvalid('name')) {
+      <span class="error-message">{{ getErrorMessage('name') }}</span>
+    }
+  </div>
+
+  <div class="input-group" [class.error]="isInvalid('englishName')">
+    <label for="en_name">Nome Inglese</label>
+    <input name="en_name" type="text" minlength="3" maxlength="50" placeholder="Inserisci il nome del Tag in inglese" formControlName="englishName" required>
+    @if (isInvalid('englishName')) {
+      <span class="error-message">{{ getErrorMessage('englishName') }}</span>
+    }
+  </div>
+
+  <div class="input-group" [class.error]="isInvalid('color')">
+    <label for="color">Colore</label>
+    <div class="file-wrapper">
+      <input name="color" type="color" formControlName="color"  required>
+    </div>
+    @if (isInvalid('color')) {
+      <span class="error-message">{{ getErrorMessage('color') }}</span>
+    }
+  </div>
+
+  <button
+    class="primary-button"
+    type="submit"
+    [disabled]="tagForm.invalid">
+    {{ tagToModify ? "Modifica" : "Aggiungi" }}
+  </button>
+
+  <div class="row">
+    <button class="tertiary-button" type="reset" (click)="resetForm()">
+      Annulla
+    </button>
+
+    @if (tagToModify) {
+      <button class="tertiary-button error" type="reset" (click)="deleteTag()">
+        Elimina
+      </button>
+    }
+  </div>
+</form>
+
+<section>
+  <div class="sub-section">
+    <h4>Anteprima</h4>
+    <div class="box">
+      <div class="background">
+        <span class="tag dark" [style.background]="tagForm.get('color')?.value + '99'">{{ tagForm.get('name')?.value || 'Inserisci nome Tag' }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="sub-section">
+    <h4>Categorie già presenti</h4>
+    @if (tags.length === 0) {
+      <p>Nessuna Categoria presente.</p>
+    } @else {
+      <div class="box">
+        <div class="tags">
+          @for (tag of tags; track tag.id) {
+            <app-tag-component [tagDto]="tag" [isSelected]="tagToModify?.id === tag.id" (tagClicked)="selectTag($event)"></app-tag-component>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</section>

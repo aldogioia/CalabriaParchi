@@ -20,12 +20,18 @@
   <section class="newsletter">
     <h5>Newsletter</h5>
     <form [formGroup]="newsletterForm" (ngSubmit)="subscribeToNewsletter()">
-      <input formControlName="email" type="email" placeholder="Enter your email" required>
-      <button class="primary-button" type="submit" [disabled]="newsletterForm.invalid">Subscribe</button>
+      <div class="input-group" [class.error]="isInvalid('email')">
+        <label for="email">Email</label>
+        <input name="email" type="email" placeholder="Email" formControlName="email" required>
+        @if (isInvalid('email')) {
+          <span class="error-message">{{ getErrorMessage('email') }}</span>
+        }
+      </div>
+      <button class="primary-button" type="submit" [disabled]="newsletterForm.invalid">{{ "SUBSCRIBE" | translate}}</button>
     </form>
   </section>
   <section class="copyright-tag">
     <span>&copy; 2025 Parchi Calabria.</span>
-    <a href="https://www.aldogioia.com" target="_blank">Develobed by Aldo Gioia</a>
+    <a href="https://www.aldogioia.com" target="_blank">Developed by Aldo Gioia for IDEA srl.</a>
   </section>
 </footer>

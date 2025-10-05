@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {ExperiencePostDto} from '../../../model/dto/ExperiencePostDto';
+import {ExperiencePostDto} from '../../model/dto/ExperiencePostDto';
 
 @Component({
   selector: 'app-experience-card-component',

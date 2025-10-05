@@ -5,24 +5,34 @@ import {TRANSLATE_HTTP_LOADER_CONFIG, TranslateHttpLoader} from '@ngx-translate/
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
-import { HomePage } from './userPages/home-page/home-page';
+import { HomePage } from './user-pages/home-page/home-page';
 import { NgOptimizedImage } from '@angular/common';
-import { ParkPage } from './userPages/park-page/park-page';
+import { ParkPage } from './user-pages/park-page/park-page';
 import { FooterComponent } from './component/footer-component/footer-component';
 import { CardComponent } from './component/card-component/card-component';
 import { ArticleComponent } from './component/article-component/article-component';
 import { GalleryComponent } from './component/gallery-component/gallery-component';
-import { ItineraryPage } from './userPages/itinerary-page/itinerary-page';
+import { ItineraryPage } from './user-pages/itinerary-page/itinerary-page';
 import { ParkItemComponent } from './component/park-item-component/park-item-component';
-import { ShareExperiencePage } from './userPages/share-experience-page/share-experience-page';
+import { ShareExperiencePage } from './user-pages/share-experience-page/share-experience-page';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ExperienceCardComponent } from './component/experience-card-component/experience-card-component';
-import { CommunityPage } from './userPages/community-page/community-page';
-import { MyItineraryPage } from './userPages/my-itinerary-page/my-itinerary-page';
-import {HttpClient, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
-import { UserLayout } from './userPages/user-layout/user-layout';
-import { AdminLayout } from './adminPages/admin-layout/admin-layout';
-import { ParksPage } from './adminPages/parks-page/parks-page';
+import { CommunityPage } from './user-pages/community-page/community-page';
+import { MyItineraryPage } from './user-pages/my-itinerary-page/my-itinerary-page';
+import {HttpClient, provideHttpClient, withInterceptors} from '@angular/common/http';
+import { UserLayout } from './user-pages/user-layout/user-layout';
+import { AdminLayout } from './admin-pages/admin-layout/admin-layout';
+import { ParksPage } from './admin-pages/parks-page/parks-page';
+import { LoginPage } from './admin-pages/login-page/login-page';
+import {tokenInterceptor} from './security/token-interceptor';
+import { GalleryPage } from './admin-pages/gallery-page/gallery-page';
+import { TagsPage } from './admin-pages/tags-page/tags-page';
+import { CategoryPage } from './admin-pages/category-page/category-page';
+import { ArticlesPage } from './admin-pages/articles-page/articles-page';
+import { InterestsPage } from './admin-pages/interests-page/interests-page';
+import { TagComponent } from './component/tag-component/tag-component';
+import { CategoryComponent } from './component/category-component/category-component';
+import { ExperiencePostReviewPage } from './admin-pages/experience-post-review-page/experience-post-review-page';
 
 export function HttpLoaderFactory():TranslateHttpLoader {
   return new TranslateHttpLoader();
@@ -46,6 +56,15 @@ export function HttpLoaderFactory():TranslateHttpLoader {
     UserLayout,
     AdminLayout,
     ParksPage,
+    LoginPage,
+    GalleryPage,
+    TagsPage,
+    CategoryPage,
+    ArticlesPage,
+    InterestsPage,
+    TagComponent,
+    CategoryComponent,
+    ExperiencePostReviewPage,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +89,9 @@ export function HttpLoaderFactory():TranslateHttpLoader {
       }
     },
     provideBrowserGlobalErrorListeners(),
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(
+      withInterceptors([tokenInterceptor]),
+    )
   ],
   bootstrap: [App]
 })

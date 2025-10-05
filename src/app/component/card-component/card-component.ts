@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
-import {InterestDto} from '../../../model/dto/InterestDto';
-import {GlobalHandler} from '../../../utils/GlobalHandler';
-import {ItineraryService} from '../../../service/itinerary-service';
+import {InterestDto} from '../../model/dto/InterestDto';
+import {GlobalHandler} from '../../utils/GlobalHandler';
+import {ItineraryService} from '../../service/itinerary-service';
 
 @Component({
   selector: 'app-card-component',

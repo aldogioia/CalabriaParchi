@@ -1,0 +1,12 @@
+:host {
+  cursor: pointer;
+}
+
+tag.dark.modifying {
+  opacity: .4;
+}
+
+input[type="color"] {
+  border-radius: 8px;
+  padding: 16px;
+}

@@ -103,22 +103,18 @@ div.header-item:hover {
   text-underline-offset: 4px;
   cursor: pointer;
 }
+
 .menu a:hover {
   color: var(--text-strong);
+}
+
+.menu a.active {
+  color: var(--text-strong);
   text-decoration-color: var(--brand-stroke-strong);
-}
-
-.menu a svg {
-  stroke: var(--text-weak);
-  transition: .3s ease-in-out;
-}
-
-.menu a:hover svg {
-  stroke: var(--brand-strong);
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 }

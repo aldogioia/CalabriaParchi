@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import {NewsletterService} from '../../../service/newsletter-service';
+import {NewsletterService} from '../../service/newsletter-service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {GlobalHandler} from '../../../utils/GlobalHandler';
+import {GlobalHandler} from '../../utils/GlobalHandler';
 
 @Component({
   selector: 'app-footer-component',
   standalone: false,
   templateUrl: './footer-component.html',
   styleUrl: './footer-component.css',
-  host: {'class': 'footer margin'}
+  host: {'class': 'footer'}
 })
 export class FooterComponent {
   newsletterForm: FormGroup = new FormGroup({});
@@ -28,7 +28,6 @@ export class FooterComponent {
       return;
     }
 
-    //TODO fare una gestione delle risposte più solida
     const email = this.newsletterForm.value.email;
     this.newsletterService.subscribe(email).subscribe({
       next: (response) => {

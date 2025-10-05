@@ -1,0 +1,11 @@
+:host {
+  cursor: pointer;
+}
+
+.category {
+  border: 1px solid var(--brand-stroke-weak);
+  background: var(--brand-fill);
+  border-radius: 16px;
+  padding: 4px 8px;
+  cursor: pointer;
+}

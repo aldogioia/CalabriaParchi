@@ -1,0 +1,3 @@
+<span class="category" [class.modifying]="isSelected" (click)="onCategoryClicked()">
+    {{ GlobalHandler.getInstance().isItalian() ? categoryDto.name : categoryDto.englishName }}
+  </span>

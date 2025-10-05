@@ -1,0 +1,21 @@
+figure {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  transition: filter .3s ease-in-out;
+}
+
+figure img {
+  border-radius: 8px;
+  border: 1px solid var(--stroke-weak);
+  aspect-ratio: 16/9;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+figcaption {
+  color: var(--text-weak);
+}
+

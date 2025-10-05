@@ -1,0 +1,142 @@
+<form [formGroup]="articleForm" (ngSubmit)="submit()">
+  <h3>Aggiungi nuovi Dettagli</h3>
+
+  <div class="warning-tag">
+    <h3>Attenzione</h3>
+    <p>Questa pagina è in fase di sviluppo e alcune funzionalità potrebbero non essere ancora definitive.</p>
+  </div>
+
+  <div class="input-group" [class.error]="isInvalid('parkId')">
+    <label for="park">Parco</label>
+    <select name="park" [class.color]="articleForm.value.park === ''" formControlName="parkId" required>
+      <option value="" disabled selected>Seleziona un Parco</option>
+      @for (park of parks; track park) {
+        <option [value]="park.id">{{ park.name }}</option>
+      }
+    </select>
+    @if (isInvalid('parkId')) {
+      <span class="error-message">{{ getErrorMessage('parkId') }}</span>
+    }
+  </div>
+
+  <div class="input-group" [class.error]="isInvalid('title')">
+    <label for="title">Titolo</label>
+    <input name="title" type="text" minlength="3" maxlength="100" placeholder="Titolo" formControlName="title" required>
+    @if (isInvalid('title')) {
+      <span class="error-message">{{ getErrorMessage('title') }}</span>
+    }
+  </div>
+
+  <div class="input-group" [class.error]="isInvalid('englishTitle')">
+    <label for="en_title">Titolo Inglese</label>
+    <input name="en_title" type="text" minlength="3" maxlength="100" placeholder="Titolo Inglese" formControlName="englishTitle" required>
+    @if (isInvalid('englishTitle')) {
+      <span class="error-message">{{ getErrorMessage('englishTitle') }}</span>
+    }
+  </div>
+
+  <div class="input-group" formArrayName="paragraphs">
+    <label>Descrizione</label>
+    @for (paragraph of paragraphs.controls; track paragraph; let i = $index) {
+      <div class="input-group">
+        <textarea
+          [formControlName]="i"
+          [class.error]="isInvalidParagraph(i)"
+          [class.to-reveal]="i !== 0"
+          maxlength="1000"
+          placeholder="Inserisci contenuto paragrafo"
+          (input)="onParagraphInput(i, false)"
+          (blur)="onParagraphBlur(i, false)">
+        </textarea>
+        @if (isInvalidParagraph(i)) {
+          <span class="error-message">{{ getParagraphError(i) }}</span>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="input-group" formArrayName="englishParagraphs">
+    <label>Descrizione in Inglese</label>
+    @for (paragraph of englishParagraphs.controls; track paragraph; let i = $index) {
+      <div class="input-group">
+      <textarea
+        [formControlName]="i"
+        [class.error]="isInvalidParagraph(i, true)"
+        [class.to-reveal]="i !== 0"
+        maxlength="1000"
+        placeholder="Inserisci contenuto paragrafo in inglese"
+        (input)="onParagraphInput(i, true)"
+        (blur)="onParagraphBlur(i, true)">
+      </textarea>
+        @if (isInvalidParagraph(i, true)) {
+          <span class="error-message">{{ getParagraphError(i, true) }}</span>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="input-group">
+    <label for="img">Foto</label>
+    <div class="file-wrapper">
+      <input #fileInput id="img" name="img" type="file" (change)="onFileSelected($event)" required>
+    </div>
+  </div>
+
+  <button
+    class="primary-button"
+    type="submit"
+    [disabled]="articleForm.invalid">
+    {{ articleToModify ? "Modifica" : "Aggiungi" }}
+  </button>
+
+  <div class="row">
+    <button class="tertiary-button" type="reset" (click)="resetForm()">
+      Annulla
+    </button>
+
+    @if (articleToModify) {
+      <button class="tertiary-button error" type="reset" (click)="deleteArticle()">
+        Elimina
+      </button>
+    }
+  </div>
+</form>
+
+<section>
+  <div class="sub-section">
+    <h4>Anteprima</h4>
+    <div class="box">
+      <app-article-component
+        [articleDto]="{
+          id: '',
+          parkId: articleForm.get('parkId')?.value || 'Seleziona un Parco',
+          title: articleForm.get('title')?.value || 'Inserisci il Titolo',
+          englishTitle: '',
+          paragraphs: paragraphs.value.length === 1 && paragraphs.value[0] === '' ? ['Inserisci il contenuto del paragrafo'] : paragraphs.value,
+          englishParagraphs: [],
+          imageUrl: selectedFileUrl || ''}">
+      </app-article-component> <!--TODO-->
+    </div>
+  </div>
+  <div class="sub-section">
+    <h4>Dettagli già presenti</h4>
+    @if (articleForm.get('parkId')?.value === '') {
+      <p>Seleziona un Parco per visualizzare i dettagli associati.</p>
+    } @else if (articles.length) {
+      <div class="box">
+        @for (article of articles; track article.id) {
+          <div class="wrapper">
+            <button class="secondary-button" (click)="selectArticle(article)">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M20.95,3.05 C22.017,4.117 22.017,5.847 20.95,6.914 L14.314,13.55 L14.234,13.631 C13.265,14.599 12.673,15.191 11.945,15.598 C11.538,15.825 10.922,16.024 10.291,16.199 C9.642,16.38 8.895,16.558 8.182,16.728 L8.174,16.73 C7.92,16.79 7.654,16.715 7.47,16.53 C7.286,16.346 7.21,16.08 7.27,15.826 L7.272,15.818 C7.442,15.105 7.62,14.358 7.801,13.709 C7.976,13.078 8.175,12.462 8.402,12.055 C8.809,11.327 9.401,10.735 10.369,9.766 L10.37,9.766 L10.45,9.686 L17.086,3.05 C18.153,1.983 19.883,1.983 20.95,3.05 Z M12,2.25 C12.414,2.25 12.75,2.586 12.75,3 C12.75,3.414 12.414,3.75 12,3.75 C9.857,3.75 8.326,3.752 7.162,3.908 C6.02,4.062 5.345,4.352 4.848,4.848 C4.352,5.345 4.062,6.02 3.908,7.162 C3.752,8.326 3.75,9.857 3.75,12 C3.75,14.142 3.752,15.674 3.908,16.838 C4.062,17.98 4.352,18.655 4.848,19.152 C5.345,19.648 6.02,19.938 7.162,20.092 C8.326,20.248 9.857,20.25 12,20.25 C14.142,20.25 15.674,20.248 16.838,20.092 C17.98,19.938 18.655,19.648 19.152,19.152 C19.648,18.655 19.938,17.98 20.092,16.838 C20.248,15.674 20.25,14.142 20.25,12 C20.25,11.586 20.586,11.25 21,11.25 C21.414,11.25 21.75,11.586 21.75,12 L21.75,12.057 C21.75,14.13 21.75,15.762 21.579,17.038 C21.403,18.346 21.034,19.391 20.212,20.212 C19.391,21.034 18.346,21.403 17.038,21.579 C15.762,21.75 14.13,21.75 12.057,21.75 L11.943,21.75 C9.87,21.75 8.238,21.75 6.962,21.579 C5.654,21.403 4.609,21.034 3.788,20.212 C2.966,19.391 2.597,18.346 2.421,17.038 C2.25,15.762 2.25,14.13 2.25,12.057 L2.25,11.943 C2.25,9.87 2.25,8.238 2.421,6.962 C2.597,5.654 2.966,4.609 3.788,3.788 C4.609,2.966 5.654,2.597 6.962,2.421 C8.238,2.25 9.87,2.25 11.943,2.25 Z M16.214,6.043 L11.511,10.747 C10.436,11.821 10.005,12.262 9.711,12.787 C9.582,13.017 9.424,13.471 9.246,14.111 C9.17,14.385 9.094,14.678 9.018,14.982 C9.322,14.906 9.615,14.83 9.889,14.754 C10.529,14.576 10.983,14.418 11.213,14.289 C11.738,13.995 12.179,13.564 13.253,12.489 L17.957,7.786 Z M18.146,4.111 L17.275,4.982 L19.018,6.725 L19.889,5.854 C20.37,5.373 20.37,4.592 19.889,4.111 C19.408,3.63 18.628,3.63 18.146,4.111 Z" />
+              </svg>
+            </button>
+            <app-article-component [articleDto]="article" [isModifyMode]="article.id === articleToModify?.id"></app-article-component>
+          </div>
+        }
+      </div>
+    } @else {
+      <p>Nessuna Dettaglio presente per il parco selezionato.</p>
+    }
+  </div>
+</section>

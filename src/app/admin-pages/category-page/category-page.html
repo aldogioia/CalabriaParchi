@@ -1,0 +1,63 @@
+<form [formGroup]="categoryForm" (ngSubmit)="submit()">
+  <h3>Aggiungi una nuova Categoria</h3>
+
+  <div class="input-group" [class.error]="isInvalid('name')">
+    <label for="name">Nome</label>
+    <input name="name" type="text" minlength="3" maxlength="50" placeholder="Inserisci il nome della categoria" formControlName="name" required>
+    @if (isInvalid('name')) {
+      <span class="error-message">{{ getErrorMessage('name') }}</span>
+    }
+  </div>
+
+  <div class="input-group" [class.error]="isInvalid('englishName')">
+    <label for="en_name">Nome</label>
+    <input name="en_name" type="text" minlength="3" maxlength="50" placeholder="Inserisci il nome della categoria in inglese" formControlName="englishName" required>
+    @if (isInvalid('englishName')) {
+      <span class="error-message">{{ getErrorMessage('englishName') }}</span>
+    }
+  </div>
+
+  <button
+    class="primary-button"
+    type="submit"
+    [disabled]="categoryForm.invalid">
+    {{ categoryToModify ? "Modifica" : "Aggiungi" }}
+  </button>
+
+  <div class="row">
+    <button class="tertiary-button" type="reset" (click)="resetForm()">
+      Annulla
+    </button>
+
+    @if (categoryToModify) {
+      <button class="tertiary-button error" type="reset" (click)="deleteCategory()">
+        Elimina
+      </button>
+    }
+  </div>
+</form>
+
+<section>
+  <div class="sub-section">
+    <h4>Anteprima</h4>
+    <div class="box">
+      <div class="background">
+        <span class="category">{{ categoryForm.get('name')?.value || 'Inserisci nome Categoria' }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="sub-section">
+    <h4>Categorie già presenti</h4>
+    @if (categories.length === 0) {
+      <p>Nessuna Categoria presente.</p>
+    } @else {
+      <div class="box">
+        <div class="categories">
+          @for (category of categories; track category.id) {
+            <app-category-component [categoryDto]="category" [isSelected]="categoryToModify?.id === category.id" (categoryClicked)="selectCategory($event)"></app-category-component>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</section>

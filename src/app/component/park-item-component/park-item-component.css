@@ -1,3 +1,9 @@
+:host {
+  display: block;
+  container-type: inline-size;
+  container-name: park-item;
+}
+
 section {
   display: flex;
   gap: 16px;
@@ -11,14 +17,13 @@ article {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding-top: 16px;
 }
 
 figure {
   flex: 1 1 0;
   min-width: 300px;
+  width: 100%;
   max-width: 400px;
-  padding-bottom: 16px;
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
@@ -60,13 +65,44 @@ figcaption {
   color: var(--brand-strong);
 }
 
+.background {
+  background: var(--fill);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid var(--stroke-weak);
+  aspect-ratio: 16/9;
+}
 
 @media (max-width: 758px) {
   section {
     flex-direction: column-reverse;
+    gap: 8px;
   }
 
   article{
+    flex: none;
+    min-width: 100%;
+  }
+
+  figure {
+    max-width: 100%;
+  }
+
+  figure img {
+    aspect-ratio: 16/9;
+  }
+}
+
+@container park-item (max-width: 758px) {
+  section {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+
+  article {
     flex: none;
     min-width: 100%;
   }

@@ -1,7 +1,10 @@
 @if (galleryItemSelected !== null) {
   <section class="overlay" (click)="galleryItemSelected = null">
     <figure class="gallery-item">
-      <img [src]="galleryItems[galleryItemSelected].imageUrl" [alt]="galleryItems[galleryItemSelected].description" />
+      <img
+        [src]="galleryItems[galleryItemSelected].imageUrl"
+        [alt]="GlobalHandler.getInstance().isItalian() ? galleryItems[galleryItemSelected].description : galleryItems[galleryItemSelected].englishDescription"
+      />
     </figure>
   </section>
 }
@@ -10,8 +13,8 @@
   @if (galleryItems) {
     @for (galleryItem of galleryItems; track galleryItem.id; let i = $index) {
       <figure class="gallery-item" (click)="galleryItemSelected = i">
-        <img [src]="galleryItem.imageUrl" [alt]="galleryItem.description" />
-        <figcaption>{{ galleryItem.description }}</figcaption>
+        <img [src]="galleryItem.imageUrl" [alt]="GlobalHandler.getInstance().isItalian() ? galleryItem.description : galleryItem.englishDescription" />
+        <figcaption>{{ GlobalHandler.getInstance().isItalian() ?  galleryItem.description: galleryItem.englishDescription }}</figcaption>
       </figure>
     }
   } @else {

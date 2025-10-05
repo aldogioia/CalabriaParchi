@@ -1,0 +1,34 @@
+.wrapper {
+  display: flex;
+  position: relative;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.wrapper app-park-item-component {
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+.secondary-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.tags{
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag{
+  background: var(--fill);
+  border-color: var(--stroke-strong);
+  color: var(--text-strong);
+  cursor: pointer;
+}
+
+.tag.selected {
+  background: var(--brand-fill);
+  border-color: var(--brand-stroke-strong);
+}
