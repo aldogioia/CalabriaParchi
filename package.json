@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "ng build --base-href=/ && echo www.calabriaparchi.it > dist/CalabriaParchiFrontEnd/browser/CNAME && npx angular-cli-ghpages --dir=dist/CalabriaParchiFrontEnd/browser"
+    "deploy": "ng build --base-href=/ && echo www.calabriaparchi.it > dist/CalabriaParchi/browser/CNAME && npx angular-cli-ghpages --dir=dist/CalabriaParchi/browser"
   },
   "prettier": {
     "overrides": [

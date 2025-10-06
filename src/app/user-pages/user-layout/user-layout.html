@@ -33,7 +33,7 @@
   <div class="container">
     <h4>{{ "DESTINATIONS" | translate }}</h4>
     @for (park of parks; track park.id){
-      <a routerLink="'/park'" (click)="redirectTo('/park', park)" routerLinkActive="active">{{ GlobalHandler.getInstance().isItalian() ? park.name : park.englishName }}</a>
+      <a routerLink="/park/{{park.id}}" (click)="redirectTo('/park', park)" routerLinkActive="active">{{ GlobalHandler.getInstance().isItalian() ? park.name : park.englishName }}</a>
     }
   </div>
 </ng-template>
@@ -41,9 +41,9 @@
 <ng-template #share>
   <div class="container">
     <h4>{{"COMMUNITY" | translate }}</h4>
-    <a routerLink="'/share-experience'" (click)="redirectTo('/share-experience')" routerLinkActive="active">
+    <a routerLink="/share-experience" (click)="redirectTo('/share-experience')" routerLinkActive="active">
       {{"SHARE_EXPERIENCE" | translate }}</a>
-    <a routerLink="'/community'" (click)="redirectTo('/community')" routerLinkActive="active">
+    <a routerLink="/community" (click)="redirectTo('/community')" routerLinkActive="active">
       {{"COMMUNITY_EXPERIENCES" | translate }}</a>
   </div>
 </ng-template>
@@ -51,7 +51,7 @@
 <ng-template #itinerary>
   <div class="container">
     <h4>{{ "ITINERARIES" | translate }}</h4>
-    <a routerLink="'/my-itinerary'" (click)="redirectTo('/my-itinerary')" routerLinkActive="active">{{"MY_ITINERARY_ARTICLE_TITLE" | translate }}</a>
-    <a routerLink="'/itineraries'" (click)="redirectTo('/itineraries')" routerLinkActive="active">{{"ITINERARY_ARTICLE_TITLE" | translate }}</a>
+    <a routerLink="/my-itinerary" (click)="redirectTo('/my-itinerary')" routerLinkActive="active">{{"MY_ITINERARY_ARTICLE_TITLE" | translate }}</a>
+    <a routerLink="/itineraries" (click)="redirectTo('/itineraries')" routerLinkActive="active">{{"ITINERARY_ARTICLE_TITLE" | translate }}</a>
   </div>
 </ng-template>

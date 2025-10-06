@@ -16,7 +16,9 @@ export class ParkItemComponent {
   @Input()
   showWishlistButton: boolean = true;
 
-  constructor(protected itineraryService: ItineraryService) {
+  constructor(
+    protected itineraryService: ItineraryService
+  ) {
   }
 
   protected readonly GlobalHandler = GlobalHandler;

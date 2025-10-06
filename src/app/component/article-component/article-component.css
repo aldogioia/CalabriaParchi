@@ -11,4 +11,5 @@ figure img {
   border-radius: 8px;
   object-position: center;
   object-fit: cover;
+  max-width: 800px;
 }
