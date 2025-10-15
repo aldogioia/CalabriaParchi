@@ -47,7 +47,7 @@
   }
 </section>
 
-<app-footer-component></app-footer-component>
+<app-footer-component [title]="FooterInfo.getTitle(park!.name)" [info]="FooterInfo.getInfo(park!.name)"></app-footer-component>
 
 <ng-template #storyTemplate>
   <section class="sub-section to-reveal">

@@ -1,22 +1,24 @@
 <footer>
   <section class="info">
-    <h5>Ente Parco Nazionale della Sila - Riserva della Biosfera MAB Sila</h5>
-    <ul>
-      <li><span>Via Nazionale 87100 Lorica - San Giovanni in Fiore (CS)</span></li>
-      <li><span>Responsabile Unico del Progetto - geom. Mauro Iucle Procellini</span></li>
-      <li><span>Direttore - Arch. Ilario Treccosti</span></li>
-      <li><span>Presidente - Dott. Francesco Curcio</span></li>
-      <li><span>Pec: parcosila&#64;pec.it</span></li>
-      <li><span>P.IVA 02583110792</span></li>
-    </ul>
+    @if (title === 'Calabriaparchi.it') {
+      <h3 style="text-align: center">Calabriaparchi<b style="color: var(--brand-strong)">.</b>it</h3>
+    } @else {
+      <h5>{{title}}</h5>
+      <ul>
+        @for (info of info; track info) {
+          <li><span>{{info}}</span></li>
+        }
+      </ul>
+    }
+
   </section>
-  <section class="social">
+  <!--<section class="social">
     <h5>Follow Us</h5>
     <ul>
       <li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
       <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
     </ul>
-  </section>
+  </section>-->
   <section class="newsletter">
     <h5>Newsletter</h5>
     <form [formGroup]="newsletterForm" (ngSubmit)="subscribeToNewsletter()">

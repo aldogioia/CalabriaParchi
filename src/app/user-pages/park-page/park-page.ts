@@ -13,6 +13,7 @@ import { Section } from '../../model/enum/Section';
 import {ParkService} from '../../service/park-service';
 import {InterestType} from '../../model/enum/InterestType';
 import {GlobalHandler} from '../../utils/GlobalHandler';
+import {FooterInfo} from '../../utils/footer-info';
 
 @Component({
   selector: 'app-park-page',
@@ -131,7 +132,7 @@ export class ParkPage implements OnInit {
     this.loadSection(this.sectionToShow);
   }
 
-
   protected readonly Section = Section;
   protected readonly GlobalHandler = GlobalHandler;
+  protected readonly FooterInfo = FooterInfo;
 }

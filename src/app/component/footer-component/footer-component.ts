@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NewsletterService} from '../../service/newsletter-service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GlobalHandler} from '../../utils/GlobalHandler';
@@ -11,6 +11,11 @@ import {GlobalHandler} from '../../utils/GlobalHandler';
   host: {'class': 'footer'}
 })
 export class FooterComponent {
+  @Input()
+  title: string = 'Calabriaparchi.it';
+  @Input()
+  info: string[] = [];
+
   newsletterForm: FormGroup = new FormGroup({});
 
   constructor(
