@@ -43,6 +43,11 @@
 
   "NO_RESULTS": "Nessun risultato trovato.",
   "ADD_INTEREST": "Non hai ancora aggiunto interessi al tuo itinerario. Vai alla sezione Crea il tuo itinerario e seleziona i tuoi interessi!",
-  "SUBSCRIBE": "Iscriviti"
+  "SUBSCRIBE": "Iscriviti",
 
+  "UNSUBSCRIBED": "Ti sei disiscritto con successo dalla newsletter.",
+  "FAILED_UNSUBSCRIBE": "Errore durante la disiscrizione.",
+  "UNSUBSCRIBING": "Attendere, stiamo processando la richiesta...",
+
+  "GO_TO_HOME": "Vai alla pagina principale"
 }

@@ -33,6 +33,10 @@ import { InterestsPage } from './admin-pages/interests-page/interests-page';
 import { TagComponent } from './component/tag-component/tag-component';
 import { CategoryComponent } from './component/category-component/category-component';
 import { ExperiencePostReviewPage } from './admin-pages/experience-post-review-page/experience-post-review-page';
+import { NewsletterPage } from './admin-pages/newsletter-page/newsletter-page';
+import { GuidePage } from './admin-pages/guide-page/guide-page';
+import { UnsubscribePage } from './user-pages/unsubscribe-page/unsubscribe-page';
+import { GuideComponent } from './component/guide-component/guide-component';
 
 export function HttpLoaderFactory():TranslateHttpLoader {
   return new TranslateHttpLoader();
@@ -65,6 +69,10 @@ export function HttpLoaderFactory():TranslateHttpLoader {
     TagComponent,
     CategoryComponent,
     ExperiencePostReviewPage,
+    NewsletterPage,
+    GuidePage,
+    UnsubscribePage,
+    GuideComponent,
   ],
   imports: [
     BrowserModule,

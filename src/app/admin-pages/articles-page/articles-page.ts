@@ -170,6 +170,26 @@ export class ArticlesPage implements OnInit {
     this.selectedFile = null;
   }
 
+  private createArticleFormData() {
+    const { parkId, title, englishTitle, paragraphs, englishParagraphs } = this.articleForm.value;
+    const filteredParagraphs = (paragraphs as string[]).filter(p => p?.trim());
+    const filteredEnglishParagraphs = (englishParagraphs as string[]).filter(p => p?.trim());
+
+    const formData = new FormData();
+    formData.append('parkId', parkId);
+    formData.append('title', title);
+    formData.append('englishTitle', englishTitle);
+
+    filteredParagraphs.forEach((p, i) => formData.append(`paragraphs[${i}]`, p));
+    filteredEnglishParagraphs.forEach((p, i) => formData.append(`englishParagraphs[${i}]`, p));
+
+    //TODO vedere come gestire l'immagine per la modifica (dare un modo per eliminarla)
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
+    }
+
+    return formData;
+  }
 
   submit() {
     //TODO vedere come gestirlo
@@ -186,21 +206,7 @@ export class ArticlesPage implements OnInit {
   }
 
   private addArticle() {
-    const { parkId, title, englishTitle, paragraphs, englishParagraphs } = this.articleForm.value;
-    const filteredParagraphs = (paragraphs as string[]).filter(p => p?.trim());
-    const filteredEnglishParagraphs = (englishParagraphs as string[]).filter(p => p?.trim());
-
-    const formData = new FormData();
-    formData.append('parkId', parkId);
-    formData.append('title', title);
-    formData.append('englishTitle', englishTitle);
-
-    filteredParagraphs.forEach((p, i) => formData.append(`paragraphs[${i}]`, p));
-    filteredEnglishParagraphs.forEach((p, i) => formData.append(`englishParagraphs[${i}]`, p));
-
-    if (this.selectedFile) {
-      formData.append('image', this.selectedFile);
-    }
+    const formData = this.createArticleFormData();
 
     this.articleService.createArticle(formData).subscribe({
       next: () => {
@@ -217,22 +223,8 @@ export class ArticlesPage implements OnInit {
   private modifyArticle() {
     if (!this.articleToModify) return;
 
-    const { parkId, title, englishTitle, paragraphs, englishParagraphs } = this.articleForm.value;
-    const filteredParagraphs = (paragraphs as string[]).filter(p => p?.trim());
-    const filteredEnglishParagraphs = (englishParagraphs as string[]).filter(p => p?.trim());
-
-    const formData = new FormData();
+    const formData = this.createArticleFormData();
     formData.append('id', this.articleToModify.id);
-    formData.append('parkId', parkId);
-    formData.append('title', title);
-    formData.append('englishTitle', englishTitle);
-
-    filteredParagraphs.forEach((p, i) => formData.append(`paragraphs[${i}]`, p));
-    filteredEnglishParagraphs.forEach((p, i) => formData.append(`englishParagraphs[${i}]`, p));
-
-    if (this.selectedFile) {
-      formData.append('image', this.selectedFile);
-    }
 
     this.articleService.updateArticle(formData).subscribe({
       next: (updatedArticle) => {
@@ -256,17 +248,16 @@ export class ArticlesPage implements OnInit {
     const confirmDelete = confirm('Are you sure you want to delete this Article?');
     if (!confirmDelete) return;
 
-    this.articleService.deleteArticle(this.articleToModify.id, this.articleToModify.parkId)
-      .subscribe({
-        next: () => {
-          this.articles = this.articles.filter(item => item.id !== this.articleToModify!.id);
-          this.resetForm();
-          alert('Article deleted successfully!');
-        },
-        error: (err) => {
-          console.error('Error deleting article:', err);
-          alert('Failed to delete article. Please try again.');
-        }
-      });
+    this.articleService.deleteArticle(this.articleToModify.id, this.articleToModify.parkId).subscribe({
+      next: () => {
+        this.articles = this.articles.filter(item => item.id !== this.articleToModify!.id);
+        this.resetForm();
+        alert('Article deleted successfully!');
+      },
+      error: (err) => {
+        console.error('Error deleting article:', err);
+        alert('Failed to delete article. Please try again.');
+      }
+    });
   }
 }

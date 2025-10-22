@@ -17,6 +17,9 @@ import {TagsPage} from './admin-pages/tags-page/tags-page';
 import {ArticlesPage} from './admin-pages/articles-page/articles-page';
 import {InterestsPage} from './admin-pages/interests-page/interests-page';
 import {ExperiencePostReviewPage} from './admin-pages/experience-post-review-page/experience-post-review-page';
+import {NewsletterPage} from './admin-pages/newsletter-page/newsletter-page';
+import {UnsubscribePage} from './user-pages/unsubscribe-page/unsubscribe-page';
+import {GuidePage} from './admin-pages/guide-page/guide-page';
 
 const routes: Routes = [
   {
@@ -30,6 +33,7 @@ const routes: Routes = [
       { path: 'my-itinerary', component: MyItineraryPage },
       { path: 'share-experience', component: ShareExperiencePage },
       { path: 'community', component: CommunityPage },
+      { path: 'unsubscribe', component: UnsubscribePage },
     ]
   },
   {
@@ -45,6 +49,8 @@ const routes: Routes = [
       { path: 'categories', component: CategoryPage },
       { path: 'tags', component: TagsPage },
       { path: 'community', component: ExperiencePostReviewPage },
+      { path: 'guide', component: GuidePage },
+      { path: 'newsletter', component: NewsletterPage },
     ]
   },
   {

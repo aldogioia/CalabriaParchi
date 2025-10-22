@@ -1,0 +1,11 @@
+@if (success === true) {
+  <p>{{ 'UNSUBSCRIBED' | translate }}</p>
+} @else if (success === false) {
+  <p>{{ 'FAILED_UNSUBSCRIBE' | translate }}</p>
+} @else {
+  <p>{{ 'UNSUBSCRIBING' | translate }}</p>
+}
+
+<button class="tertiary-button" (click)="goToHome()">
+  {{ 'GO_TO_HOME' | translate }}
+</button>

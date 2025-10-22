@@ -10,13 +10,22 @@ export class NewsletterService {
 
   constructor(private http: HttpClient) {}
 
-  subscribe(email: string) {
-    const url = `${this.baseUrl}/subscribe`;
-    return this.http.post(url, email);
+  getAllSubscribers() {
+    return this.http.get<string[]>(this.baseUrl);
   }
 
-  unsubscribe(email: string) {
+  sendNewsletter(formData: FormData) {
+    const url = `${this.baseUrl}/send`;
+    return this.http.post(url, formData);
+  }
+
+  subscribe(email: string) {
+    const url = `${this.baseUrl}/subscribe`;
+    return this.http.post(url, { email: email });
+  }
+
+  unsubscribe(subscriberId: string) {
     const url = `${this.baseUrl}/unsubscribe`;
-    return this.http.post(url, email);
+    return this.http.post(url, { id: subscriberId });
   }
 }

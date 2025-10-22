@@ -1,0 +1,52 @@
+figure {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 300px;
+}
+
+figure img{
+  width: 100%;
+  aspect-ratio: .75 / 1;
+  border: 1px solid var(--stroke-weak);
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+figcaption {
+  width: 100%;
+  font-size: 8px;
+  color: var(--text-weak);
+  overflow: hidden;
+  display: block;
+  text-align: center;
+}
+
+figcaption a {
+  text-overflow: fade;
+  white-space: nowrap;
+}
+
+.background {
+  background: var(--fill);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid var(--stroke-weak);
+  aspect-ratio: .75 / 1;
+}
+
+
+@media (max-width: 758px) {
+  figure img {
+    width: 250px;
+  }
+}
+
+@media (max-width: 568px) {
+  figure img {
+    width: 160px;
+  }
+}
