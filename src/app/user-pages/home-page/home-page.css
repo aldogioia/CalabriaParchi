@@ -10,7 +10,8 @@ section {
 .home-component {
   position: relative;
   width: 100%;
-  height: 100dvh;
+  height: 100vh;
+  height: 100lvh;
   scroll-snap-align: start;
   background: var(--text-strong);
 }
