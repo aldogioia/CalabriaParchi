@@ -49,3 +49,11 @@ figure figcaption h1 {
 nav ul li:first-of-type {
   margin-left: 16px;
 }
+
+.guides-slider {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 16px;
+}

@@ -30,7 +30,7 @@
 
   @switch (sectionToShow) {
     @case (Section.DETAILS) {
-      <ng-container *ngTemplateOutlet="storyTemplate"></ng-container>
+      <ng-container *ngTemplateOutlet="detailsTemplate"></ng-container>
     }
     @case (Section.LOCATIONS) {
       <ng-container *ngTemplateOutlet="locationsTemplate"></ng-container>
@@ -49,8 +49,15 @@
 
 <app-footer-component [title]="FooterInfo.getTitle(park!.name)" [info]="FooterInfo.getInfo(park!.name)"></app-footer-component>
 
-<ng-template #storyTemplate>
+<ng-template #detailsTemplate>
   <section class="sub-section to-reveal">
+    @if (guides !== undefined && guides.length >= 1) {
+      <div class="guides-slider">
+        @for (guide of guides; track guide.id) {
+          <app-guide-component [guideDto]="guide"></app-guide-component>
+        }
+      </div>
+    }
     @for (article of articles; track article.id) {
       <app-article-component [articleDto]="article"></app-article-component>
     }

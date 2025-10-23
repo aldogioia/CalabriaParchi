@@ -40,13 +40,13 @@ figcaption a {
 
 
 @media (max-width: 758px) {
-  figure img {
+  figure {
     width: 250px;
   }
 }
 
 @media (max-width: 568px) {
-  figure img {
+  figure {
     width: 160px;
   }
 }

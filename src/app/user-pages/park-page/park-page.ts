@@ -8,12 +8,15 @@ import { ParkDto } from '../../model/dto/ParkDto';
 import { ArticleDto } from '../../model/dto/ArticleDto';
 import { InterestDto } from '../../model/dto/InterestDto';
 import { GalleryItemDto } from '../../model/dto/GalleryItemDto';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
 import { Section } from '../../model/enum/Section';
 import {ParkService} from '../../service/park-service';
 import {InterestType} from '../../model/enum/InterestType';
 import {GlobalHandler} from '../../utils/GlobalHandler';
 import {FooterInfo} from '../../utils/footer-info';
+import {GuideDto} from '../../model/dto/GuideDto';
+import {GuideService} from '../../service/guide-service';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-park-page',
@@ -32,6 +35,7 @@ export class ParkPage implements OnInit {
   activities?: InterestDto[];
   enoGastronomy?: InterestDto[];
   galleryItems?: GalleryItemDto[];
+  guides?: GuideDto[];
 
   loading = false;
 
@@ -49,13 +53,20 @@ export class ParkPage implements OnInit {
     private parkService: ParkService,
     private articleService: ArticleService,
     private interestService: InterestService,
-    private galleryItemService: GalleryItemService
+    private galleryItemService: GalleryItemService,
+    private guideService: GuideService
   ) {
     this.sectionConfig = {
       0: {
-        fetch: (id) => this.articleService.getArticlesByParkId(id),
-        assign: (data) => (this.articles = data),
-        cache: () => this.articles
+        fetch: (id) => forkJoin([
+          this.articleService.getArticlesByParkId(id).pipe(catchError(() => of([]))),
+          this.guideService.getAllGuideByParkId(id).pipe(catchError(() => of([])))
+        ]),
+        assign: (data) => {
+          this.articles = data[0];
+          this.guides = data[1];
+        },
+        cache: () => (this.articles && this.guides)
       },
       1: {
         fetch: (id) => this.interestService.getInterests(id, InterestType.LOCATION),
