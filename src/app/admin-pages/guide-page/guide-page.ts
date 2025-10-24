@@ -79,7 +79,21 @@ export class GuidePage implements OnInit {
   }
 
   resetForm() {
+    this.guideForm.reset();
+    this.selectedFileImage = null;
+    this.selectedFileImageUrl = null;
+    this.selectedFilePdf = null;
 
+    this.guideForm.patchValue({
+      parkId: ''
+    })
+
+    if (this.fileInputImage) {
+      this.fileInputImage.nativeElement.value = '';
+    }
+    if (this.fileInputPdf) {
+      this.fileInputPdf.nativeElement.value = '';
+    }
   }
 
   get guidePreview() {
