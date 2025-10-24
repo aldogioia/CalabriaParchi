@@ -2,7 +2,7 @@ import { AbstractControl } from '@angular/forms';
 
 export class GlobalHandler {
   private static instance: GlobalHandler;
-  private baseUrl = 'http://localhost:8080/api/v1';
+  private baseUrl = 'http://api.calabriaparchi.it/api/v1';
   private isItalianLang : boolean | undefined;
 
   private constructor() {}
