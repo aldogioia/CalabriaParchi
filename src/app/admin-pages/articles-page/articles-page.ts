@@ -213,8 +213,8 @@ export class ArticlesPage implements OnInit {
         this.resetForm();
         alert('Article created successfully!');
       },
-      error: () => {
-        alert('Failed to create article. Please try again.');
+      error: (error) => {
+        alert(error);
       }
     });
   }
@@ -235,9 +235,8 @@ export class ArticlesPage implements OnInit {
         this.resetForm();
         alert('Article updated successfully!');
       },
-      error: (err) => {
-        console.error('Error updating article:', err);
-        alert('Failed to update article. Please try again.');
+      error: (error) => {
+        alert(error);
       }
     });
   }
@@ -254,9 +253,8 @@ export class ArticlesPage implements OnInit {
         this.resetForm();
         alert('Article deleted successfully!');
       },
-      error: (err) => {
-        console.error('Error deleting article:', err);
-        alert('Failed to delete article. Please try again.');
+      error: (error) => {
+        alert(error);
       }
     });
   }

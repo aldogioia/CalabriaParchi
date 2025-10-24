@@ -49,12 +49,12 @@ export class HomePage implements OnInit {
 
     const email = this.newsletterForm.value.email;
     this.newsletterService.subscribe(email).subscribe({
-      next: (response) => {
-        alert('Subscription successful:' + response);
+      next: () => {
+        alert('Subscription successful!');
         this.showPopup = false;
       },
       error: (error) => {
-        alert('Subscription failed:'+ error);
+        alert(error);
       }
     });
   }

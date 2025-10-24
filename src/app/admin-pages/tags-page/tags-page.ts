@@ -74,9 +74,8 @@ export class TagsPage implements OnInit {
           this.resetForm();
           alert('Tag added successfully!');
         },
-        error: (err) => {
-          console.error('Error adding tag:', err);
-          alert('Failed to add tag. Please try again.');
+        error: (error) => {
+          alert(error);
         }
       });
   }
@@ -99,9 +98,8 @@ export class TagsPage implements OnInit {
           this.resetForm();
           alert('Tag updated successfully!');
         },
-        error: (err) => {
-          console.error('Error updating tag:', err);
-          alert('Failed to update tag. Please try again.');
+        error: (error) => {
+          alert(error);
         }
       });
   }
@@ -119,9 +117,8 @@ export class TagsPage implements OnInit {
           this.resetForm();
           alert('Tag deleted successfully!');
         },
-        error: (err) => {
-          console.error('Error deleting tag:', err);
-          alert('Failed to delete tag. Please try again.');
+        error: (error) => {
+          alert(error);
         }
       });
   }

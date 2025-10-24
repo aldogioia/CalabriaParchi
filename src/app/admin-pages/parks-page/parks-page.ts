@@ -90,9 +90,8 @@ export class ParksPage implements OnInit {
         this.resetForm();
         alert("Park created successfully!");
       },
-      error: (err) => {
-        console.error('Error creating park:', err);
-        alert('Failed to create park. Please try again.');
+      error: (error) => {
+        alert(error);
       }
     });
   }
@@ -117,9 +116,8 @@ export class ParksPage implements OnInit {
         this.resetForm();
         alert("Park updated successfully!");
       },
-      error: (err) => {
-        console.error('Error updating park:', err);
-        alert('Failed to update park. Please try again.');
+      error: (error) => {
+        alert(error);
       }
     });
   }
@@ -147,9 +145,8 @@ export class ParksPage implements OnInit {
           this.resetForm();
           alert("Park deleted successfully!");
         },
-        error: (err) => {
-          console.error('Error deleting park:', err);
-          alert('Failed to delete park. Please try again.');
+        error: (error) => {
+          alert(error);
         }
       });
     }

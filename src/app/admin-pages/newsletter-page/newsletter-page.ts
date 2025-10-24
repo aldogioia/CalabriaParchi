@@ -83,8 +83,8 @@ export class NewsletterPage implements OnInit {
         this.resetForm();
         alert('Newsletter sent successfully.');
       },
-      error: () => {
-        alert('Failed to send newsletter. Please try again.');
+      error: (error) => {
+        alert(error);
       }
     });
   }

@@ -68,8 +68,8 @@ export class ShareExperiencePage implements OnInit{
         this.selectedFile = null;
         this.selectedFileUrl = null;
       },
-      error: (error: any) => {
-        alert('Errore durante la condivisione: ' + error.message);
+      error: (error) => {
+        alert(error);
       }
     });
   }

@@ -65,8 +65,8 @@ export class MyItineraryPage implements OnInit, OnDestroy {
         alert("Itinerary generated successfully! Check your email.");
         this.showPopup = false;
       },
-      error: () => {
-        alert('Error generating itinerary');
+      error: (error) => {
+        alert(error);
       }
     });
   }

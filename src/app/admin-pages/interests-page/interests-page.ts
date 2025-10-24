@@ -254,9 +254,8 @@ export class InterestsPage implements OnInit {
         this.resetForm();
         alert('Interesse creato con successo!');
       },
-      error: (err) => {
-        console.error('Errore nella creazione dell\'interesse:', err);
-        alert('Impossibile creare l\'interesse. Riprova più tardi.');
+      error: (error) => {
+        alert(error);
       }
     });
   }
@@ -269,9 +268,8 @@ export class InterestsPage implements OnInit {
         this.resetForm();
         alert('Interesse modificato con successo!');
       },
-      error: (err) => {
-        console.error('Errore nella modifica dell\'interesse:', err);
-        alert('Impossibile modificare l\'interesse. Riprova più tardi.');
+      error: (error) => {
+        alert(error);
       }
     });
   }
@@ -286,9 +284,8 @@ export class InterestsPage implements OnInit {
         this.resetForm();
         alert('Interesse eliminato con successo!');
       },
-      error: (err) => {
-        console.error('Errore nell\'eliminazione dell\'interesse:', err);
-        alert('Impossibile eliminare l\'interesse. Riprova più tardi.');
+      error: (error) => {
+        alert(error);
       }
     });
   }

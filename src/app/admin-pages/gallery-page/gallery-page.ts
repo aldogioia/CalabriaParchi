@@ -116,9 +116,8 @@ export class GalleryPage implements OnInit {
         this.resetForm();
         alert("Gallery item created successfully!");
       },
-      error: (err) => {
-        console.error('Error creating gallery item:', err);
-        alert('Failed to create gallery item. Please try again.');
+      error: (error) => {
+        alert(error);
       }
     });
   }
@@ -142,9 +141,8 @@ export class GalleryPage implements OnInit {
         this.resetForm();
         alert("Gallery item updated successfully!");
       },
-      error: (err) => {
-        console.error('Error updating gallery item:', err);
-        alert('Failed to update gallery item. Please try again.');
+      error: (error) => {
+        alert(error);
       }
     });
   }
@@ -162,9 +160,8 @@ export class GalleryPage implements OnInit {
           this.resetForm();
           alert('Gallery item deleted successfully!');
         },
-        error: (err) => {
-          console.error('Error deleting gallery item:', err);
-          alert('Failed to delete gallery item. Please try again.');
+        error: (error) => {
+          alert(error);
         }
       });
   }

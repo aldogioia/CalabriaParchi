@@ -87,7 +87,34 @@ export function tokenInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn)
         }
       }
 
-      return throwError(() => error);
+      let userMessage = 'Operation Failed';
+
+      try {
+        const backendMsg = error?.error?.message;
+
+        if (backendMsg && typeof backendMsg === 'string') {
+          if (backendMsg.includes('Validation failed')) {
+            const regex = /default message \[([^\]]+)\]/g;
+            const matches = Array.from(backendMsg.matchAll(regex));
+            if (matches.length > 0) {
+              const last = matches[matches.length - 1];
+              userMessage = last[1];
+            }
+          } else if (
+            !backendMsg.match(/(Exception|SQL|could not execute statement|constraint|violate|error)/i)
+          ) {
+            userMessage = backendMsg;
+          } else {
+            userMessage = 'Operation Failed';
+          }
+        }
+      } catch (e) {
+        console.error('Errore nel parsing del messaggio backend:', e);
+      }
+
+      console.warn('[INTERCEPTOR] Messaggio utente:', userMessage);
+
+      return throwError(() => userMessage);
     })
   );
 }

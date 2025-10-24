@@ -74,9 +74,8 @@ export class CategoryPage implements OnInit {
           this.resetForm();
           alert('Category added successfully!');
         },
-        error: (err) => {
-          console.error('Error adding category:', err);
-          alert('Failed to add category. Please try again.');
+        error: (error) => {
+          alert(error);
         }
       });
   }
@@ -97,9 +96,8 @@ export class CategoryPage implements OnInit {
           this.resetForm();
           alert('Category updated successfully!');
         },
-        error: (err) => {
-          console.error('Error updating category:', err);
-          alert('Failed to update category. Please try again.');
+        error: (error) => {
+          alert(error);
         }
       });
   }
@@ -117,9 +115,8 @@ export class CategoryPage implements OnInit {
           this.resetForm();
           alert('Category deleted successfully!');
         },
-        error: (err) => {
-          console.error('Error deleting category:', err);
-          alert('Failed to delete category. Please try again.');
+        error: (error) => {
+          alert(error);
         }
       });
   }

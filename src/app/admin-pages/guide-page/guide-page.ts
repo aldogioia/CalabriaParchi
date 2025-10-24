@@ -128,9 +128,8 @@ export class GuidePage implements OnInit {
         this.resetForm();
         alert("Guide created successfully!");
       },
-      error: (err) => {
-        console.error('Error creating guide:', err.message);
-        alert('Failed to create guide. Please try again.');
+      error: (error) => {
+        alert(error);
       }
     });
   }
@@ -152,9 +151,8 @@ export class GuidePage implements OnInit {
         this.guides = this.guides.filter(g => g.id !== guide.id);
         alert("Guide deleted successfully!");
       },
-      error: (err) => {
-        console.error('Error deleting guide:', err.message);
-        alert('Failed to delete guide. Please try again.');
+      error: (error) => {
+        alert(error);
       }
     });
   }

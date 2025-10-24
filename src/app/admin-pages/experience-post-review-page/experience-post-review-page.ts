@@ -52,8 +52,8 @@ export class ExperiencePostReviewPage implements OnInit {
         next: () => {
           this.pendingExperiences = this.pendingExperiences.filter(e => e.id !== experiencePostId);
         },
-        error: () => {
-          alert('Si è verificato un errore durante la valutazione.');
+        error: (error) => {
+          alert(error);
         }
       });
     }
