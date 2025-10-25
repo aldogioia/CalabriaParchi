@@ -24,8 +24,8 @@ export class CategoryPage implements OnInit {
   ) {
     this.categoryForm = this.formBuilder.group({
       id: [''],
-      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]],
-      englishName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]]
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      englishName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
     });
   }
 

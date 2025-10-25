@@ -30,7 +30,7 @@ export class ShareExperiencePage implements OnInit{
       surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       email: ['', [Validators.required, Validators.email]],
       park: ['', Validators.required],
-      description: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(300)]]
+      description: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(300)]]
     });
   }
 

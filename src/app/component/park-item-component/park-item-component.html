@@ -22,11 +22,13 @@
         </button>
       }
     </div>
-    <div class="tags">
-      @for (tag of interestDto.tags; track tag.id) {
-        <span class="tag dark" [style.background]="tag.color + '99'">{{ GlobalHandler.getInstance().isItalian() ? tag.name : tag.englishName }}</span>
-      }
-    </div>
+    @if (interestDto.tags.length > 0) {
+      <div class="tags">
+        @for (tag of interestDto.tags; track tag.id) {
+          <span class="tag dark" [style.background]="tag.color + '99'">{{ GlobalHandler.getInstance().isItalian() ? tag.name : tag.englishName }}</span>
+        }
+      </div>
+    }
 
     @if (interestDto.phoneNumber != null || interestDto.website != null) {
       <div class="article-infos">

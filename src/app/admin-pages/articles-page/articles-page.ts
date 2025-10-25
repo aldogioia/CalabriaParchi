@@ -34,8 +34,8 @@ export class ArticlesPage implements OnInit {
   ) {
     this.articleForm = this.formBuilder.group({
       parkId: [''],
-      title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      englishTitle: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      title: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
+      englishTitle: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
       paragraphs: this.formBuilder.array([
         this.createParagraphControl()
       ]),
@@ -68,7 +68,7 @@ export class ArticlesPage implements OnInit {
   }
 
   private createParagraphControl(isFirst: boolean = false): FormControl {
-    return this.formBuilder.control('', [firstRequiredValidator(isFirst), Validators.maxLength(100)]);
+    return this.formBuilder.control('', [firstRequiredValidator(isFirst), Validators.maxLength(1000)]);
   }
 
 
@@ -170,20 +170,23 @@ export class ArticlesPage implements OnInit {
     this.selectedFile = null;
   }
 
-  private createArticleFormData() {
+  private buildFormData() {
     const { parkId, title, englishTitle, paragraphs, englishParagraphs } = this.articleForm.value;
     const filteredParagraphs = (paragraphs as string[]).filter(p => p?.trim());
     const filteredEnglishParagraphs = (englishParagraphs as string[]).filter(p => p?.trim());
 
+    const dto = {
+      id: this.articleToModify ? this.articleToModify.id : undefined,
+      parkId,
+      title,
+      englishTitle,
+      paragraphs: filteredParagraphs,
+      englishParagraphs: filteredEnglishParagraphs
+    };
+
     const formData = new FormData();
-    formData.append('parkId', parkId);
-    formData.append('title', title);
-    formData.append('englishTitle', englishTitle);
+    formData.append('dto', new Blob([JSON.stringify(dto)], { type: 'application/json' }));
 
-    filteredParagraphs.forEach((p, i) => formData.append(`paragraphs[${i}]`, p));
-    filteredEnglishParagraphs.forEach((p, i) => formData.append(`englishParagraphs[${i}]`, p));
-
-    //TODO vedere come gestire l'immagine per la modifica (dare un modo per eliminarla)
     if (this.selectedFile) {
       formData.append('image', this.selectedFile);
     }
@@ -192,12 +195,6 @@ export class ArticlesPage implements OnInit {
   }
 
   submit() {
-    //TODO vedere come gestirlo
-    /*if (!this.articleToModify ? this.articleForm.invalid  || !this.selectedFile : this.articleForm.invalid) {
-      this.galleryItemForm.markAllAsTouched();
-      return;
-    }*/
-
     if (this.articleToModify) {
       this.modifyArticle();
     } else {
@@ -206,7 +203,7 @@ export class ArticlesPage implements OnInit {
   }
 
   private addArticle() {
-    const formData = this.createArticleFormData();
+    const formData = this.buildFormData();
 
     this.articleService.createArticle(formData).subscribe({
       next: () => {
@@ -223,8 +220,7 @@ export class ArticlesPage implements OnInit {
   private modifyArticle() {
     if (!this.articleToModify) return;
 
-    const formData = this.createArticleFormData();
-    formData.append('id', this.articleToModify.id);
+    const formData = this.buildFormData();
 
     this.articleService.updateArticle(formData).subscribe({
       next: (updatedArticle) => {

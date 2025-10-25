@@ -24,9 +24,9 @@ export class TagsPage implements OnInit {
   ) {
     this.tagForm = this.formBuilder.group({
       id: [''],
-      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]],
-      englishName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]],
-      color: ['', [Validators.required, Validators.pattern(/^#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$/)]],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      englishName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      color: ['', [Validators.required, Validators.pattern('^#([A-Fa-f0-9]{6})$')]],
     });
   }
 

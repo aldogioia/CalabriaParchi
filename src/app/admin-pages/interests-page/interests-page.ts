@@ -58,7 +58,7 @@ export class InterestsPage implements OnInit {
       description: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(500)]],
       englishDescription: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(500)]],
       phoneNumber: [null, [Validators.pattern('^\\+?[0-9]{7,15}$')]],
-      website: [null],
+      website: [null, [Validators.pattern('^(https?://)([\\w.-]+)(:[0-9]+)?([/\\w .-]*)*/?$')]],
       interestType: [InterestType.ACTIVITY, Validators.required],
       tags: this.formBuilder.array([]),
       categories: this.formBuilder.array([])
@@ -200,52 +200,72 @@ export class InterestsPage implements OnInit {
   }
 
   submit() {
-    if (!this.interestToModify && (this.interestForm.invalid || !this.selectedFileImage || !this.selectedFilePdf)) {
+    const creating = !this.interestToModify;
+
+    if (this.interestForm.invalid) {
       this.interestForm.markAllAsTouched();
-      alert('Compila tutti i campi obbligatori prima di continuare.');
+      alert('Compila tutti i campi obbligatori.');
+      return;
+    }
+
+    if (creating && (!this.selectedFileImage || !this.selectedFilePdf)) {
+      alert('Immagine e PDF sono obbligatori per la creazione.');
       return;
     }
 
     const formData = this.buildFormData();
 
-    console.log('FormData content:');
-    for (const [key, value] of formData.entries()) {
-      console.log(key, value);
-    }
-
-    if (this.interestToModify) {
-      this.modifyInterest(formData);
-    } else {
+    if (creating) {
       this.addInterest(formData);
+    } else {
+      this.modifyInterest(formData);
     }
   }
 
+
   private buildFormData(): FormData {
-    const { parkId, name, englishName, description, englishDescription, phoneNumber, website, interestType } = this.interestForm.value;
+    const {
+      parkId,
+      name,
+      englishName,
+      description,
+      englishDescription,
+      phoneNumber,
+      website,
+      interestType
+    } = this.interestForm.value;
+
+    const selectedTags = this.tags
+      .filter((_, i) => this.tagsArray.value[i])
+      .map(t => t.id);
+
+    const selectedCategories = this.categories
+      .filter((_, i) => this.categoriesArray.value[i])
+      .map(c => c.id);
+
+    const dto = {
+      id: this.interestToModify ? this.interestToModify.id : undefined,
+      parkId,
+      name,
+      englishName,
+      description,
+      englishDescription,
+      phoneNumber,
+      website,
+      interestType,
+      tags: selectedTags,
+      categories: selectedCategories
+    };
+
     const formData = new FormData();
-
-    formData.append('parkId', parkId);
-    formData.append('name', name);
-    formData.append('englishName', englishName);
-    formData.append('description', description);
-    formData.append('englishDescription', englishDescription);
-    if (phoneNumber) formData.append('phoneNumber', phoneNumber);
-    if (website) formData.append('website', website);
-    formData.append('interestType', interestType);
-
-    const selectedTags = this.tags.filter((_, i) => this.tagsArray.value[i]).map(t => t.id);
-    const selectedCategories = this.categories.filter((_, i) => this.categoriesArray.value[i]).map(c => c.id);
-
-    selectedTags.forEach(tag => formData.append('tags', tag));
-    selectedCategories.forEach(category => formData.append('categories', category));
+    formData.append('dto', new Blob([JSON.stringify(dto)], { type: 'application/json' }));
 
     if (this.selectedFileImage) formData.append('image', this.selectedFileImage);
     if (this.selectedFilePdf) formData.append('pdf', this.selectedFilePdf);
 
-    if (this.interestToModify?.id) formData.append('id', this.interestToModify.id);
-
     return formData;
   }
+
 
   private addInterest(formData: FormData) {
     this.interestService.createInterest(formData).subscribe({
