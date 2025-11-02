@@ -37,6 +37,10 @@ import { NewsletterPage } from './admin-pages/newsletter-page/newsletter-page';
 import { GuidePage } from './admin-pages/guide-page/guide-page';
 import { UnsubscribePage } from './user-pages/unsubscribe-page/unsubscribe-page';
 import { GuideComponent } from './component/guide-component/guide-component';
+import { AdminsPage } from './admin-pages/admins-page/admins-page';
+import { ResetPasswordPage } from './admin-pages/reset-password-page/reset-password-page';
+import { RequestResetPage } from './admin-pages/request-reset-page/request-reset-page';
+import { UpdatePasswordPage } from './admin-pages/update-password-page/update-password-page';
 
 export function HttpLoaderFactory():TranslateHttpLoader {
   return new TranslateHttpLoader();
@@ -73,6 +77,10 @@ export function HttpLoaderFactory():TranslateHttpLoader {
     GuidePage,
     UnsubscribePage,
     GuideComponent,
+    AdminsPage,
+    ResetPasswordPage,
+    RequestResetPage,
+    UpdatePasswordPage,
   ],
   imports: [
     BrowserModule,

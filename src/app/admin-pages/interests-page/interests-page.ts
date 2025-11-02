@@ -10,7 +10,8 @@ import {ParkService} from '../../service/park-service';
 import {TagService} from '../../service/tag-service';
 import {CategoryService} from '../../service/category-service';
 import {InterestService} from '../../service/interest-service';
-import {forkJoin} from 'rxjs';
+import {forkJoin, of} from 'rxjs';
+import {switchMap} from 'rxjs/operators';
 
 enum FileType {
   IMAGE,
@@ -31,7 +32,9 @@ export class InterestsPage implements OnInit {
   protected readonly FileType = FileType;
   protected readonly InterestType = InterestType;
 
-  interestForm: FormGroup;
+  interestForm: FormGroup = new FormGroup({});
+  parkForm: FormGroup = new FormGroup({});
+
   interests: InterestDto[] = [];
 
   parks: ParkDto[] = [];
@@ -51,6 +54,10 @@ export class InterestsPage implements OnInit {
     private categoryService: CategoryService,
     private interestService: InterestService,
   ) {
+    this.parkForm = this.formBuilder.group({
+      parkId: ['', [Validators.required]],
+    })
+
     this.interestForm = this.formBuilder.group({
       parkId: ['', Validators.required],
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -66,25 +73,27 @@ export class InterestsPage implements OnInit {
   }
 
   ngOnInit(): void {
+    this.parkService.getParks(true)
+      .subscribe(parks => this.parks = parks);
+
     forkJoin({
       tags: this.tagService.getTags(),
-      parks: this.parkService.getParks(),
       categories: this.categoryService.getCategories()
-    }).subscribe(({ tags, parks, categories }) => {
+    }).subscribe(({ tags, categories }) => {
       this.tags = tags;
-      this.parks = parks;
       this.categories = categories;
       this.initFormArrays();
     });
 
-    this.interestForm.get('parkId')?.valueChanges.subscribe(parkId => {
-      if (parkId) {
-        this.interestService.getInterests(parkId)
-          .subscribe(interests => this.interests = interests);
-      } else {
-        this.interests = [];
-      }
-    });
+    this.parkForm.get('parkId')?.valueChanges.pipe(
+      switchMap(parkId => {
+        if (parkId) {
+          return this.interestService.getInterests(parkId);
+        } else {
+          return of([]);
+        }
+      })
+    ).subscribe(interests => this.interests = interests);
   }
 
   get typeSelected(): InterestType {

@@ -11,7 +11,7 @@ export class AdminLayout {
   isMenuOpen = false;
 
   constructor(
-    private authService: AuthService,
+    protected authService: AuthService,
   ) {}
 
   signOut() {

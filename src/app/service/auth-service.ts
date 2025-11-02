@@ -78,6 +78,49 @@ export class AuthService {
       );
   }
 
+  private base64UrlDecode(str: string): string {
+    str = str.replace(/-/g, '+').replace(/_/g, '/');
+    const pad = str.length % 4;
+    if (pad) str += '='.repeat(4 - pad);
+    return atob(str);
+  }
+
+  getUserRoleFromToken(): string | null {
+    const token = this.getAccessToken();
+    if (!token) return null;
+
+    try {
+      const payload = JSON.parse(this.base64UrlDecode(token.split('.')[1]));
+      return payload.role || null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  getParkIdFromToken(): string | null {
+    const token = this.getAccessToken();
+    if (!token) return null;
+
+    try {
+      const payload = JSON.parse(this.base64UrlDecode(token.split('.')[1]));
+      return payload.parkId || null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  getUserIdFromToken(): string | null {
+    const token = this.getAccessToken();
+    if (!token) return null;
+
+    try {
+      const payload = JSON.parse(this.base64UrlDecode(token.split('.')[1]));
+      return payload.userId || null;
+    } catch (error) {
+      return null;
+    }
+  }
+
   setTokens(access: string, refresh: string) {
     localStorage.setItem(this.accessTokenKey, access);
     localStorage.setItem(this.refreshTokenKey, refresh);

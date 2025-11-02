@@ -25,6 +25,7 @@ export class GuidePage implements OnInit {
   protected readonly FileType = FileType;
 
   guideForm: FormGroup = new FormGroup({});
+  parkForm: FormGroup = new FormGroup({});
 
   guides: GuideDto[] = [];
   parks: ParkDto[] = [];
@@ -38,6 +39,10 @@ export class GuidePage implements OnInit {
     private parkService: ParkService,
     private guideService: GuideService,
   ) {
+    this.parkForm = this.formBuilder.group({
+      parkId: ['', [Validators.required]],
+    })
+
     this.guideForm = this.formBuilder.group({
       parkId: ['', Validators.required],
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -46,7 +51,7 @@ export class GuidePage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.parkService.getParks()
+    this.parkService.getParks(true)
       .subscribe(parks => this.parks = parks );
 
     this.guideForm.get('parkId')?.valueChanges.subscribe(parkId => {
@@ -120,7 +125,6 @@ export class GuidePage implements OnInit {
     formData.append('imagePreview', this.selectedFileImage);
     formData.append('pdf', this.selectedFilePdf);
 
-    console.log(formData.values());
 
     this.guideService.createGuide(formData).subscribe({
       next: (createdGuide) => {

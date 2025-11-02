@@ -16,6 +16,9 @@ import {GalleryItemService} from '../../service/gallery-item-service';
 export class GalleryPage implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
+  galleryItemForm: FormGroup = new FormGroup({});
+  parkForm: FormGroup = new FormGroup({});
+
   parks: ParkDto[] = [];
   galleryItems: GalleryItemDto[] = [];
 
@@ -24,27 +27,28 @@ export class GalleryPage implements OnInit {
 
   galleryItemToModify: GalleryItemDto | null = null;
 
-  galleryItemForm: FormGroup = new FormGroup({});
-
   constructor(
     private formBuilder: FormBuilder,
     private parkService: ParkService,
     private galleryItemService: GalleryItemService,
   ) {
+    this.parkForm = this.formBuilder.group({
+      parkId: ['', [Validators.required]],
+    })
+
     this.galleryItemForm = this.formBuilder.group({
       parkId: ['', [Validators.required]],
       description: ['', [Validators.required, Validators.maxLength(80)]],
       englishDescription: ['', [Validators.required, Validators.maxLength(80)]]
-
     });
   }
 
   ngOnInit(): void {
-    this.parkService.getParks().subscribe(parks => {
+    this.parkService.getParks(true).subscribe(parks => {
       this.parks = parks;
     })
 
-    this.galleryItemForm.get('parkId')?.valueChanges
+    this.parkForm.get('parkId')?.valueChanges
       .subscribe(parkId => parkId ? this.getGalleryItemsByParkId(parkId) : this.galleryItems = []);
   }
 

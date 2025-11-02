@@ -1,11 +1,6 @@
 <form [formGroup]="newsletterForm" (ngSubmit)="submit()">
   <h3>Invia Newsletter</h3>
 
-  <div class="warning-tag">
-    <h3>Attenzione</h3>
-    <p>Questa pagina è in fase di sviluppo e alcune funzionalità potrebbero non essere ancora definitive.</p>
-  </div>
-
   <div class="input-group" [class.error]="isInvalid('subject')">
     <label for="subject">Soggetto</label>
     <input name="subject" type="text" placeholder="Soggetto" formControlName="subject">
@@ -30,7 +25,7 @@
   <div class="input-group">
     <label for="img">Foto</label>
     <div class="file-wrapper">
-      <input #fileInput id="img" name="img" type="file" (change)="onFileSelected($event)">
+      <input #fileInput id="img" name="img" type="file" accept="image/jpeg,image/png" (change)="onFileSelected($event)">
     </div>
   </div>
 

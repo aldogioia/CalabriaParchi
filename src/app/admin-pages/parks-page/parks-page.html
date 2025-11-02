@@ -1,9 +1,9 @@
 <form [formGroup]="parkForm" (ngSubmit)="submit()">
-  <h3>Aggiungi un nuovo Parco</h3>
+  <h3>Aggiungi nuovi Parchi</h3>
   <div class="input-group" [class.error]="(!parkToModify ? parkForm.invalid  || !selectedFile : parkForm.invalid) && parkForm.touched">
     <label for="img">Foto</label>
     <div class="file-wrapper">
-      <input #fileInput id="img" name="img" type="file" (change)="onFileSelected($event)" required>
+      <input #fileInput id="img" name="img" type="file" accept="image/jpeg,image/png" (change)="onFileSelected($event)" required>
     </div>
     @if ((!parkToModify ? parkForm.invalid  || !selectedFile : parkForm.invalid) && parkForm.touched) {
       <span class="error-message">Immagine obbligatoria</span>
@@ -44,17 +44,19 @@
     {{ parkToModify ? "Modifica" : "Aggiungi" }}
   </button>
 
-  <div class="row">
-    <button class="tertiary-button" type="reset" (click)="resetForm()">
-      Annulla
-    </button>
-
-    @if (parkToModify) {
-      <button class="tertiary-button error" type="reset" (click)="deletePark()">
-        Elimina
+  @if (authService.getUserRoleFromToken() === "ROLE_SUPER_ADMIN") {
+    <div class="row">
+      <button class="tertiary-button" type="reset" (click)="resetForm()">
+        Annulla
       </button>
-    }
-  </div>
+
+      @if (parkToModify) {
+        <button class="tertiary-button error" type="reset" (click)="deletePark()">
+          Elimina
+        </button>
+      }
+    </div>
+  }
 </form>
 
 <section>
@@ -90,14 +92,16 @@
       </figure>
     </div>
   </div>
-  <div class="sub-section">
-    <h4>Parchi già presenti</h4>
-    <div class="box">
-      @for (park of parks; track park.id) {
-        <ng-container *ngTemplateOutlet="parkTemplate; context: { $implicit: park }"></ng-container>
-      }
+  @if (authService.getUserRoleFromToken() === "ROLE_SUPER_ADMIN") {
+    <div class="sub-section">
+      <h4>Parchi già presenti</h4>
+      <div class="box">
+        @for (park of parks; track park.id) {
+          <ng-container *ngTemplateOutlet="parkTemplate; context: { $implicit: park }"></ng-container>
+        }
+      </div>
     </div>
-  </div>
+  }
 </section>
 
 <ng-template #parkTemplate let-parkDto>

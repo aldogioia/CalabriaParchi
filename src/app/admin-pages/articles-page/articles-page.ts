@@ -19,6 +19,8 @@ export class ArticlesPage implements OnInit {
 
   articleForm: FormGroup = new FormGroup({});
 
+  parkForm: FormGroup = new FormGroup({});
+
   parks: ParkDto[] = [];
   articles: ArticleDto[] = [];
 
@@ -32,6 +34,10 @@ export class ArticlesPage implements OnInit {
     private parkService: ParkService,
     private articleService: ArticleService,
   ) {
+    this.parkForm = this.formBuilder.group({
+      parkId: ['', [Validators.required]],
+    })
+
     this.articleForm = this.formBuilder.group({
       parkId: [''],
       title: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
@@ -46,10 +52,10 @@ export class ArticlesPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.parkService.getParks()
+    this.parkService.getParks(true)
       .subscribe(parks => this.parks = parks);
 
-    this.articleForm.get('parkId')?.valueChanges.subscribe(parkId => {
+    this.parkForm.get('parkId')?.valueChanges.subscribe(parkId => {
       if (parkId) {
         this.articleService.getArticlesByParkId(parkId)
           .subscribe(articles => this.articles = articles);

@@ -24,7 +24,7 @@
           <span class="error-message">{{ getErrorMessage('password') }}</span>
         }
       </div>
-      <!--<p class="little-text">Password dimenticata? <u style="color: var(--text-strong); cursor: pointer">recuperala</u></p>-->
+      <p class="little-text">Password dimenticata? <u routerLink="/request-reset" style="color: var(--text-strong); cursor: pointer">recuperala</u></p>
     </div>
 
     <button class="primary-button" type="submit" [disabled]="loginForm.invalid">Accedi</button>

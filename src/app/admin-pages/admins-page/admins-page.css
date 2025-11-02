@@ -1,0 +1,12 @@
+.admin-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px;
+}
+
+.secondary-button {
+  position: relative !important;
+  top: initial !important;
+  right: initial !important;
+}

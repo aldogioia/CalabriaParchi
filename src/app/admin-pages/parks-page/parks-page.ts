@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ParkService} from '../../service/park-service';
 import {GlobalHandler} from '../../utils/GlobalHandler';
 import {ParkDto} from '../../model/dto/ParkDto';
+import {AuthService} from '../../service/auth-service';
 
 @Component({
   selector: 'app-parks-page',
@@ -26,7 +27,8 @@ export class ParksPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private parkService: ParkService
+    private parkService: ParkService,
+    protected authService: AuthService,
   ) {
     this.parkForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(100)]],
@@ -35,8 +37,12 @@ export class ParksPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.parkService.getParks().subscribe(parks => {
+    this.parkService.getParks(true).subscribe(parks => {
       this.parks = parks;
+
+      if (this.authService.getUserRoleFromToken() === "ROLE_ADMIN" && this.parks.length > 0) {
+        this.selectPark(this.parks.at(0)!);
+      }
     })
   }
 
@@ -56,7 +62,7 @@ export class ParksPage implements OnInit {
     return GlobalHandler.getInstance().getErrorMessage(control);
   }
 
-  async selectPark(park: ParkDto) {
+  selectPark(park: ParkDto) {
     this.parkToModify = park;
     this.parkForm.patchValue(park);
     this.selectedOption = park.isMarine;
@@ -113,7 +119,9 @@ export class ParksPage implements OnInit {
         if (index > -1) {
           this.parks[index] = updatedPark;
         }
-        this.resetForm();
+        if (this.authService.getUserRoleFromToken() !== "ROLE_ADMIN") {
+          this.resetForm();
+        }
         alert("Park updated successfully!");
       },
       error: (error) => {

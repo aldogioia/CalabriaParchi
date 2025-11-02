@@ -23,7 +23,7 @@ export class ExperiencePostReviewPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.parkService.getParks().subscribe({
+    this.parkService.getParks(true).subscribe({
       next: (response) => {
         this.parks = response;
         if (this.parks.length > 0) {

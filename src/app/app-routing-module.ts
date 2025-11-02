@@ -20,6 +20,11 @@ import {ExperiencePostReviewPage} from './admin-pages/experience-post-review-pag
 import {NewsletterPage} from './admin-pages/newsletter-page/newsletter-page';
 import {UnsubscribePage} from './user-pages/unsubscribe-page/unsubscribe-page';
 import {GuidePage} from './admin-pages/guide-page/guide-page';
+import {AdminsPage} from './admin-pages/admins-page/admins-page';
+import {ResetPasswordPage} from './admin-pages/reset-password-page/reset-password-page';
+import {RequestResetPage} from './admin-pages/request-reset-page/request-reset-page';
+import {UpdatePasswordPage} from './admin-pages/update-password-page/update-password-page';
+import {roleGuard} from './security/role-guard';
 
 const routes: Routes = [
   {
@@ -40,22 +45,33 @@ const routes: Routes = [
     path: 'admin',
     component: AdminLayout,
     canActivate: [authGuard],
+    canActivateChild: [roleGuard],
     children: [
       { path: '', redirectTo: 'parks', pathMatch: 'full' },
-      { path: 'parks', component: ParksPage },
-      { path: 'details', component: ArticlesPage },
-      { path: 'interests', component: InterestsPage },
-      { path: 'gallery', component: GalleryPage },
-      { path: 'categories', component: CategoryPage },
-      { path: 'tags', component: TagsPage },
-      { path: 'community', component: ExperiencePostReviewPage },
-      { path: 'guide', component: GuidePage },
-      { path: 'newsletter', component: NewsletterPage },
+      { path: 'parks', component: ParksPage, data: { roles: ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] } },
+      { path: 'details', component: ArticlesPage, data: { roles: ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] } },
+      { path: 'interests', component: InterestsPage, data: { roles: ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] } },
+      { path: 'gallery', component: GalleryPage, data: { roles: ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] } },
+      { path: 'categories', component: CategoryPage, data: { roles: ['ROLE_SUPER_ADMIN'] } },
+      { path: 'tags', component: TagsPage, data: { roles: ['ROLE_SUPER_ADMIN'] } },
+      { path: 'community', component: ExperiencePostReviewPage, data: { roles: ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] } },
+      { path: 'guide', component: GuidePage, data: { roles: ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] } },
+      { path: 'newsletter', component: NewsletterPage, data: { roles: ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] } },
+      { path: 'admins', component: AdminsPage, data: { roles: ['ROLE_SUPER_ADMIN'] } },
+      { path: 'update-password', component: UpdatePasswordPage, data: { roles: ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] } },
     ]
   },
   {
     path: 'login',
     component: LoginPage
+  },
+  {
+    path: 'request-reset',
+    component: RequestResetPage
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordPage
   }
 ];
 
