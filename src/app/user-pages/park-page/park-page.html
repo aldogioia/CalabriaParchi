@@ -71,7 +71,7 @@
         <app-park-item-component [interestDto]="locality"></app-park-item-component>
       }
     } @else {
-      <p>{{ "NO_RESULT" | translate }}</p>
+      <p>{{ 'NO_RESULTS' | translate }}</p>
     }
   </section>
 </ng-template>
@@ -83,7 +83,7 @@
         <app-park-item-component [interestDto]="activity"></app-park-item-component>
       }
     } @else {
-      <p>{{ "NO_RESULT" | translate }}</p>
+      <p>{{ 'NO_RESULTS' | translate }}</p>
     }
   </section>
 </ng-template>
@@ -95,7 +95,7 @@
         <app-park-item-component [interestDto]="eno"></app-park-item-component>
       }
     } @else {
-      <p>{{ "NO_RESULT" | translate }}</p>
+      <p>{{ 'NO_RESULTS' | translate }}</p>
     }
   </section>
 </ng-template>
@@ -105,7 +105,7 @@
     @if (galleryItems && galleryItems.length > 0) {
       <app-gallery-component [galleryItems]="galleryItems"></app-gallery-component>
     } @else {
-      <p>{{ "NO_RESULT" | translate }}</p>
+      <p>{{ 'NO_RESULTS' | translate }}</p>
     }
   </section>
 </ng-template>
