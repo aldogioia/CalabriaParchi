@@ -66,32 +66,46 @@
 
 <ng-template #locationsTemplate>
   <section class="sub-section to-reveal">
-    @for (locality of localities; track locality.id) {
-      <app-park-item-component [interestDto]="locality"></app-park-item-component>
+    @if (localities && localities.length > 0) {
+      @for (locality of localities; track locality.id) {
+        <app-park-item-component [interestDto]="locality"></app-park-item-component>
+      }
+    } @else {
+      <p>{{ "NO_RESULT" | translate }}</p>
     }
   </section>
 </ng-template>
 
 <ng-template #activitiesTemplate>
   <section class="sub-section to-reveal">
-    @for (activity of activities; track activity.id) {
-      <app-park-item-component [interestDto]="activity"></app-park-item-component>
+    @if (activities && activities.length > 0) {
+      @for (activity of activities; track activity.id) {
+        <app-park-item-component [interestDto]="activity"></app-park-item-component>
+      }
+    } @else {
+      <p>{{ "NO_RESULT" | translate }}</p>
     }
   </section>
 </ng-template>
 
 <ng-template #foodAndWineTemplate>
   <section class="sub-section to-reveal">
-    @for (eno of enoGastronomy; track eno.id) {
-      <app-park-item-component [interestDto]="eno"></app-park-item-component>
+    @if (enoGastronomy && enoGastronomy.length > 0) {
+      @for (eno of enoGastronomy; track eno.id) {
+        <app-park-item-component [interestDto]="eno"></app-park-item-component>
+      }
+    } @else {
+      <p>{{ "NO_RESULT" | translate }}</p>
     }
   </section>
 </ng-template>
 
 <ng-template #galleryTemplate>
   <section class="sub-section to-reveal">
-    @if (galleryItems !== undefined) {
+    @if (galleryItems && galleryItems.length > 0) {
       <app-gallery-component [galleryItems]="galleryItems"></app-gallery-component>
+    } @else {
+      <p>{{ "NO_RESULT" | translate }}</p>
     }
   </section>
 </ng-template>

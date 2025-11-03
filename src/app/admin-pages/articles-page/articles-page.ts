@@ -125,11 +125,7 @@ export class ArticlesPage implements OnInit {
   }
 
   resetForm() {
-    this.articleForm.patchValue({
-      parkId: '',
-      title: '',
-      english_title: ''
-    });
+    this.articleForm.reset({parkId: '',});
 
     this.resetParagraphsArray('paragraphs');
     this.resetParagraphsArray('englishParagraphs');
@@ -212,8 +208,9 @@ export class ArticlesPage implements OnInit {
     const formData = this.buildFormData();
 
     this.articleService.createArticle(formData).subscribe({
-      next: () => {
+      next: (addedArticle) => {
         this.resetForm();
+        this.articles.push(addedArticle);
         alert('Article created successfully!');
       },
       error: (error) => {
