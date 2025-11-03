@@ -29,7 +29,7 @@
           <span class="error-message">{{ getErrorMessage('email') }}</span>
         }
       </div>
-      <button class="primary-button" type="submit" [disabled]="newsletterForm.invalid">{{ "SUBSCRIBE" | translate}}</button>
+      <button class="primary-button" type="submit" [disabled]="newsletterForm.invalid || loading">{{ "SUBSCRIBE" | translate}}</button>
     </form>
   </section>
   <section class="copyright-tag">

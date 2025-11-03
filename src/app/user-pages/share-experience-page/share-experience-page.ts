@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ExperiencePostService} from '../../service/experience-post-service';
 import {ParkDto} from '../../model/dto/ParkDto';
@@ -13,7 +13,11 @@ import {GlobalHandler} from '../../utils/GlobalHandler';
   host: {'class': 'page margin'}
 })
 export class ShareExperiencePage implements OnInit{
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+
   parks: ParkDto[] = [];
+
+  loading: boolean = false;
 
   selectedFileUrl: string | null = null;
   selectedFile: File | null = null;
@@ -46,11 +50,22 @@ export class ShareExperiencePage implements OnInit{
     this.selectedFileUrl = result.url;
   }
 
+  resetForm() {
+    this.experienceForm.reset({parkId: ''});
+    this.selectedFile = null;
+    this.selectedFileUrl = null;
+
+    if (this.fileInput) {
+      this.fileInput.nativeElement.value = '';
+    }
+  }
+
   share(): void {
-    if (this.experienceForm.invalid || !this.selectedFile) {
+    if (this.experienceForm.invalid || !this.selectedFile || this.loading) {
       this.experienceForm.markAllAsTouched();
       return;
     }
+    this.loading = true;
 
     const formData = new FormData();
 
@@ -64,12 +79,12 @@ export class ShareExperiencePage implements OnInit{
     this.shareExperienceService.createExperiencePost(formData).subscribe({
       next: () => {
         alert('Esperienza condivisa con successo!');
-        this.experienceForm.reset({ park: '' });
-        this.selectedFile = null;
-        this.selectedFileUrl = null;
+        this.resetForm()
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }

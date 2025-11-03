@@ -17,6 +17,7 @@ export class HomePage implements OnInit {
   parks: ParkDto[] = [];
 
   newsletterForm: FormGroup = new FormGroup({});
+  loading: boolean = false;
 
   showPopup: boolean = true;
 
@@ -42,19 +43,23 @@ export class HomePage implements OnInit {
   }
 
   subscribeToNewsletter() {
-    if (this.newsletterForm.invalid) {
+    if (this.newsletterForm.invalid || this.loading) {
       this.newsletterForm.markAllAsTouched();
       return;
     }
+    this.loading = true;
 
     const email = this.newsletterForm.value.email;
     this.newsletterService.subscribe(email).subscribe({
       next: () => {
         alert('Subscription successful!');
+        this.newsletterForm.reset();
         this.showPopup = false;
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }

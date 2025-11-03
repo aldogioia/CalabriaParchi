@@ -203,7 +203,12 @@ article p {
 
 .primary-button:disabled {
   background: var(--stroke-weak);
+  color: var(--text-weak);
   cursor: not-allowed;
+}
+
+.primary-button:disabled > svg {
+  fill: var(--text-weak);
 }
 
 .secondary-button {

@@ -17,6 +17,7 @@ export class MyItineraryPage implements OnInit, OnDestroy {
   myInterests: InterestDto[] = [];
   private sub!: Subscription;
 
+  loading: boolean = false;
 
   showPopup: boolean = false;
   itineraryForm: FormGroup = new FormGroup({});
@@ -51,10 +52,12 @@ export class MyItineraryPage implements OnInit, OnDestroy {
   }
 
   generateItinerary(): void {
-    if (this.itineraryForm.invalid) {
+    if (this.itineraryForm.invalid || this.loading) {
       this.itineraryForm.markAllAsTouched();
       return;
     }
+
+    this.loading = true;
 
     const email = this.itineraryForm.value.email;
     this.itineraryService.generateItinerary(
@@ -63,10 +66,13 @@ export class MyItineraryPage implements OnInit, OnDestroy {
     ).subscribe({
       next: () => {
         alert("Itinerary generated successfully! Check your email.");
+        this.itineraryForm.reset();
+        this.loading = false;
         this.showPopup = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }

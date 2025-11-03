@@ -65,6 +65,10 @@ span {
   color: var(--text-weak);
 }
 
+span.error-message {
+  color: var(--error-strong);
+}
+
 form {
   display: flex;
   flex-direction: column;
