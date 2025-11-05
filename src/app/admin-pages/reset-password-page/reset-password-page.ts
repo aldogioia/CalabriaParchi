@@ -16,6 +16,8 @@ export class ResetPasswordPage implements OnInit {
 
   private verificationToken: string | null = null;
 
+  loading: boolean = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -48,7 +50,7 @@ export class ResetPasswordPage implements OnInit {
   }
 
   submitPasswordForm() {
-    if (this.passwordForm.invalid) {
+    if (this.passwordForm.invalid || this.loading) {
       this.passwordForm.markAllAsTouched();
       return;
     }
@@ -64,6 +66,8 @@ export class ResetPasswordPage implements OnInit {
       return;
     }
 
+    this.loading = true;
+
     const {email, newPassword} = this.passwordForm.value;
     this.passwordService.resetPassword({
       email: email,
@@ -72,11 +76,13 @@ export class ResetPasswordPage implements OnInit {
     }).subscribe({
       next: () => {
         alert('Password updated successfully.');
+        this.loading = false;
         this.resetPasswordForm();
         this.router.navigate(['/login']).then();
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     })
 

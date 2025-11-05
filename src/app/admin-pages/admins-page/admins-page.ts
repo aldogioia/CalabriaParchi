@@ -22,6 +22,8 @@ export class AdminsPage implements OnInit {
 
   adminToModify: AdminDto | null = null;
 
+  loading: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private adminService: AdminsService,
@@ -32,7 +34,7 @@ export class AdminsPage implements OnInit {
       parkId: ['', [Validators.required, Validators.minLength(3)]],
       name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(25)]],
       surname: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(25)]],
-      phoneNumber: ['', [Validators.required, Validators.pattern('^[+]?[(]?[0-9]{1,4}[)]?[-s./0-9]*$')]],
+      phoneNumber: ['', [Validators.required, Validators.pattern('^(?:\\+39|0039)?\\s?(?:3\\d{8,9}|0\\d{6,10})$')]],
       email: ['', [Validators.required, Validators.email]],
     });
   }
@@ -67,11 +69,12 @@ export class AdminsPage implements OnInit {
   }
 
   submitAdminForm() {
-    if (this.adminForm.invalid) {
+    if (this.adminForm.invalid || this.loading) {
       this.adminForm.markAllAsTouched();
       return;
     }
 
+    this.loading = true;
     this.adminToModify ? this.modifyAdmin(): this.addAdmin();
   }
 
@@ -83,16 +86,16 @@ export class AdminsPage implements OnInit {
         this.admins.push(newAdmin);
         this.resetAdminForm();
         alert("Admin added successfully!");
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }
 
   private modifyAdmin() {
-    if (!this.adminToModify) return;
-
     const updatedAdmin = this.adminForm.value;
     this.adminService.updateAdmin(updatedAdmin).subscribe({
       next: (admin) => {
@@ -102,27 +105,33 @@ export class AdminsPage implements OnInit {
         }
         this.resetAdminForm();
         alert("Admin updated successfully!");
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }
 
   deleteArticle() {
-    if (this.adminToModify) {
+    if (this.adminToModify && !this.loading) {
       if (!confirm(`Are you sure you want to delete the admin "${this.adminToModify.name}"? This action cannot be undone.`)) {
         return;
       }
+
+      this.loading = true;
 
       this.adminService.deleteAdmin(this.adminToModify.id).subscribe({
         next: () => {
           this.admins = this.admins.filter(a => a.id !== this.adminToModify!.id);
           this.resetAdminForm();
           alert("Admin deleted successfully!");
+          this.loading = false;
         },
         error: (error) => {
           alert(error);
+          this.loading = false;
         }
       });
     }

@@ -20,6 +20,7 @@ export class NewsletterPage implements OnInit {
   selectedFileUrl: string | null = null;
   selectedFile: File | null = null;
 
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,7 +65,7 @@ export class NewsletterPage implements OnInit {
   }
 
   submit() {
-    if (this.newsletterForm.invalid) {
+    if (this.newsletterForm.invalid || this.loading) {
       this.newsletterForm.markAllAsTouched();
     }
 
@@ -78,13 +79,17 @@ export class NewsletterPage implements OnInit {
       formData.append('attachment', this.selectedFile);
     }
 
+    this.loading = true;
+
     this.newsletterService.sendNewsletter(formData).subscribe({
       next: () => {
         this.resetForm();
         alert('Newsletter sent successfully.');
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }

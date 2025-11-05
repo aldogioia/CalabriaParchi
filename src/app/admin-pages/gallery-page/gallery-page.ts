@@ -27,6 +27,8 @@ export class GalleryPage implements OnInit {
 
   galleryItemToModify: GalleryItemDto | null = null;
 
+  loading: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private parkService: ParkService,
@@ -94,11 +96,19 @@ export class GalleryPage implements OnInit {
       .subscribe(galleryItems => this.galleryItems = galleryItems);
   }
 
+  private isEqualsParkSelection() {
+    const parkForm = this.parkForm.get('parkId')?.value;
+    const objectForm = this.galleryItemForm.get('parkId')?.value;
+    return parkForm == objectForm;
+  }
+
   submit() {
-    if (!this.galleryItemToModify ? this.galleryItemForm.invalid  || !this.selectedFile : this.galleryItemForm.invalid) {
+    if ((!this.galleryItemToModify ? this.galleryItemForm.invalid  || !this.selectedFile : this.galleryItemForm.invalid) || this.loading) {
       this.galleryItemForm.markAllAsTouched();
       return;
     }
+
+    this.loading = true;
 
     if (this.galleryItemToModify) {
       this.modifyGalleryItem();
@@ -116,12 +126,15 @@ export class GalleryPage implements OnInit {
 
     this.galleryItemService.createGalleryItem(formData).subscribe({
       next: (createdGalleryItem) => {
-        this.galleryItems.push(createdGalleryItem);
+        if (this.isEqualsParkSelection())
+          this.galleryItems.push(createdGalleryItem);
         this.resetForm();
         alert("Gallery item created successfully!");
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }
@@ -144,18 +157,22 @@ export class GalleryPage implements OnInit {
         }
         this.resetForm();
         alert("Gallery item updated successfully!");
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }
 
-  deletePark() {
-    if (!this.galleryItemToModify) return;
+  deleteGalleryItem() {
+    if (!this.galleryItemToModify || this.loading) return;
 
     const confirmDelete = confirm('Are you sure you want to delete this gallery item?');
     if (!confirmDelete) return;
+
+    this.loading = true;
 
     this.galleryItemService.deleteGalleryItem(this.galleryItemToModify.id, this.galleryItemToModify.parkId)
       .subscribe({
@@ -163,9 +180,11 @@ export class GalleryPage implements OnInit {
           this.galleryItems = this.galleryItems.filter(item => item.id !== this.galleryItemToModify!.id);
           this.resetForm();
           alert('Gallery item deleted successfully!');
+          this.loading = false;
         },
         error: (error) => {
           alert(error);
+          this.loading = false;
         }
       });
   }

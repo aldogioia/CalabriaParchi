@@ -27,6 +27,6 @@
       <p class="little-text">Password dimenticata? <u routerLink="/request-reset" style="color: var(--text-strong); cursor: pointer">recuperala</u></p>
     </div>
 
-    <button class="primary-button" type="submit" [disabled]="loginForm.invalid">Accedi</button>
+    <button class="primary-button" type="submit" [disabled]="loginForm.invalid || loading">Accedi</button>
   </form>
 </section>

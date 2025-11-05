@@ -5,7 +5,7 @@
     <label for="park">Parco</label>
     <select name="park" [class.color]="galleryItemForm.value.parkId === ''" formControlName="parkId" required>
       <option value="" disabled selected>Seleziona un Parco</option>
-      @for (park of parks; track park) {
+      @for (park of parks; track park.id) {
         <option [value]="park.id">{{ park.name }}</option>
       }
     </select>
@@ -43,7 +43,7 @@
   <button
     class="primary-button"
     type="submit"
-    [disabled]="!galleryItemToModify ? galleryItemForm.invalid  || !selectedFile : galleryItemForm.invalid">
+    [disabled]="(!galleryItemToModify ? galleryItemForm.invalid  || !selectedFile : galleryItemForm.invalid) || loading">
     {{ galleryItemToModify ? "Modifica" : "Aggiungi" }}
   </button>
 
@@ -53,7 +53,11 @@
     </button>
 
     @if (galleryItemToModify) {
-      <button class="tertiary-button error" type="reset" (click)="deletePark()">
+      <button
+        class="tertiary-button error"
+        type="reset"
+        [disabled]="loading"
+        (click)="deleteGalleryItem()">
         Elimina
       </button>
     }
@@ -83,8 +87,8 @@
 
     <div class="input-group">
       <select [class.color]="parkForm.value.parkId === ''" formControlName="parkId">
-        <option value="" disabled selected>Seleziona un Parco</option>
-        @for (park of parks; track park) {
+        <option value="">Seleziona un Parco</option>
+        @for (park of parks; track park.id) {
           <option [value]="park.id">{{ park.name }}</option>
         }
       </select>

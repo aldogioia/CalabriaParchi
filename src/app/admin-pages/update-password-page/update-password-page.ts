@@ -14,6 +14,8 @@ import {GlobalHandler} from '../../utils/GlobalHandler';
 export class UpdatePasswordPage {
   passwordForm: FormGroup = new FormGroup({});
 
+  loading: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private passwordService: PasswordService,
@@ -41,7 +43,7 @@ export class UpdatePasswordPage {
   }
 
   submitPasswordForm() {
-    if (this.passwordForm.invalid) {
+    if (this.passwordForm.invalid || this.loading) {
       this.passwordForm.markAllAsTouched();
       return;
     }
@@ -58,6 +60,8 @@ export class UpdatePasswordPage {
       return;
     }
 
+    this.loading = true;
+
     const {oldPassword, newPassword} = this.passwordForm.value;
     this.passwordService.updatePassword({
         userId: userId,
@@ -66,10 +70,12 @@ export class UpdatePasswordPage {
     }).subscribe({
       next: () => {
         alert('Password updated successfully.');
+        this.loading = false;
         this.resetPasswordForm();
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     })
   }

@@ -20,7 +20,7 @@
   <button
     class="primary-button"
     type="submit"
-    [disabled]="categoryForm.invalid">
+    [disabled]="categoryForm.invalid || loading">
     {{ categoryToModify ? "Modifica" : "Aggiungi" }}
   </button>
 
@@ -30,7 +30,11 @@
     </button>
 
     @if (categoryToModify) {
-      <button class="tertiary-button error" type="reset" (click)="deleteCategory()">
+      <button
+        class="tertiary-button error"
+        type="reset"
+        [disabled]="loading"
+        (click)="deleteCategory()">
         Elimina
       </button>
     }

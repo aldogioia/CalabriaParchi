@@ -34,22 +34,37 @@ export class GlobalHandler {
     return this.baseUrl;
   }
 
+  private readonly patternErrorMap: Record<string, string> = {
+    '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d?!_\-@#]{8,}$':
+      'La password deve contenere almeno 1 maiuscola, 1 minuscola, 1 numero e può contenere solo ? ! _ - @ #',
+    '^#([A-Fa-f0-9]{6})$':
+      'Inserisci un colore valido in formato esadecimale (es. #A1B2C3)',
+    '^(?:\+39|0039)?\s?(?:3\d{8,9}|0\d{6,10})$':
+      'Inserisci un numero di telefono valido',
+    '^(https?://)([\\w.-]+)(:[0-9]+)?([/\\w .-]*)*/?$':
+      'Inserisci un URL valido (es. https://www.esempio.com)',
+  };
+
   getErrorMessage(control: AbstractControl<any, any> | null): string {
-    if (control?.errors?.['required']) {
+    if (!control) return '';
+
+    if (control.errors?.['required']) {
       return 'Campo obbligatorio';
     }
-    if (control?.errors?.['email']) {
+    if (control.errors?.['email']) {
       return 'Formato email non valido';
     }
-    if (control?.errors?.['minlength']) {
+    if (control.errors?.['minlength']) {
       return `Minimo ${control.errors['minlength'].requiredLength} caratteri`;
     }
-    if (control?.errors?.['maxlength']) {
+    if (control.errors?.['maxlength']) {
       return `Massimo ${control.errors['maxlength'].requiredLength} caratteri`;
     }
-    if (control?.errors?.['pattern']) {
-      return 'La password deve contenere almeno 1 maiuscola, 1 minuscola, 1 numero e può contenere solo i seguenti caratteri speciali ? ! _ - @ #';
+    if (control.errors?.['pattern']) {
+      const pattern = control.errors['pattern'].requiredPattern;
+      return this.patternErrorMap[pattern] || 'Formato non valido';
     }
+
     return 'Valore non valido';
   }
 

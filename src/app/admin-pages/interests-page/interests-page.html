@@ -5,7 +5,7 @@
     <label for="park">Parco</label>
     <select name="park" [class.color]="interestForm.value.parkId === ''" formControlName="parkId" required>
       <option value="" disabled selected>Seleziona un Parco</option>
-      @for (park of parks; track park) {
+      @for (park of parks; track park.id) {
         <option [value]="park.id">{{ park.name }}</option>
       }
     </select>
@@ -16,7 +16,7 @@
 
   <div class="input-group" [class.error]="isInvalid('name')">
     <label for="name">Nome</label>
-    <input name="name" type="text" minlength="3" maxlength="50" placeholder="Nome" formControlName="name" required>
+    <input name="name" type="text" placeholder="Nome" formControlName="name" required>
     @if (isInvalid('name')) {
       <span class="error-message">{{ getErrorMessage('name') }}</span>
     }
@@ -24,7 +24,7 @@
 
   <div class="input-group" [class.error]="isInvalid('englishName')">
     <label for="en_name">Nome inglese</label>
-    <input name="en_name" type="text" minlength="3" maxlength="50" placeholder="Nome in inglese" formControlName="englishName" required>
+    <input name="en_name" type="text" placeholder="Nome in inglese" formControlName="englishName" required>
     @if (isInvalid('englishName')) {
       <span class="error-message">{{ getErrorMessage('englishName') }}</span>
     }
@@ -32,7 +32,7 @@
 
   <div class="input-group" [class.error]="isInvalid('website')">
     <label for="url">Url</label>
-    <input name="url" type="url" minlength="3" maxlength="50" placeholder="Url" formControlName="website">
+    <input name="url" type="url" placeholder="Url" formControlName="website">
     @if (isInvalid('website')) {
       <span class="error-message">{{ getErrorMessage('website') }}</span>
     }
@@ -40,7 +40,7 @@
 
   <div class="input-group" [class.error]="isInvalid('phoneNumber')">
     <label for="tel">Numero di telefono</label>
-    <input name="tel" type="tel" minlength="3" maxlength="50" placeholder="Numero di telefono" formControlName="phoneNumber">
+    <input name="tel" type="tel" placeholder="Numero di telefono" formControlName="phoneNumber">
     @if (isInvalid('phoneNumber')) {
       <span class="error-message">{{ getErrorMessage('phoneNumber') }}</span>
     }
@@ -48,7 +48,7 @@
 
   <div class="input-group" [class.error]="isInvalid('description')">
     <label>Descrizione</label>
-    <textarea formControlName="description"  maxlength="500" placeholder="Inserisci una descrizione"></textarea>
+    <textarea formControlName="description" maxlength="500" placeholder="Inserisci una descrizione"></textarea>
     @if (isInvalid('description')) {
       <span class="error-message">{{ getErrorMessage('description') }}</span>
     }
@@ -122,7 +122,7 @@
   <button
     class="primary-button"
     type="submit"
-    [disabled]="interestForm.invalid">
+    [disabled]="interestForm.invalid || loading">
     {{ interestToModify ? "Modifica" : "Aggiungi" }}
   </button>
 
@@ -132,7 +132,11 @@
     </button>
 
     @if (interestToModify) {
-      <button class="tertiary-button error" type="reset" (click)="deleteInterest()">
+      <button
+        class="tertiary-button error"
+        type="reset"
+        [disabled]="loading"
+        (click)="deleteInterest()">
         Elimina
       </button>
     }
@@ -151,8 +155,8 @@
 
     <div class="input-group">
       <select [class.color]="parkForm.value.parkId === ''" formControlName="parkId">
-        <option value="" disabled selected>Seleziona un Parco</option>
-        @for (park of parks; track park) {
+        <option value="">Seleziona un Parco</option>
+        @for (park of parks; track park.id) {
           <option [value]="park.id">{{ park.name }}</option>
         }
       </select>

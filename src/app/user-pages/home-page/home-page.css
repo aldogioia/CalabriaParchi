@@ -10,7 +10,6 @@ section {
 .home-component {
   position: relative;
   width: 100%;
-  height: 100vh;
   height: 100dvh;
   scroll-snap-align: start;
   background: var(--text-strong);
@@ -18,7 +17,7 @@ section {
 
 .home-component img {
   width: 100%;
-  height: 100%;
+  height: 100dvh;
   object-fit: cover;
 }
 

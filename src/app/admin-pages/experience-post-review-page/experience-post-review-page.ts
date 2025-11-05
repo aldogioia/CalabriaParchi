@@ -17,6 +17,8 @@ export class ExperiencePostReviewPage implements OnInit {
 
   selectedPark: number = 0;
 
+  loading: boolean = false;
+
   constructor(
     private experiencePostService: ExperiencePostService,
     private parkService: ParkService
@@ -43,7 +45,10 @@ export class ExperiencePostReviewPage implements OnInit {
   }
 
   valuateExperience(experiencePostId: string, experiencePostStatus: 'ACCEPTED' | 'REJECTED') {
+    if (this.loading) return
+
     if (confirm('Sei sicuro di voler procedere?')) {
+      this.loading = true;
       this.experiencePostService.updateExperiencePostStatus(
         experiencePostStatus,
         experiencePostId,
@@ -51,9 +56,11 @@ export class ExperiencePostReviewPage implements OnInit {
       ).subscribe({
         next: () => {
           this.pendingExperiences = this.pendingExperiences.filter(e => e.id !== experiencePostId);
+          this.loading = false;
         },
         error: (error) => {
           alert(error);
+          this.loading = false;
         }
       });
     }

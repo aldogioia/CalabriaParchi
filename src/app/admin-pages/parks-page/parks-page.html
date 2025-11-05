@@ -40,7 +40,7 @@
   <button
     class="primary-button"
     type="submit"
-    [disabled]="!parkToModify ? parkForm.invalid  || !selectedFile : parkForm.invalid">
+    [disabled]="(!parkToModify ? parkForm.invalid  || !selectedFile : parkForm.invalid) || loading">
     {{ parkToModify ? "Modifica" : "Aggiungi" }}
   </button>
 
@@ -51,7 +51,11 @@
       </button>
 
       @if (parkToModify) {
-        <button class="tertiary-button error" type="reset" (click)="deletePark()">
+        <button
+          class="tertiary-button error"
+          type="reset"
+          [disabled]="loading"
+          (click)="deletePark()">
           Elimina
         </button>
       }

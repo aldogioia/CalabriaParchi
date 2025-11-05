@@ -30,7 +30,7 @@
   <button
     class="primary-button"
     type="submit"
-    [disabled]="tagForm.invalid">
+    [disabled]="tagForm.invalid || loading">
     {{ tagToModify ? "Modifica" : "Aggiungi" }}
   </button>
 
@@ -40,7 +40,11 @@
     </button>
 
     @if (tagToModify) {
-      <button class="tertiary-button error" type="reset" (click)="deleteTag()">
+      <button
+        class="tertiary-button error"
+        type="reset"
+        [disabled]="loading"
+        (click)="deleteTag()">
         Elimina
       </button>
     }

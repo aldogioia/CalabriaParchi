@@ -34,6 +34,8 @@ export class GuidePage implements OnInit {
   selectedFileImage: File | null = null;
   selectedFilePdf: File | null = null;
 
+  loading: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private parkService: ParkService,
@@ -111,8 +113,14 @@ export class GuidePage implements OnInit {
     };
   }
 
+  private isEqualsParkSelection() {
+    const parkForm = this.parkForm.get('parkId')?.value;
+    const objectForm = this.guideForm.get('parkId')?.value;
+    return parkForm == objectForm;
+  }
+
   submit() {
-    if (this.selectedFileImage === null || this.selectedFilePdf === null || this.guideForm.invalid) {
+    if (this.selectedFileImage === null || this.selectedFilePdf === null || this.guideForm.invalid || this.loading) {
       this.guideForm.markAsTouched();
       return;
     }
@@ -128,18 +136,23 @@ export class GuidePage implements OnInit {
 
     this.guideService.createGuide(formData).subscribe({
       next: (createdGuide) => {
-        this.guides.push(createdGuide);
+        if (this.isEqualsParkSelection())
+          this.guides.push(createdGuide);
         this.resetForm();
         alert("Guide created successfully!");
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }
 
   deleteGuide(guide: GuideDto) {
-    const parkId = this.guideForm.get('parkId')?.value
+    if (this.loading) return;
+
+    const parkId = this.parkForm.get('parkId')?.value
 
     if(!parkId) {
       alert('Please select a park first.');
@@ -150,13 +163,17 @@ export class GuidePage implements OnInit {
       return;
     }
 
+    this.loading = true;
+
     this.guideService.deleteGuide(guide.id, parkId).subscribe({
       next: () => {
         this.guides = this.guides.filter(g => g.id !== guide.id);
         alert("Guide deleted successfully!");
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }

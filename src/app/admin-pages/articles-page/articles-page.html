@@ -4,8 +4,8 @@
   <div class="input-group" [class.error]="isInvalid('parkId')">
     <label for="park">Parco</label>
     <select name="park" [class.color]="articleForm.value.parkId === ''" formControlName="parkId" required>
-      <option value="" disabled selected>Seleziona un Parco</option>
-      @for (park of parks; track park) {
+      <option value="" disabled>Seleziona un Parco</option>
+      @for (park of parks; track park.id) {
         <option [value]="park.id">{{ park.name }}</option>
       }
     </select>
@@ -80,7 +80,7 @@
   <button
     class="primary-button"
     type="submit"
-    [disabled]="articleForm.invalid">
+    [disabled]="articleForm.invalid || loading">
     {{ articleToModify ? "Modifica" : "Aggiungi" }}
   </button>
 
@@ -90,7 +90,11 @@
     </button>
 
     @if (articleToModify) {
-      <button class="tertiary-button error" type="reset" (click)="deleteArticle()">
+      <button
+        class="tertiary-button error"
+        type="reset"
+        [disabled]="loading"
+        (click)="deleteArticle()">
         Elimina
       </button>
     }
@@ -110,7 +114,7 @@
           paragraphs: paragraphs.value.length === 1 && paragraphs.value[0] === '' ? ['Inserisci il contenuto del paragrafo'] : paragraphs.value,
           englishParagraphs: [],
           imageUrl: selectedFileUrl || ''}">
-      </app-article-component> <!--TODO-->
+      </app-article-component>
     </div>
   </div>
   <form [formGroup]="parkForm" class="sub-section">
@@ -118,8 +122,8 @@
 
     <div class="input-group">
       <select [class.color]="parkForm.value.parkId === ''" formControlName="parkId">
-        <option value="" disabled selected>Seleziona un Parco</option>
-        @for (park of parks; track park) {
+        <option value="">Seleziona un Parco</option>
+        @for (park of parks; track park.id) {
           <option [value]="park.id">{{ park.name }}</option>
         }
       </select>

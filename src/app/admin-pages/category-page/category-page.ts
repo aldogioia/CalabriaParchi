@@ -18,6 +18,8 @@ export class CategoryPage implements OnInit {
 
   categoryForm: FormGroup = new FormGroup({});
 
+  loading: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private categoryService: CategoryService
@@ -56,10 +58,12 @@ export class CategoryPage implements OnInit {
   }
 
   submit() {
-    if (this.categoryForm.invalid) {
+    if (this.categoryForm.invalid || this.loading) {
       this.categoryForm.markAllAsTouched();
       return;
     }
+
+    this.loading = true;
 
     this.categoryToModify ? this.updateCategory() : this.addCategory();
   }
@@ -73,16 +77,16 @@ export class CategoryPage implements OnInit {
           this.categories.push(category);
           this.resetForm();
           alert('Category added successfully!');
+          this.loading = false;
         },
         error: (error) => {
           alert(error);
+          this.loading = false;
         }
       });
   }
 
   private updateCategory() {
-    if (!this.categoryToModify) return;
-
     const updatedCategory = this.categoryForm.value;
 
     this.categoryService.updateCategory(updatedCategory)
@@ -95,18 +99,22 @@ export class CategoryPage implements OnInit {
           }
           this.resetForm();
           alert('Category updated successfully!');
+          this.loading = false;
         },
         error: (error) => {
           alert(error);
+          this.loading = false;
         }
       });
   }
 
   deleteCategory() {
-    if (!this.categoryToModify) return;
+    if (!this.categoryToModify || this.loading) return;
 
     const confirmDelete = confirm('Are you sure you want to delete this category?');
     if (!confirmDelete) return;
+
+    this.loading = true;
 
     this.categoryService.deleteCategory(this.categoryToModify.id)
       .subscribe({
@@ -114,9 +122,11 @@ export class CategoryPage implements OnInit {
           this.categories = this.categories.filter(item => item.id !== this.categoryToModify!.id);
           this.resetForm();
           alert('Category deleted successfully!');
+          this.loading = false;
         },
         error: (error) => {
           alert(error);
+          this.loading = false;
         }
       });
   }

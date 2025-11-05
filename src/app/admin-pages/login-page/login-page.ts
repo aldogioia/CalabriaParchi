@@ -37,18 +37,17 @@ export class LoginPage {
   }
 
   onSubmit() {
-    if (this.loginForm.valid) {
+    if (this.loginForm.valid && !this.loading) {
       this.loading = true;
       this.authService.signIn(this.loginForm.value).subscribe({
         next: () => {
+          this.loading = false;
           this.router.navigateByUrl(
             this.route.snapshot.queryParams['returnUrl'] || '/admin'
           ).then();
         },
         error: () => {
           alert('Credenziali non valide o errore di rete');
-        },
-        complete: () => {
           this.loading = false;
         }
       });

@@ -18,6 +18,8 @@ export class TagsPage implements OnInit {
 
   tagForm: FormGroup = new FormGroup({});
 
+  loading: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private tagService: TagService
@@ -56,11 +58,12 @@ export class TagsPage implements OnInit {
   }
 
   submit() {
-    if (this.tagForm.invalid) {
+    if (this.tagForm.invalid || this.loading) {
       this.tagForm.markAllAsTouched();
       return;
     }
 
+    this.loading = true;
     this.tagToModify ? this.updateTag() : this.addTag();
   }
 
@@ -73,9 +76,11 @@ export class TagsPage implements OnInit {
           this.tags.push(tag);
           this.resetForm();
           alert('Tag added successfully!');
+          this.loading = false;
         },
         error: (error) => {
           alert(error);
+          this.loading = false;
         }
       });
   }
@@ -84,8 +89,6 @@ export class TagsPage implements OnInit {
     if (!this.tagToModify) return;
 
     const updatedTag = this.tagForm.value;
-
-    console.log('updatedTag', updatedTag);
 
     this.tagService.updateTag(updatedTag)
       .subscribe({
@@ -97,18 +100,22 @@ export class TagsPage implements OnInit {
           }
           this.resetForm();
           alert('Tag updated successfully!');
+          this.loading = false;
         },
         error: (error) => {
           alert(error);
+          this.loading = false;
         }
       });
   }
 
   deleteTag() {
-    if (!this.tagToModify) return;
+    if (!this.tagToModify || this.loading) return;
 
     const confirmDelete = confirm('Are you sure you want to delete this tag?');
     if (!confirmDelete) return;
+
+    this.loading = true;
 
     this.tagService.deleteTag(this.tagToModify.id)
       .subscribe({
@@ -116,9 +123,11 @@ export class TagsPage implements OnInit {
           this.tags = this.tags.filter(item => item.id !== this.tagToModify!.id);
           this.resetForm();
           alert('Tag deleted successfully!');
+          this.loading = false;
         },
         error: (error) => {
           alert(error);
+          this.loading = false;
         }
       });
   }

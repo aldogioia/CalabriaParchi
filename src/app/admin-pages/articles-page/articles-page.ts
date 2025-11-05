@@ -29,6 +29,8 @@ export class ArticlesPage implements OnInit {
 
   articleToModify: ArticleDto | null = null;
 
+  loading: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private parkService: ParkService,
@@ -196,12 +198,21 @@ export class ArticlesPage implements OnInit {
     return formData;
   }
 
+  private isEqualsParkSelection(): boolean {
+    const parkForm = this.parkForm.get('parkId')?.value;
+    console.log('parkForm', parkForm);
+    const objectForm = this.articleForm.get('parkId')?.value;
+    console.log('objectForm', objectForm);
+
+    console.log('result', objectForm == parkForm);
+    return parkForm == objectForm;
+  }
+
   submit() {
-    if (this.articleToModify) {
-      this.modifyArticle();
-    } else {
-      this.addArticle();
-    }
+    if (this.articleForm.invalid || this.loading) return;
+
+    this.loading = true;
+    this.articleToModify ? this.modifyArticle() : this.addArticle();
   }
 
   private addArticle() {
@@ -209,16 +220,20 @@ export class ArticlesPage implements OnInit {
 
     this.articleService.createArticle(formData).subscribe({
       next: (addedArticle) => {
+        if (this.isEqualsParkSelection()) {
+          console.log('Stessi parchi selezionati!');
+          this.articles.push(addedArticle);
+        }
         this.resetForm();
-        this.articles.push(addedArticle);
         alert('Article created successfully!');
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }
-
 
   private modifyArticle() {
     if (!this.articleToModify) return;
@@ -227,33 +242,41 @@ export class ArticlesPage implements OnInit {
 
     this.articleService.updateArticle(formData).subscribe({
       next: (updatedArticle) => {
-        const index = this.articles.findIndex(item => item.id === this.articleToModify!.id);
-        if (index !== -1) {
-          this.articles[index] = updatedArticle;
+        if (this.isEqualsParkSelection()) {
+          console.log('Stessi parchi selezionati!');
+          const index = this.articles.findIndex(item => item.id === this.articleToModify!.id);
+          if (index !== -1) {
+            this.articles[index] = updatedArticle;
+          }
         }
         this.resetForm();
         alert('Article updated successfully!');
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }
 
   deleteArticle() {
-    if (!this.articleToModify) return;
+    if (!this.articleToModify || this.loading) return;
 
     const confirmDelete = confirm('Are you sure you want to delete this Article?');
     if (!confirmDelete) return;
 
+    this.loading = true;
     this.articleService.deleteArticle(this.articleToModify.id, this.articleToModify.parkId).subscribe({
       next: () => {
         this.articles = this.articles.filter(item => item.id !== this.articleToModify!.id);
         this.resetForm();
         alert('Article deleted successfully!');
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }

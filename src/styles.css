@@ -259,6 +259,14 @@ article p {
   fill: var(--brand-strong);
 }
 
+.secondary-button:disabled {
+  cursor: not-allowed;
+}
+
+.secondary-button:disabled:hover > svg {
+  fill: var(--text-weak);
+}
+
 .tertiary-button {
   display: flex;
   align-items: center;
@@ -295,6 +303,11 @@ article p {
 .tertiary-button.error:hover {
   border-color: var(--error-stroke-strong);
   color: var(--error-strong);
+}
+
+.tertiary-button:disabled {
+  cursor: not-allowed;
+  filter: grayscale(100%);
 }
 
 

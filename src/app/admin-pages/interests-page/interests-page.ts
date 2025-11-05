@@ -47,6 +47,8 @@ export class InterestsPage implements OnInit {
 
   interestToModify: InterestDto | null = null;
 
+  loading: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private parkService: ParkService,
@@ -64,7 +66,7 @@ export class InterestsPage implements OnInit {
       englishName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(500)]],
       englishDescription: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(500)]],
-      phoneNumber: [null, [Validators.pattern('^\\+?[0-9]{7,15}$')]],
+      phoneNumber: [null, [Validators.pattern('^(?:\\+39|0039)?\\s?(?:3\\d{8,9}|0\\d{6,10})$')]],
       website: [null, [Validators.pattern('^(https?://)([\\w.-]+)(:[0-9]+)?([/\\w .-]*)*/?$')]],
       interestType: [InterestType.ACTIVITY, Validators.required],
       tags: this.formBuilder.array([]),
@@ -129,6 +131,7 @@ export class InterestsPage implements OnInit {
 
     // Patch base
     this.interestForm.patchValue(interest);
+    this.interestForm.get("parkId")?.setValue(interest.park.id);
 
     // Reset e ricostruzione formArray coerente con il record
     this.tagsArray.clear();
@@ -188,10 +191,6 @@ export class InterestsPage implements OnInit {
   resetForm() {
     this.interestForm.reset({
       parkId: '',
-      name: '',
-      englishName: '',
-      description: '',
-      englishDescription: '',
       interestType: InterestType.ACTIVITY
     });
 
@@ -211,6 +210,8 @@ export class InterestsPage implements OnInit {
   submit() {
     const creating = !this.interestToModify;
 
+    if (this.loading) return;
+
     if (this.interestForm.invalid) {
       this.interestForm.markAllAsTouched();
       alert('Compila tutti i campi obbligatori.');
@@ -224,11 +225,8 @@ export class InterestsPage implements OnInit {
 
     const formData = this.buildFormData();
 
-    if (creating) {
-      this.addInterest(formData);
-    } else {
-      this.modifyInterest(formData);
-    }
+    this.loading = true;
+    creating ? this.addInterest(formData) : this.modifyInterest(formData);
   }
 
 
@@ -275,16 +273,24 @@ export class InterestsPage implements OnInit {
     return formData;
   }
 
+  private isEqualsParkSelection(): boolean {
+    const parkForm = this.parkForm.get('parkId')?.value;
+    const objectForm = this.interestForm.get('parkId')?.value;
+    return parkForm == objectForm;
+  }
 
   private addInterest(formData: FormData) {
     this.interestService.createInterest(formData).subscribe({
       next: (createdInterest) => {
-        this.interests.push(createdInterest);
+        if (this.isEqualsParkSelection())
+          this.interests.push(createdInterest);
         this.resetForm();
         alert('Interesse creato con successo!');
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }
@@ -296,25 +302,31 @@ export class InterestsPage implements OnInit {
         if (index !== -1) this.interests[index] = updatedInterest;
         this.resetForm();
         alert('Interesse modificato con successo!');
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }
 
   deleteInterest() {
-    if (!this.interestToModify) return;
+    if (!this.interestToModify || this.loading) return;
     if (!confirm('Sei sicuro di voler eliminare questo interesse?')) return;
+
+    this.loading = true;
 
     this.interestService.deleteInterest(this.interestToModify.id, this.interestToModify.park.id).subscribe({
       next: () => {
         this.interests = this.interests.filter(i => i.id !== this.interestToModify!.id);
         this.resetForm();
         alert('Interesse eliminato con successo!');
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }

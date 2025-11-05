@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PasswordService} from '../../service/password-service';
 import {GlobalHandler} from '../../utils/GlobalHandler';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-request-reset-page',
@@ -14,8 +13,9 @@ import {Router} from '@angular/router';
 export class RequestResetPage {
   requestForm: FormGroup = new FormGroup({});
 
+  loading: boolean = false;
+
   constructor(
-    private router: Router,
     private formBuilder: FormBuilder,
     private passwordService: PasswordService,
   ) {
@@ -35,17 +35,20 @@ export class RequestResetPage {
   }
 
   submitPasswordForm() {
-    if (this.requestForm.invalid) {
+    if (this.requestForm.invalid || this.loading) {
       this.requestForm.markAllAsTouched();
       return;
     }
 
+    this.loading = true;
     this.passwordService.requestPasswordReset(this.requestForm.value).subscribe({
       next: () => {
         alert('Password reset link sent to your email.');
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     })
   }

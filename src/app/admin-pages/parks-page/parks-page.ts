@@ -25,6 +25,8 @@ export class ParksPage implements OnInit {
 
   parkForm: FormGroup = new FormGroup({});
 
+  loading = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private parkService: ParkService,
@@ -71,16 +73,13 @@ export class ParksPage implements OnInit {
   }
 
   submit() {
-    if (!this.parkToModify ? this.parkForm.invalid  || !this.selectedFile : this.parkForm.invalid) {
+    if ((!this.parkToModify ? this.parkForm.invalid  || !this.selectedFile : this.parkForm.invalid) || this.loading) {
       this.parkForm.markAllAsTouched();
       return;
     }
 
-    if (this.parkToModify) {
-      this.modifyPark();
-    } else {
-      this.addPark();
-    }
+    this.loading = true;
+    this.parkToModify ? this.modifyPark() : this.addPark();
   }
 
   private addPark() {
@@ -95,9 +94,11 @@ export class ParksPage implements OnInit {
         this.parks.push(createdPark);
         this.resetForm();
         alert("Park created successfully!");
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }
@@ -123,9 +124,11 @@ export class ParksPage implements OnInit {
           this.resetForm();
         }
         alert("Park updated successfully!");
+        this.loading = false;
       },
       error: (error) => {
         alert(error);
+        this.loading = false;
       }
     });
   }
@@ -142,19 +145,22 @@ export class ParksPage implements OnInit {
   }
 
   deletePark() {
-    if (this.parkToModify) {
+    if (this.parkToModify && !this.loading) {
       if (!confirm(`Are you sure you want to delete the park "${this.parkToModify.name}"? This action cannot be undone.`)) {
         return;
       }
 
+      this.loading = true;
       this.parkService.deletePark(this.parkToModify.id).subscribe({
         next: () => {
           this.parks = this.parks.filter(p => p.id !== this.parkToModify!.id);
           this.resetForm();
           alert("Park deleted successfully!");
+          this.loading = false;
         },
         error: (error) => {
           alert(error);
+          this.loading = false;
         }
       });
     }
