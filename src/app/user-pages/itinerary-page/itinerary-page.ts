@@ -60,14 +60,16 @@ export class ItineraryPage implements OnInit, OnDestroy {
       this.itineraryService.wishlist$.subscribe(ids => this.wishlistCount = ids.length)
     );
 
+    this.parkService.getParks().subscribe(parks => {
+      this.parks = parks
+    })
+
     this.subs.add(
       forkJoin({
         tags: this.tagService.getTags(),
-        parks: this.parkService.getParks(),
         categories: this.categoryService.getCategories()
-      }).subscribe(({ tags, parks, categories }) => {
+      }).subscribe(({ tags, categories }) => {
         this.tags = tags;
-        this.parks = parks;
         this.categories = categories;
         this.initFormArrays();
         this.loadInterests();
